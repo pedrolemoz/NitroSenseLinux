@@ -1,0 +1,583 @@
+{
+  "schema": 1,
+  "feature": "Archive the retired Node implementation and preserve path-correct regression and evidence tooling",
+  "original": [
+    {
+      "member": "main.js",
+      "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+      "symbols": [
+        "getMonitorData",
+        "getSupportCPUInfo",
+        "getSupportGPUInfo",
+        "getAllInstalledApps",
+        "getScenario",
+        "ProfilePool"
+      ]
+    },
+    {
+      "member": "dist/widgets/main/main.ce24a9a875916226.js",
+      "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+      "symbols": [
+        "ChangeBatteryMode",
+        "setBatteryHealthy",
+        "getBatteryHealthy",
+        "UPDATE_MONITOR_DATA"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "legacy/README.md",
+      "sha256": "f377e0d0a89caf8de778139c596daeb56b00f782bf64972d62a016f67c4d61a1"
+    },
+    {
+      "path": "legacy/docs/development-history.md",
+      "sha256": "1c10dad30e153e02821f17d013f31c3f30e9432ed5c84d20b281fd003b9836f5"
+    },
+    {
+      "path": "legacy/docs/node-roadmap.md",
+      "sha256": "ddabfb879eb444847a80c1817206714e850d28667444e1e1deed6e4df647226e"
+    },
+    {
+      "path": "legacy/docs/node-status.md",
+      "sha256": "9016611143def2bb6000ea5f2f475219092585d2825bf0f5cd5139a50078b5d0"
+    },
+    {
+      "path": "legacy/lib/acer-client.cjs",
+      "sha256": "45d3a7a39e65a7d850be45b5b3b2a952428f20c7cdaa92716d835493a8714723"
+    },
+    {
+      "path": "legacy/lib/acer-requests.cjs",
+      "sha256": "2244e8b30db4349a7c0083835d7e94767c727ec673a0c23aea29a147c37553d5"
+    },
+    {
+      "path": "legacy/lib/acer-service.cjs",
+      "sha256": "a636bbbc9379e3dbe99783087e7a46e7ade473b7b9d672808ba433324f594884"
+    },
+    {
+      "path": "legacy/lib/asar.cjs",
+      "sha256": "8fc2cff1f7812e36341e5029137accfcc5221004507a495701db51121b4f0080"
+    },
+    {
+      "path": "legacy/lib/battery-charge.cjs",
+      "sha256": "d192b1121e90dfaa7219f5c3b8ae960a36fa716689773fc916b2a1ee7e70b14e"
+    },
+    {
+      "path": "legacy/lib/desktop-apps.cjs",
+      "sha256": "fab08dbff22212ae33b598fd410b43c8b8df2f2d180f33de6cb4242470b09ac4"
+    },
+    {
+      "path": "legacy/lib/linux-monitor.cjs",
+      "sha256": "68ef91d92b1ec5418365d5ff2d12d7c67abeca229788e9f47423d199e1475f75"
+    },
+    {
+      "path": "legacy/lib/linux-platform-state.cjs",
+      "sha256": "d7aa568bd6f5566993af7a4c270d10322430553e74bf0674aa006ab08f40e765"
+    },
+    {
+      "path": "legacy/lib/linux-sensors.cjs",
+      "sha256": "ccab2423fe49040fc5ffb168f36c49d6bd749f12f2ae054b364658305485e907"
+    },
+    {
+      "path": "legacy/lib/linux-telemetry.cjs",
+      "sha256": "fdc7d5d3500bf7d2b0c615dfe0126e2094a2794f42920771933ab9f1ee33559a"
+    },
+    {
+      "path": "legacy/lib/monitor-fields.cjs",
+      "sha256": "66dcff6ba7d5ed3add67dccff9eed42cf1adbfd1fa6e4cdb67b89d85f2f32a89"
+    },
+    {
+      "path": "legacy/lib/msi-oem.cjs",
+      "sha256": "3fa9bde27bbbb3b481169e8f5851a44967886c3518b5b41263aff31a71e8017b"
+    },
+    {
+      "path": "legacy/lib/nvidia-monitor.cjs",
+      "sha256": "8c6a594192773c5bbf3ddacea9ecdd7c75f8f98d9a958d8d2d906770fffaadbe"
+    },
+    {
+      "path": "legacy/lib/protocol.cjs",
+      "sha256": "ce9dd55e4398ae54c459b1f5e518f8a11398d1ec61c9449f39b59f954cebea16"
+    },
+    {
+      "path": "legacy/lib/reference.cjs",
+      "sha256": "8dbb75be66c0e4b53fcf25d6ed5e81db57f2f8d2fb7ae9d14b891f4a01dd0787"
+    },
+    {
+      "path": "legacy/lib/ui-session.cjs",
+      "sha256": "93728a9be0db7aa6d4ea9e7f1812ec012fc70c968b425f3e3e17a2eb8fd09fb2"
+    },
+    {
+      "path": "legacy/lib/vendor.cjs",
+      "sha256": "d9e9ea6b9940c084b7906c659ecf3ff64ae1a7914990c808d9195558a1cef2b3"
+    },
+    {
+      "path": "legacy/lib/zip.cjs",
+      "sha256": "a92981b2a3568f610855ac6746fca4d452aa17e81beab5c772cdbbc6de2de6aa"
+    },
+    {
+      "path": "legacy/runtime/asset-overrides.cjs",
+      "sha256": "c4c39b62f54c20afe25b720a0ffefd456595ab8b66b7fe6d861f1bc574dd8169"
+    },
+    {
+      "path": "legacy/runtime/bootstrap.cjs",
+      "sha256": "a5cb853ab24e9ef7da3671bc57923775ad50224da35c1a16cf6c5ed44ae884e0"
+    },
+    {
+      "path": "legacy/runtime/mode-banner.cjs",
+      "sha256": "48877875720a2eb3cdd2206b6ffc4260e7606730cadf5c609616be039db7ec8d"
+    },
+    {
+      "path": "legacy/runtime/package.json",
+      "sha256": "1c3c1e075a7ef1350dda2a4312cbc11c1fd51b19a267a32ddaef77977bd1470d"
+    },
+    {
+      "path": "legacy/runtime/platform.cjs",
+      "sha256": "cb80f0a9fd9aba730d291861f74b1b4070f9659273f695ce7264a68363f52f05"
+    },
+    {
+      "path": "legacy/runtime/readonly-bridge.cjs",
+      "sha256": "c94d7bcebb0123ec5bac607c936871f82d6b9acac2c83a488f233f01959457b3"
+    },
+    {
+      "path": "legacy/runtime/readonly-session.cjs",
+      "sha256": "a39fae5b34b96558e57414d277707d6a37ca7cbc32b04f57f91f9593a7a3e08d"
+    },
+    {
+      "path": "legacy/runtime/renderer-device-state.cjs",
+      "sha256": "2c10f7b7244fe365d859dadded0aa3230783917ba149a8b6bcd798846d7465f3"
+    },
+    {
+      "path": "legacy/runtime/renderer-log.cjs",
+      "sha256": "d035e14e47e05c89390f9e9d389a6e3ae5a1e5372667ea8ac2d4340359237d71"
+    },
+    {
+      "path": "legacy/runtime/renderer-modules.cjs",
+      "sha256": "b919d9230f99807a3dbefa66fc999d860313d8691a1bf02828952ac2cecefa1f"
+    },
+    {
+      "path": "legacy/runtime/renderer-patches.cjs",
+      "sha256": "886b006de3277fb8c35b88314e56d2c292a6a368395c7b2d3c2bc2ec6a7501cd"
+    },
+    {
+      "path": "legacy/runtime/renderer-startup.cjs",
+      "sha256": "96cbe682d6f8b5e5a0da2ac8bb93f2ca0f90104140a91f42878e1693c72387e2"
+    },
+    {
+      "path": "legacy/runtime/renderer-state.cjs",
+      "sha256": "ed240878c9f2010ebb101a6b33c933fbb9cb3ff3a7a762e7ad8fe397c0cb6f88"
+    },
+    {
+      "path": "legacy/runtime/rpc.cjs",
+      "sha256": "f0dcb28b382ff422a47befac3082057b8e8adf89949bffc889d45947554b861b"
+    },
+    {
+      "path": "legacy/runtime/single-instance.cjs",
+      "sha256": "3f1d590a9a50daea1eebd26346cbfc05f0234cbf8143c5f89fa54d1944f95e48"
+    },
+    {
+      "path": "legacy/runtime/source-patches.cjs",
+      "sha256": "7b13c895676293e1a6ae4d0082312105e5e4b14c71618cfd2b960b98b67dbf23"
+    },
+    {
+      "path": "legacy/scripts/capture-reference.cjs",
+      "sha256": "f0bbaaa51bd6c953aec045149579959c3e64d044282da03f058fdf5443afdf3f"
+    },
+    {
+      "path": "legacy/scripts/check-manual-readings.cjs",
+      "sha256": "e7dcde143ff6e992921daf6b6d9e944314d34990db9756652e7bfb043e8fbd17"
+    },
+    {
+      "path": "legacy/scripts/check-runtime.cjs",
+      "sha256": "e9af27f41c5ec1acfc55d4dd83b52a2413fbb55b79724ffae29ca03627b65637"
+    },
+    {
+      "path": "legacy/scripts/import-vendor.cjs",
+      "sha256": "78dc97ebff3c578a4e2b3120f5f8fd08f798f4d21936c901ce274a099484e068"
+    },
+    {
+      "path": "legacy/scripts/inspect-asar.cjs",
+      "sha256": "8e296c812993ddc83f216eafb36ad6264696209288ccac06de552b430c160d67"
+    },
+    {
+      "path": "legacy/scripts/inspect-linux.cjs",
+      "sha256": "f94e3eadc415bce65eae0a8ba47a496ee97c9ba888629f4b73cce546f2cb6270"
+    },
+    {
+      "path": "legacy/scripts/inspect-live-ui.cjs",
+      "sha256": "87a423caf7bc6878b6e9c4e77ad2948a884560e02b04405ca772dbf5f6f99f71"
+    },
+    {
+      "path": "legacy/scripts/inspect-original.cjs",
+      "sha256": "56a8dafe001955cfdec74d4d11e897184cc0bc55571ad21fa46f2b46e3a21f36"
+    },
+    {
+      "path": "legacy/scripts/inspect-runtime.cjs",
+      "sha256": "45ff26ea3c15c7935576ed38f8ae9739e2cba3e81df6972faee46abd42d27689"
+    },
+    {
+      "path": "legacy/scripts/map-boundaries.cjs",
+      "sha256": "bae3270a4d044b6499bb9529fbcd8490860d10da56bd6599ffce2c801eaf15cc"
+    },
+    {
+      "path": "legacy/scripts/map-protocol.cjs",
+      "sha256": "b4b92635144fbaa82f6f154ca7633e8bba5b5d2b134f22358023f301f228c2c1"
+    },
+    {
+      "path": "legacy/scripts/map-startup.cjs",
+      "sha256": "a20970b2c48f8c0af3abbf3fa2c35816dccb28d87c9d43156a3c6b0e13ef1f94"
+    },
+    {
+      "path": "legacy/scripts/prepare-linux-vendor.cjs",
+      "sha256": "100d8ec12d71f67f77925adfc8b04fb2f582c311fc673129bd79a96c77cde791"
+    },
+    {
+      "path": "legacy/scripts/read-linux-sensors.cjs",
+      "sha256": "c41d45bc5dd6718149bd4c01189956e540a6d1d0e463d26e9c81af879fe1e069"
+    },
+    {
+      "path": "legacy/scripts/setup.cjs",
+      "sha256": "7bd4b9981c309d621f39deb7cd3b7a89e6477b8f0449de5cb094337d0f0c6a98"
+    },
+    {
+      "path": "legacy/scripts/smoke-original-ui.cjs",
+      "sha256": "5229869dda49b0ee11501c0c361bb180eff242043eb3ad9f561f73b4901a7554"
+    },
+    {
+      "path": "legacy/scripts/start-linux.sh",
+      "sha256": "346e81c748bc6c25d535273462988fdabf738c575a3b39abbd0d04f3633ec952"
+    },
+    {
+      "path": "legacy/scripts/start-readonly-service.cjs",
+      "sha256": "64718705958fad239ded30ed6b28532ce0d3c6662d173955c6d189bde375eb6f"
+    },
+    {
+      "path": "legacy/scripts/summarize-linux.cjs",
+      "sha256": "d9fc4d5e5018c7de5dabb128cc990068380abdc7ae27afe24b15a76379c913f8"
+    },
+    {
+      "path": "legacy/scripts/summarize-reference.cjs",
+      "sha256": "b3547c5a35dc2361bc964995ed886c824d6492c98519da94751eaa205615ff4f"
+    },
+    {
+      "path": "legacy/scripts/summarize-ui-session.cjs",
+      "sha256": "6c8be5e4eb8482003e792e11d053e13b7aed2ae2af3b73621060448c19db90f5"
+    },
+    {
+      "path": "legacy/scripts/test-linux-readonly.sh",
+      "sha256": "5cf41852b555dead659deecd01ff0dd51ba817865481b868bbc7859e85dae747"
+    },
+    {
+      "path": "legacy/scripts/test-linux-ui.sh",
+      "sha256": "9ef2d3f1e7989595f878b69a30976d4d5f103cf47c9a9bb12576febc14a20191"
+    },
+    {
+      "path": "legacy/scripts/ui-smoke-isolation.cjs",
+      "sha256": "83f5729a50fc126be44582b8f554eda46d34f0373e84d2a08c20d0f1e5c18b9b"
+    },
+    {
+      "path": "legacy/scripts/windows/extract-appx.ps1",
+      "sha256": "1a591bc7841ff4455a8902288477d917dcde76655ff67c20e245388ec5fab9ae"
+    },
+    {
+      "path": "legacy/scripts/windows/extract-msi-oem.ps1",
+      "sha256": "5b01ffe7f9b7daaa5c3cf0015da1770076f96af4fffd2c4b957618876edf0f3b"
+    },
+    {
+      "path": "legacy/scripts/windows/inspect-msi.ps1",
+      "sha256": "d96f1ece6d914cc0a85c4fd10d787663a88839c105f4454bbc2879ca4c25e394"
+    },
+    {
+      "path": "legacy/scripts/windows/inspect-wmi.ps1",
+      "sha256": "82b4dc9a4fc41e70ec026c398e311dfbdeaa3996f15ed5e78399f318984f06ee"
+    },
+    {
+      "path": "lib/acer-client.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "lib/acer-requests.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "lib/acer-service.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "lib/asar.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "lib/battery-charge.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "lib/desktop-apps.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "lib/linux-monitor.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "lib/linux-platform-state.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "lib/linux-sensors.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "lib/linux-telemetry.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "lib/monitor-fields.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "lib/msi-oem.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "lib/nvidia-monitor.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "lib/protocol.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "lib/reference.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "lib/ui-session.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "lib/vendor.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "lib/zip.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "runtime/asset-overrides.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "runtime/bootstrap.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "runtime/mode-banner.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "runtime/package.json",
+      "sha256": "deleted"
+    },
+    {
+      "path": "runtime/platform.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "runtime/readonly-bridge.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "runtime/readonly-session.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "runtime/renderer-device-state.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "runtime/renderer-log.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "runtime/renderer-modules.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "runtime/renderer-patches.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "runtime/renderer-startup.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "runtime/renderer-state.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "runtime/rpc.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "runtime/single-instance.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "runtime/source-patches.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/audit-reverse-engineering.cjs",
+      "sha256": "d5d7e2e7c67c1e29b493d70314a25a5767b3fbdb79a219537a905bd135b3200f"
+    },
+    {
+      "path": "scripts/capture-reference.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/check-manual-readings.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/check-runtime.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/import-vendor.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/inspect-asar.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/inspect-linux.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/inspect-live-ui.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/inspect-original.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/inspect-runtime.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/map-boundaries.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/map-protocol.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/map-startup.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/prepare-linux-vendor.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/read-linux-sensors.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/setup.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/smoke-original-ui.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/start-linux.sh",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/start-readonly-service.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/summarize-linux.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/summarize-reference.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/summarize-ui-session.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/test-linux-readonly.sh",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/test-linux-ui.sh",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/ui-smoke-isolation.cjs",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/windows/extract-appx.ps1",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/windows/extract-msi-oem.ps1",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/windows/inspect-msi.ps1",
+      "sha256": "deleted"
+    },
+    {
+      "path": "scripts/windows/inspect-wmi.ps1",
+      "sha256": "deleted"
+    },
+    {
+      "path": "drivers/nitrosense-charge/README.md",
+      "sha256": "bffffcc9406acb771493b189bc646ed8b295d3451caf12f12435afc419e0e2e6"
+    },
+    {
+      "path": "scripts/validate-linux-sensors.sh",
+      "sha256": "d18091b10b1d63a5eb8f5886da816ffdcc9ffe3493426b148f59161373448c06"
+    },
+    {
+      "path": "scripts/probe-acer-wmi.sh",
+      "sha256": "1e779dfcc67bc8f951f2c3fae3f67fde7a6cb84084dcebced8dcdf4ac1bb3ce4"
+    }
+  ],
+  "trace": {
+    "control": "No original Acer control, factory, template or workflow is changed by this relocation.",
+    "model": "The old Node backend and original-host baseline remain research/regression sources under legacy/. The current Rust backend and frontend remain separate.",
+    "transport": "Archived CommonJS imports and launcher/test paths were adjusted to the new archive location. No protocol or live hardware command was added.",
+    "osOrFirmware": "Project-root private vendor, tools, analysis and state remain outside the archive. Current kernel operator scripts remain scripts/. No hardware operation performed.",
+    "replyAndRefresh": "Current frontend transport remains unchanged. Regression tests exercise the relocated original-source fixtures without transferring acceptance to Rust.",
+    "linuxAdaptation": "Both evidence scanners retain coverage of relocated implementation sources. Deleted former paths and relocated files are hash-bound here; the shared Node audit uses the relocated inert ASAR reader. Current documentation uses Cargo; historical records are explicitly archived. Agent/contributor/current documentation uses Cargo and distinguishes historical acceptance. Retained operator inventory paths now point into legacy, explicitly documented as a temporary dependency. The shared heuristic visibly reports the archived banner but permits only unchanged bytes verified against its former Git-base path. Any edit or missing matching baseline still fails; current original-source evidence remains mandatory."
+  },
+  "validation": [
+    {
+      "status": "pass",
+      "behavior": "Combined suite after relocation: 21 Rust tests and 209 JavaScript assertions pass with four private-input skips.",
+      "evidence": ".state/rust-validation/legacy-relocation-tests.log"
+    },
+    {
+      "status": "not-tested",
+      "behavior": "Archived GUI launch, setup network download, Windows utilities and hardware operations were not rerun. This move is not feature parity acceptance.",
+      "evidence": "docs/migration/legacy-relocation.json; legacy/README.md"
+    }
+  ],
+  "windows": {
+    "status": "not-required",
+    "reason": "This is filesystem/module path reorganization and documentation, not a native feature contract implementation."
+  },
+  "remainingGaps": "All existing Rust feature, native contract, Electron security and packaging gaps remain. Archived implementation is preserved, not fully retired."
+}

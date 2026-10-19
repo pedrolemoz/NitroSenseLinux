@@ -60,20 +60,26 @@ if full charging is desired.
 The driver remains installed and working after removal of the temporary custom
 Scenario UI. Working operation was confirmed on the target machine. Charging
 controls belong to the original application's **Personal Settings** page. Wiring
-those existing controls to the backend is pending original-app reference
-screenshots. No custom Scenario charging panel remains.
+those existing controls to the Rust backend remains incomplete; all 20 reference
+screenshots are available in `references/`. No custom Scenario charging panel remains.
 
-`lib/battery-charge.cjs` is the independent Node backend: `createBatteryCharge()`
-returns `status()` and `setLimit(80|100)`. It detects a single system battery,
-checks permission, selects the standard power-supply ABI when available or this
-WMI attribute otherwise, and verifies the resulting limit. Backend tests use
-isolated filesystem fixtures; ordinary `npm test` runs do not change hardware.
+The current Rust charge adapter in `backend/crates/linux/src/charge.rs` detects
+the supported device/driver ABI and distinguishes requested state from independent
+readback. The application validates 80/100 limits. Hardware writes are disabled
+by the frontend launcher and require an explicitly enabled standalone service;
+see [the backend API](../../backend/README.md). Automated tests use fixtures and
+do not write hardware. The old Node adapter is archived in `legacy/lib/` and is
+not the production backend.
 
-For a deliberate manual check from the repository root:
+For a deliberate read-only query from the repository root after building:
 
 ```sh
-node -e 'console.log(require("./lib/battery-charge.cjs").createBatteryCharge().status())'
+backend/target/debug/nitrosense-backend charge-status
 ```
+
+This connects to a running service. `nitrosense-backend diagnose` can instead
+query actual sources directly without a socket or hardware writes. Historical
+driver verification below is not Rust original-frontend or physical charging acceptance.
 
 Actual installation on 7.0.0-38-generic created:
 

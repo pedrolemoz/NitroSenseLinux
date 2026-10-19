@@ -13,7 +13,7 @@ These rules apply to all agents, subagents, reviews and future iterations.
 2. Inspect the downloaded, verified original Acer assets. Extract/unbundle and
    read the original main/renderer code; inspect native/service binaries or
    Windows behavior when the JavaScript boundary does not explain the feature.
-   Use `npm run inspect:original -- --symbol <original-symbol>` for a static
+   Use `cargo run --manifest-path backend/Cargo.toml -p nitrosense-tools -- inspect-original --symbol <original-symbol>` for a static
    source extraction/index. This does not decompile native DLLs or recover the
    unpublished Acer project. Never execute an unknown binary as an inspection step.
 3. Trace the real feature end to end: original control/component → model →
@@ -27,8 +27,8 @@ These rules apply to all agents, subagents, reviews and future iterations.
    fake capability, or simulated production result. Do not hide missing behavior
    or claim completion by disabling/removing controls merely to match a screenshot.
 5. Record trace and behavioral verification in `docs/reverse-engineering/*.json`.
-   Run `npm run audit:changes` and, with a local import,
-   `npm run audit:changes -- --verify-original`. The audit is a heuristic plus an
+   Run `cargo run --manifest-path backend/Cargo.toml -p nitrosense-tools -- audit` and, with a local import,
+   `cargo run --manifest-path backend/Cargo.toml -p nitrosense-tools -- audit --verify-original`. The audit is a heuristic plus an
    evidence gate; passing cannot prove intent, correctness or functional parity.
 6. Validate original-source behavior and Linux behavior, including failure and
    recovery. Compare screenshots for visual regressions only. A matching image,
@@ -57,3 +57,31 @@ bundles or binaries. Preserve original ASAR bytes and hash checks. Commit only
 our code and concise non-proprietary research metadata. Report remaining gaps
 against Windows behavior; never redefine success as a visual imitation or a
 read-only monitor when a requested feature still does not work.
+
+## Rust rewrite architecture and current commands
+
+The maintained backend and tooling are a Rust Cargo workspace in `backend/`.
+Dependencies point inward: domain/application must not depend on Acer protocols,
+Electron, filesystem paths or concrete hardware. Keep requested hardware state,
+observed state and saved preferences separate. Use typed errors and the versioned
+user-private Unix socket; Acer formats belong in outer adapters.
+
+`frontend/` hosts only the original Acer frontend and necessary Electron glue.
+Do not translate or rebuild its components/factories. Our OS/hardware operations
+belong in Rust. `drivers/` retains the verified C charge ABI. Retired Node code,
+research utilities and historical documentation live in `legacy/`; do not add
+production dependencies on that backend/runtime. The retained shared audit's
+inert archive reader is documented as a temporary tooling dependency.
+
+Use Cargo for build, tests, inspection, import, setup, diagnostics and audit; see
+`docs/development.md` and `backend/README.md`. Node remains necessary for original
+Electron hosting, its provisioning and JavaScript glue/regression tests. Root
+npm aliases are optional wrappers, not the backend architecture. Current driver
+operator scripts remain in `scripts/`. Launch with
+`sh frontend/start.sh --experimental-runtime` (hardware writes disabled).
+
+Review `docs/migration/features.json`, its generated checklist and handoff before
+claiming status. All 20 screenshot IDs have goals, but full Windows parity,
+complete file/dependency audit, native feature contracts, supported Electron,
+sandbox/TLS hardening and release packaging remain incomplete. Historical
+passes, source symbols and selected preferences do not certify Rust behavior.

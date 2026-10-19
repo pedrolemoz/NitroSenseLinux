@@ -2,9 +2,9 @@
 
 ## Nothing opens
 
-Launch from a graphical desktop terminal using `npm start`. Read the printed evidence directory and inspect its error files locally. Confirm `node --version` is at least 18, run `npm run setup:electron`, then `npm run check`.
+Launch from a graphical desktop terminal using `sh frontend/start.sh --experimental-runtime`. Read the printed evidence directory and inspect its error files locally. Confirm `node --version` is at least 18, run `npm run setup:electron`, then `cargo run --manifest-path backend/Cargo.toml -p nitrosense-tools -- check-original`.
 
-If Electron reports a missing shared library, install the desktop dependencies in the README. You can inspect unresolved libraries with:
+If Electron reports a missing shared library, install the corresponding system desktop library. You can inspect unresolved libraries with:
 
 ```sh
 ldd .tools/electron-runtime/node_modules/electron/dist/electron | grep 'not found'
@@ -18,7 +18,7 @@ Run `nvidia-smi`. If it reports a driver/library version mismatch after a driver
 
 ## Fan RPM or Acer GPU temperature is missing
 
-The mapping currently requires ANV15-52, Linux 7.0.x and hwmon bound to `acer-wmi`. Inspect `node scripts/read-linux-sensors.cjs`. For the checked model, `npm run start:acer` can prepare interfaces for this boot; see the module-reload explanation in the manual checklist. Other models/kernels remain unverified. Do not force numbered sensor channels to match this laptop.
+The mapping currently requires ANV15-52, Linux 7.0.x and hwmon bound to `acer-wmi`. Inspect Rust `nitrosense-backend diagnose` sources. For the checked model, `sh scripts/validate-linux-sensors.sh` can prepare interfaces for this boot; see the module-reload explanation in the manual checklist. Other models/kernels remain unverified. Do not force numbered sensor channels to match this laptop.
 
 ## Import is rejected
 
@@ -26,7 +26,7 @@ Confirm you supplied the official reviewed 5.2.84 package, with both its MSI and
 
 ## The screen appears simulated
 
-Use `npm start`, not `test-linux-ui.sh`. Wait for multiple samples, inspect Monitoring and run `npm run verify:readings`. Use a new read-only session rather than reusing the UI-only experiment's state. Missing fields should show `--`. If evidence confirms real backend sampling but the screen does not match, report the specific screen/field as a UI integration defect.
+Use `sh frontend/start.sh --experimental-runtime`, rather than the archived simulator experiment. Wait for multiple samples, inspect Monitoring and run `cargo run --manifest-path backend/Cargo.toml -p nitrosense-service --bin nitrosense-backend -- diagnose`. Use a new read-only session rather than reusing the UI-only experiment's state. Missing fields should show `--`. If evidence confirms real backend sampling but the screen does not match, report the specific screen/field as a UI integration defect.
 
 ## Sharing evidence safely
 
@@ -34,6 +34,6 @@ Start with the assessed summary and your observations. Review even summaries bef
 
 ## Automatic setup download
 
-`npm run setup` downloads approximately 947 MiB from Acer over HTTPS. If networking is unavailable, download the official ZIP using the README link and run `npm run setup -- --zip /absolute/path/to/file.zip`. An interrupted download leaves a `.partial` file in `.state/downloads/`; remove that specific file before retrying. A SHA-256 mismatch means the downloaded bytes differ from the reviewed package: remove the cached download and retry the official source, and report persistent mismatches rather than bypassing verification.
+`cargo run --manifest-path backend/Cargo.toml -p nitrosense-tools -- setup` downloads approximately 947 MiB from Acer over HTTPS. If networking is unavailable, obtain the pinned official Acer ZIP described by the Rust setup tooling and run `cargo run --manifest-path backend/Cargo.toml -p nitrosense-tools -- setup --zip /absolute/path/to/file.zip`. An interrupted download leaves a `.partial` file in `.state/downloads/`; remove that specific file before retrying. A SHA-256 mismatch means the downloaded bytes differ from the reviewed package: remove the cached download and retry the official source, and report persistent mismatches rather than bypassing verification.
 
 Setup refuses partial vendor/OEM imports. Preserve or move the named partial directories for diagnosis before retrying. A completed import is verified and reused. No Windows executable needs to run.

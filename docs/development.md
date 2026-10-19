@@ -1,49 +1,39 @@
-# Development notes
+# Rust development
 
-The active rewrite uses the independent Rust workspace in `backend/` and the
-original Acer host in `frontend/`. Read their README files for the architecture,
-socket API and current commands. `npm start` selects this path;
-`npm run start:legacy` explicitly selects the earlier Node experiment. Root
-`lib/` and `runtime/` remain migration/regression evidence until replacements
-have acceptance coverage. Their original structure is documented below for
-historical research, not as the intended new architecture.
+Read [AGENTS.md](../AGENTS.md), [the research workflow](reverse-engineering/README.md), the applicable screenshot and feature evidence before changing behavior. The objective is the original Acer Windows behavior on Linux; source tests and matching images do not establish parity.
 
-This is a reverse engineering project with original Windows feature behavior as its goal. Read the mandatory [agent rules](../AGENTS.md) and [research workflow](reverse-engineering/README.md) before implementation. A compatibility layer is the current technique; read-only monitoring is an intermediate milestone. Screenshots alone never establish feature completion.
+## Architecture
 
-## Structure and runtime boundary
+- `backend/`: Cargo workspace with domain, application, Linux adapter, service and tools crates. Domain/application depend inward and contain no Acer protocol, Electron or concrete OS paths. See [the API and architecture](../backend/README.md).
+- `frontend/`: original Acer application hosted with minimal Electron transport/resource glue. Original factories and stores remain original. Our hardware, discovery and preferences use Rust. See [the host boundary](../frontend/README.md).
+- `drivers/`: retained verified GPL C charge driver and its existing ABI.
+- `scripts/`: current driver/operator scripts and shared evidence audit. These are not the retired Node service.
+- `legacy/`: archived Node backend, old Electron host, tools, regression tests and historical records. See [archive notes](../legacy/README.md). It is not a dependency of the Rust service or current frontend.
+- `docs/migration/`: inventory, original-native metadata, 50 feature goals/all 20 screenshot references, generated checklist, validation handoff and unresolved Windows capture procedure.
 
-- `lib/` implements archive parsing/import validation, Linux monitoring, desktop entry discovery and local read-only protocol services.
-- `runtime/` hosts the Electron bootstrap, RPC/SDK adapters and narrow source/renderer transformations. Changes are applied in memory only after vendor integrity verification; the imported ASAR is not rewritten.
-- `scripts/` contains installation, launch, diagnostics, reference capture and static inspection utilities. See its README before choosing a tool.
-- `scripts/windows/` contains historical PowerShell research tools. The normal installation and monitoring workflow is Linux-only; no return to Windows was needed for this repository preparation.
-- `tests/` and `runtime/*.test.cjs` contain regression tests. Synthetic input is appropriate for deterministic automated tests; normal application monitoring uses real sources.
+## Build and verify
 
-The project uses CommonJS and Node built-in modules for its core utilities. The application runtime is pinned to Electron 26.6.10 because patch matching and original application behavior are version-specific. There is no compiled frontend in this repository: the UI comes from the user's private Acer import.
+Run from the repository root:
 
-## Tests
+```sh
+cargo build --manifest-path backend/Cargo.toml --locked
+cargo test --manifest-path backend/Cargo.toml --locked
+cargo fmt --manifest-path backend/Cargo.toml --all -- --check
+cargo clippy --manifest-path backend/Cargo.toml --all-targets -- -D warnings
+cargo run --manifest-path backend/Cargo.toml -p nitrosense-tools -- audit
+cargo run --manifest-path backend/Cargo.toml -p nitrosense-tools -- audit --verify-original
+cargo run --manifest-path backend/Cargo.toml -p nitrosense-tools -- checklist --check
+node --test frontend/host/*.test.cjs tests/*.test.cjs
+```
 
-Run `npm test` from the repository root. A source-only checkout can run the suite without downloading Electron or supplying Acer assets. Original-source integration tests skip if the local vendor archive is missing. Two historical reference-dependent tests also require local `analysis/` captures and skip when those captures are absent. Skips must not be reported as verified vendor compatibility.
+The last command tests the remaining JavaScript host and shared audit, not a Node backend. Rust source tests use synthetic fixtures only within tests. Original-source integration tests need private local assets and may skip; skips are not acceptance. For changes affecting archived sources or shared contracts, also run `node --test legacy/tests/*.test.cjs legacy/runtime/*.test.cjs`. The root package scripts remain optional convenience wrappers, not the canonical backend build system.
 
-`npm run check` verifies the local import's integrity, not host hardware readiness. `npm run verify:readings` assesses saved CPU/RAM backend evidence from the latest real-monitoring session. Neither opens the GUI. Operator-run scripts that open the UI or prepare kernel modules are separate from automated tests.
+`check-original` validates imported bytes. `nitrosense-backend diagnose` reads actual Linux sources independently of a running service; it does not assess old session logs. `sh frontend/start.sh --experimental-runtime` launches the original application against Rust with hardware writes disabled. `--inspect` performs bounded navigation/captures; it does not operate hardware controls.
 
-## Local data and publication
+## Evidence and private data
 
-Keep all user-supplied Acer files in ignored `vendor/`, `.state/installer/` or `Installer/`. Runtime downloads belong in `.tools/`; raw analysis belongs in `analysis/`; session data and private history belong in `.state/`. The original local notes were archived under `.state/local-history/pre-publication/` without deleting their contents.
+Record exact original versions/hashes/symbols, trace, file hashes, failures/recovery and Linux readback in `docs/reverse-engineering/*.json`. Preserve prior observations; do not transfer their pass status to the rewrite. The ledger records visual and behavioral results separately. When native contracts remain unresolved, use [targeted Windows captures](migration/windows-capture.md); never guess firmware operations.
 
-Do not commit generated Acer resources, screenshots containing proprietary assets, copied source bundles, binaries, captured credentials or personal hardware inventories. Git ignore rules help prevent accidental additions but do not remove files already tracked or protect against forced additions. Review the actual staged diff before publishing. No Acer download or redistribution step belongs in CI.
+Keep installers, imported assets, source extractions, disassembly, captures and personal/device data ignored under `vendor/`, `analysis/` or `.state/`. Runtime downloads belong in `.tools/`. No Acer assets are distributed. The license remains undecided. Electron support/security, full dependency/file audit, native features, packaging and full acceptance remain open; [the handoff](migration/handoff.md) states the actual completed work.
 
-## Scope
-
-Preserve unavailable states and data provenance. Do not infer sensor identity from an arbitrary channel number, silently activate the simulator, claim a visible Windows feature works on Linux, or enable hardware writes through an unverified adapter. Broader hardware support requires model-specific evidence and manual confirmation.
-
-The first release's hardening, fresh installation and hardware acceptance work is tracked in the roadmap. The project-wide license remains undecided; there is no root LICENSE yet. The battery driver has its own GPL-2.0-only license and COPYING file.
-
-## Original UI compatibility requirement
-
-Preserve the original Acer interface, page structure and existing controls. Do not
-add new panels or redesign features. Fix compatibility at the adapter, transport,
-device-state or narrowly scoped original-code boundary. Battery charge-limit
-controls belong in Personal Settings, not Scenario. Follow the reviewed [Windows screenshot matrix](../references/README.md) before changing UI behavior. Record its reference IDs and visual/behavioral results in validation evidence. The
-working battery driver and backend must remain independent of UI rework.
-
-See the [development record](development-history.md) for completed work, reverted UI and pending integration.
+The retained sensor/module operator scripts still call archived read-only inventory utilities for diagnostic captures. This is a documented temporary operator-tool dependency, separate from the Rust service and normal frontend launcher.

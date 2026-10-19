@@ -4,6 +4,8 @@ const { implementation, suspicious, validateRecord } = require('../scripts/audit
 
 test('audit flags replacement UI and ignores ordinary protocol implementations', () => {
   assert.ok(implementation('runtime/renderer-patches.cjs'));
+  assert.ok(implementation('legacy/runtime/renderer-patches.cjs'));
+  assert.ok(!implementation('legacy/runtime/vendor-sdk.test.cjs'));
   assert.ok(!implementation('runtime/vendor-sdk.test.cjs'));
   for (const code of [
     'panel.innerHTML = `<button>80%</button>`',

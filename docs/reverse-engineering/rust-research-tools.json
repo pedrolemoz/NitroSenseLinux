@@ -39,7 +39,7 @@
     },
     {
       "path": "backend/crates/tools/src/audit.rs",
-      "sha256": "e731afe97546e7f039b6bde5f0ab4ea9a9d401f82ecc20d8085ac3a94d358c0f"
+      "sha256": "f0d149c7d169c1e4174e68d61d65bf5f8c37c3701e445617a0d57fdbc2bc9d5e"
     },
     {
       "path": "backend/crates/tools/src/checklist.rs",
@@ -63,7 +63,7 @@
     },
     {
       "path": "scripts/audit-reverse-engineering.cjs",
-      "sha256": "526170fda4bbdc674aed4ec89cdf4ef1695a5b237207303f5ec98f2ad9a791a9"
+      "sha256": "d5d7e2e7c67c1e29b493d70314a25a5767b3fbdb79a219537a905bd135b3200f"
     }
   ],
   "trace": {
@@ -89,12 +89,17 @@
       "status": "not-tested",
       "behavior": "Fresh network download/provisioning, interrupted remote setup, hosted CI and release packaging/security audit. Static native dumps are not complete native-function reverse engineering.",
       "evidence": "docs/migration/native-inventory.json lists six statically inspected original binaries; docs/migration/windows-capture.md records unresolved contracts and capture requirements."
+    },
+    {
+      "status": "pass",
+      "behavior": "Documentation now names Cargo as the current backend/tooling workflow. Retired Node code moved to legacy; evidence scanners retain archive coverage, and the shared audit uses the relocated inert ASAR reader.",
+      "evidence": "docs/migration/legacy-relocation.json; docs/reverse-engineering/legacy-relocation.json; docs/development.md."
     }
   ],
   "heuristicReviews": [
     {
       "path": "backend/crates/tools/src/audit.rs",
-      "sha256": "e731afe97546e7f039b6bde5f0ab4ea9a9d401f82ecc20d8085ac3a94d358c0f",
+      "sha256": "f0d149c7d169c1e4174e68d61d65bf5f8c37c3701e445617a0d57fdbc2bc9d5e",
       "reason": "Manually reviewed detector self-match: this exact Rust audit file contains literal replacement-UI patterns and negative regression examples, not UI creation or injection. Both audits retain this finding visibly and still require current original-source evidence; no other source path may use this narrow self-review."
     }
   ]

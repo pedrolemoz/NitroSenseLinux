@@ -13,7 +13,7 @@ cargo build --manifest-path backend/Cargo.toml --locked
 cargo test --manifest-path backend/Cargo.toml --locked
 ```
 
-`npm run setup` now orchestrates the verified import and frontend runtime through Rust. You may also supply your own original Acer NitroSense 5.2.84 resources. For a fresh import from the reviewed official ZIP, install `unzip`, `msitools` and `cabextract`, then:
+`cargo run --manifest-path backend/Cargo.toml -p nitrosense-tools -- setup` now orchestrates the verified import and frontend runtime through Rust. You may also supply your own original Acer NitroSense 5.2.84 resources. For a fresh import from the reviewed official ZIP, install `unzip`, `msitools` and `cabextract`, then:
 
 ```sh
 backend/target/debug/nitrosense-tools import --zip /path/to/official.zip --output /absolute/path/to/new-import
@@ -48,7 +48,7 @@ The Rust import has reproduced all 762 baseline resource members byte-for-byte. 
 
 Fan/performance/audio/USB charging/calibration/boot-logo behavior, complete Checkup and system information, all screenshot states, extended reliability, security auditing and release packaging remain incomplete. The frontend still needs original Care Center integration for its battery-health radio controls. No unverified firmware/EC writes are permitted.
 
-Root `lib/`, `runtime/` and legacy scripts are retained as explicit migration/regression evidence while corresponding acceptance is completed. They are not dependencies of the new frontend or Rust backend. `npm run start:legacy` selects the old path deliberately. Some historical research utilities and driver operator scripts still await retirement or migration; this is not yet an entirely retired Node project.
+Archived `legacy/lib/`, `legacy/runtime/` and `legacy/scripts/` are retained as explicit migration/regression evidence while corresponding acceptance is completed. They are not dependencies of the new frontend or Rust backend. `npm run start:legacy` selects the old path deliberately. See [the archive guide](legacy/README.md). Current driver operator scripts and the shared audit remain under `scripts/`. Archiving is not full retirement or acceptance.
 
 ## Development checks
 
@@ -57,8 +57,8 @@ cargo clippy --manifest-path backend/Cargo.toml --all-targets -- -D warnings
 backend/target/debug/nitrosense-tools audit
 backend/target/debug/nitrosense-tools audit --verify-original
 backend/target/debug/nitrosense-tools checklist --check
-npm test
-npm run test:frontend
+cargo test --manifest-path backend/Cargo.toml --locked
+node --test frontend/host/*.test.cjs tests/*.test.cjs
 ```
 
 Both Rust and legacy audit entrypoints remain available. The evidence gate requires file-bound research records; it is a heuristic, not proof of behavior or a completed security audit. Source-only CI must not download Acer assets. See [AGENTS.md](AGENTS.md), [CONTRIBUTING.md](CONTRIBUTING.md), [research workflow](docs/reverse-engineering/README.md) and the [Windows investigation procedure](docs/migration/windows-capture.md).

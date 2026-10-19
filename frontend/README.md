@@ -18,6 +18,6 @@ The launcher starts a separate Rust process on a private Unix socket, with hardw
 
 **Unresolved runtime blockers:** Electron remains 26.6.10, and the inherited original host requires disabled sandbox/certificate protections. The explicit experimental entrypoint is retained while a supported-runtime and scoped trust/process-isolation migration is researched. This is not a hardened release. Online functionality and other incomplete functions must not be reported as working.
 
-Root `runtime/`, `lib/` and legacy scripts remain temporarily as migration/regression evidence; they are not dependencies of this host. Remove them only after their replacements have corresponding acceptance evidence. The original Node launch path is available explicitly as `npm run start:legacy`.
+Archived `legacy/runtime/`, `legacy/lib/` and `legacy/scripts/` remain temporarily as migration/regression evidence; they are not dependencies of this host. Remove them only after their replacements have corresponding acceptance evidence. The original Node launch path is available explicitly as `npm run start:legacy`.
 
 The final additional hash-guarded renderer fix preserves plain error strings emitted by the original bundled push receiver instead of JSON-parsing them. The actual remote 404 remains visible; this does not implement notifications. See `docs/reverse-engineering/original-push-error.json`.

@@ -35,7 +35,7 @@
   "files": [
     {
       "path": "frontend/README.md",
-      "sha256": "4175b9bb70839c3cefecfbaf450d5ac6f01d7708025f2349a210a48c4e0f373a"
+      "sha256": "3b899b224e60d32c9620b57af47f3af8632dc0e986b5142b0da56415fe774968"
     },
     {
       "path": "frontend/host/asset-overrides.cjs",
@@ -147,6 +147,11 @@
       "status": "pass",
       "behavior": "Diagnostic-only error source/stack instrumentation traced a plain-string push service error. The guarded renderer fix preserves its text; six final original pages reported no renderer errors. Underlying remote 404 persists and is not notification acceptance.",
       "evidence": ".state/rust-frontend-YEKt2mYO/frontend/inspection/report.json; frontend/host/original-notification-error.test.cjs; original-push-error.json."
+    },
+    {
+      "status": "pass",
+      "behavior": "Documentation now names Cargo as the current backend/tooling workflow. Retired Node code moved to legacy; evidence scanners retain archive coverage, and the shared audit uses the relocated inert ASAR reader.",
+      "evidence": "docs/migration/legacy-relocation.json; docs/reverse-engineering/legacy-relocation.json; docs/development.md."
     }
   ]
 }

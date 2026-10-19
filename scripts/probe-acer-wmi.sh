@@ -22,7 +22,7 @@ stamp=$(date -u +%Y%m%dT%H%M%SZ)
 output="$project/.state/acer-wmi-$stamp"
 mkdir -p "$project/.state"
 mkdir "$output"
-node "$project/scripts/inspect-linux.cjs" "$output/before.json"
+node "$project/legacy/scripts/inspect-linux.cjs" "$output/before.json"
 loaded=no
 if [ -d /sys/module/acer_wmi ]; then loaded=yes; fi
 printf '%s\n' "$loaded" > "$output/previously-loaded.txt"
@@ -60,7 +60,7 @@ if ! sudo modprobe acer_wmi "$@" predator_v4=1; then
     fi
     echo "Evidence directory: $output" >&2; exit 1
 fi
-node "$project/scripts/inspect-linux.cjs" "$output/after.json"
+node "$project/legacy/scripts/inspect-linux.cjs" "$output/after.json"
 cat /sys/module/acer_wmi/parameters/predator_v4 > "$output/trial-parameter.txt"
 echo "Evidence directory: $output"
 echo 'Trial remains active for this boot. Reboot to return to the original boot configuration.'

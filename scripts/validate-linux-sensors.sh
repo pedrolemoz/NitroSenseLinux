@@ -35,7 +35,7 @@ status() {
 }
 
 status > "$output/module-before.txt"
-node scripts/read-linux-sensors.cjs "$output/sensors-before.json"
+node legacy/scripts/read-linux-sensors.cjs "$output/sensors-before.json"
 parameter=/sys/module/acer_wmi/parameters/predator_v4
 value=absent
 if [ -f "$parameter" ]; then value=$(cat "$parameter"); fi
@@ -76,7 +76,7 @@ case "$value" in
 esac
 fi
 status > "$output/module-after.txt"
-node scripts/read-linux-sensors.cjs "$output/sensors-after.json"
+node legacy/scripts/read-linux-sensors.cjs "$output/sensors-after.json"
 echo "Completed. Share this directory: $output"
 echo 'Capture is saved on disk; rebooting afterward does not erase it.'
 echo 'The trial parameter remains temporary. No physical control change was tested.'

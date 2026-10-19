@@ -5,10 +5,10 @@ original app's Windows behavior on Linux. Research precedes implementation.
 
 1. Select the original feature/control and screenshot reference ID. Extract and
    index the verified original JavaScript with
-   `npm run inspect:original -- --symbol <symbol>`; outputs stay in ignored
+   `cargo run --manifest-path backend/Cargo.toml -p nitrosense-tools -- inspect-original --symbol <symbol>`; outputs stay in ignored
    `analysis/original-5.2.84/`. Read the actual source around the indexed offsets.
    ASAR extraction is not native decompilation, nor the recovered Acer project.
-   Existing `map-boundaries.cjs` and `map-protocol.cjs` can help trace bundled JS;
+   Archived `legacy/scripts/map-boundaries.cjs` and `legacy/scripts/map-protocol.cjs` can help trace bundled JS;
    see the script guide for their local parser prerequisite.
 2. Trace original event handlers, model transitions, RPC, service/native calls,
    packet shapes, persistence, reply validation and UI refresh. Inspect original
@@ -29,7 +29,7 @@ original app's Windows behavior on Linux. Research precedes implementation.
    `validation` lists behavior, status and evidence paths; explicitly distinguish
    pass/fail/blocked/not-tested. Record the Windows decision/reason and remaining
    gaps. No copied proprietary source, personal data or raw captures in records.
-5. Run `npm run audit:changes -- --verify-original` locally, then `npm test` and
+5. Run `cargo run --manifest-path backend/Cargo.toml -p nitrosense-tools -- audit --verify-original` locally, then `cargo test --manifest-path backend/Cargo.toml --locked`, the frontend glue tests and
    applicable real behavior checks. The default diff is HEAD to current working
    tree plus untracked implementation files. Use `--base <revision>` for a branch
    or committed change range. PR CI uses its base commit and needs no Acer assets.

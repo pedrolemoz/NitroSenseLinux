@@ -32,12 +32,16 @@ Supported Electron migration and sandbox/TLS hardening are release blockers: the
 
 ```sh
 cargo build --offline --manifest-path backend/Cargo.toml
-npm test
-npm run audit:changes
-npm run audit:changes -- --verify-original
-npm run audit:changes:legacy -- --verify-original
-npm run checklist -- --check
+cargo test --manifest-path backend/Cargo.toml --locked
+cargo run --manifest-path backend/Cargo.toml -p nitrosense-tools -- audit
+cargo run --manifest-path backend/Cargo.toml -p nitrosense-tools -- audit --verify-original
+node scripts/audit-reverse-engineering.cjs --verify-original
+cargo run --manifest-path backend/Cargo.toml -p nitrosense-tools -- checklist --check
 sh frontend/start.sh --experimental-runtime
 ```
 
 The GUI requires the user's verified import, provisioned runtime and a graphical session. The launcher disables backend hardware writes. Test sockets/processes may require execution outside a restrictive sandbox. Original-source integration tests may skip without private assets; skipped checks are not passes. See `backend/README.md` and `frontend/README.md` for API, lifecycle and runtime details. No commit or release was created.
+
+## Subsequent archive and documentation update
+
+Retired Node implementation, research tools, regression tests and historical records now live under `legacy/`. Current Cargo/host commands, agent rules, contributor/development/manual/troubleshooting and driver integration documentation were updated. `legacy-relocation.json` records the moved paths and current hashes; this does not transfer historical acceptance to Rust. The combined suite again passed 21 Rust tests and 209 JavaScript assertions with four skips.

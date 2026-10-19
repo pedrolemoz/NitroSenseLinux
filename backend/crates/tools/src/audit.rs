@@ -20,6 +20,7 @@ fn implementation(p: &str) -> bool {
             .iter()
             .any(|suffix| p.ends_with(suffix)))
         || [
+            "legacy/",
             "runtime/",
             "lib/",
             "drivers/",
