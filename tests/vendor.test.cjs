@@ -17,9 +17,9 @@ function fixture(electron) {
     ['win32/Nitro/Nitro ANV15-52.json', Buffer.from('{}')],
     ['oem/NitroSense/Common/Settings.json', Buffer.from('{}')]
   ]);
-  const manifest = { schema: 1, application: 'acernitrosense', version: '5.1.392', runtime: '26.6.10',
-    asarSha256: hash(archive), msiEvidence: { productVersion: '5.1.392',
-      msiSha256: '1a9715c8d4de31a8d88b2b3f61574ec53dca1b81eba07ccb0a00a41a3a3a2e10' },
+  const manifest = { schema: 1, application: 'acernitrosense', version: '5.2.84', runtime: '26.6.10',
+    asarSha256: hash(archive), msiEvidence: { productVersion: '5.2.84',
+      msiSha256: '113f71cb8e2176acd8e3e08bd036bf74b9ec1c60fee0197677a2f9aeb2b2bbdb' },
     files: [...files].map(([name, bytes]) => ({ path: name, bytes: bytes.length, sha256: hash(bytes) })) };
   const storage = new Map([...files].map(([name, bytes]) => [path.join(root, name), bytes]));
   storage.set(path.join(root, 'import.json'), Buffer.from(JSON.stringify(manifest)));

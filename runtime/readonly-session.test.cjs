@@ -9,7 +9,7 @@ const { startAcerServices } = require('../lib/acer-service.cjs');
 const { RENDERER_FILE } = require('./renderer-patches.cjs');
 const { startReadOnlySession } = require('./readonly-session.cjs');
 const { prepareRendererOverlay, createFsFacade } = require('./asset-overrides.cjs');
-const archive = path.join(__dirname, '../vendor/nitrosense-5.1.392-official/resources/app.asar');
+const archive = path.join(__dirname, '../vendor/nitrosense-5.2.84-official/resources/app.asar');
 const available = fs.existsSync(archive);
 let source;
 function fixture(t) {

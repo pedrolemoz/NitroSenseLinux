@@ -1,7 +1,7 @@
 const crypto = require('node:crypto');
 const path = require('node:path');
-const RENDERER_FILE = 'dist/widgets/main/main.3f0bc01a1d49e6ce.js';
-const RENDERER_SHA256 = 'cd87941481821f733292bcc380601869f6a85adcacf522d3498dfa61db95276e';
+const RENDERER_FILE = 'dist/widgets/main/main.ce24a9a875916226.js';
+const RENDERER_SHA256 = '0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c';
 
 // Prepared for the read-only integration. The current --ui-only loader does not
 // apply these patches. Original assets are never changed on disk.
@@ -21,8 +21,8 @@ function transformRenderer(source) {
     if (start < 0 || until < 0) throw new Error('Reviewed renderer section no longer matches: ' + reason);
     replace(source.slice(start, until), after, reason);
   }
-  replace('this.getCategory(r)[s]=(...f)=>this.client.call(XS,"ddsc",r,s,f)',
-    `this.getCategory(r)[s]=require(${logging}).rendererFunction(this.client,XS,r,s)`,
+  replace('this.getCategory(r)[s]=(...f)=>this.client.call(tk,"ddsc",r,s,f)',
+    `this.getCategory(r)[s]=require(${logging}).rendererFunction(this.client,tk,r,s)`,
     'Keep renderer diagnostics synchronous and bounded outside the hardware RPC queue');
   replace('null==this.driverService.SNnumber){let g=yield this.driverService.getSnNumber(),M=yield this.driverService.getSnId(),S=yield r.info.getSystemUuid();console.log(`[main.ts] get sn: ${g}, snid: ${M}, uuid: ${S}`),r.logIt.info(`[main.ts] get sn: ${g}, snid: ${M}, uuid: ${S}`)}',
     `null==this.driverService.SNnumber){yield require(${JSON.stringify(path.join(__dirname, 'renderer-startup.cjs'))}).readOptionalIdentity(this,r)}`,
@@ -37,8 +37,8 @@ function transformRenderer(source) {
   replace('this.initDynamicEffects(t),this.initFanDialControl(t)',
     `require(${startup}).settleOptional(this,"lighting",()=>this.initDynamicEffects(t)),this.initFanDialControl(t)`,
     'Keep unavailable lighting discovery from leaving an unhandled startup rejection');
-  replace('a=yield e.info.getMachineGuid(),r=new Date,s=[ste("expireTime",">",r)',
-    `a=yield require(${startup}).settleOptional(this,"recommendations",()=>e.info.getMachineGuid());if(a==null)return;const r=new Date,s=[ste("expireTime",">",r)`,
+  replace('a=yield e.info.getMachineGuid(),r=new Date,s=[cte("expireTime",">",r)',
+    `a=yield require(${startup}).settleOptional(this,"recommendations",()=>e.info.getMachineGuid());if(a==null)return;const r=new Date,s=[cte("expireTime",">",r)`,
     'Skip identity dependent recommendation subscription when identity is unavailable');
   section('setPlanet9Promise(){', 'refreshCheckWinStoreUpdate(){',
     `setPlanet9Promise(){return require(${startup}).preparePlanet9(this)}`,
@@ -65,7 +65,7 @@ function transformRenderer(source) {
   section('Current_LightingDataFromDeviceName(e){', 'get ProfileKeyboard(){',
     'Current_LightingDataFromDeviceName(e){return this.profileLight?.devices?.find(r=>r.deviceName==e)}Current_LightingDataFromIndex(e){return this.profileLight?.devices?.find(r=>r.device==e)}get profileLight(){return this.pss.CurrentProfile?.lighting}get profileGlobal(){return this.profileLight?.GlobalEffect}',
     'Keep unavailable lighting getters free of exceptions and asynchronous logging');
-  section('class ZP{', 'class Co extends ZP{', `class ZP extends require(${device}).DeviceState{}`,
+  section('class HP{', 'class xo extends HP{', `class HP extends require(${device}).DeviceState{}`,
     'Settle failed device queries, invalidate stale values and bound asynchronous readers');
   section('refresh(){return pe(this,void 0,void 0,function*(){let t=yield this._ddsc.pssdk.getSystemUpdatedData',
     'set GA4Label(t)',
@@ -84,7 +84,7 @@ function transformRenderer(source) {
   replace('setMode(t){this.getData()!=t&&(this.setData(t),this._ddsc.logIt.debug(`set operating mode:${Le[t]}`))}',
     'setMode(t){return this.getData()!=t?this.setData(t):Promise.resolve()}',
     'Return the original operating mode write promise');
-  section('setModeWithoutScenario_And_RefreshUI(t){this._ddsc.logIt.info', 'class aIe extends Co{',
+  section('setModeWithoutScenario_And_RefreshUI(t){this._ddsc.logIt.info', 'class hIe extends xo{',
     'setModeWithoutScenario_And_RefreshUI(t){return this.getData()!=t?this.setDataWithoutScenario_And_RefreshUI(t):Promise.resolve()}}',
     'Return operating mode UI refresh failure without changing local data');
   for (const name of ['setModeWithoutScenario', 'setMode', 'setModeWithoutScenario_And_RefreshUI']) {
@@ -104,14 +104,14 @@ function transformRenderer(source) {
   section('SyncBatteryStatus(){', 'setDeviceData(e,a,r){',
     `SyncBatteryStatus(){return require(${device}).refreshReadOnlyPower(this)}`,
     'Refresh read-only power state without applying scenarios or writing hardware');
-  replace('get IsUnplugAC(){var e;return!ou(null===(e=this.dataModel)||void 0===e?void 0:e.adaptorStatus.getData())}',
-    'get IsUnplugAC(){const e=this.dataModel?.adaptorStatus.getData();return e==null?null:!ou(e)}',
+  replace('get IsUnplugAC(){var e;return!du(null===(e=this.dataModel)||void 0===e?void 0:e.adaptorStatus.getData())}',
+    'get IsUnplugAC(){const e=this.dataModel?.adaptorStatus.getData();return e==null?null:!du(e)}',
     'Preserve unknown power state instead of inferring unplugged AC');
   section('get createHomeTab(){', 'get embeddedUrl(){',
     `get createHomeTab(){return require(${JSON.stringify(path.join(__dirname, 'renderer-startup.cjs'))}).createReadOnlyHome(this,Le,window.location.port)}`,
     'Keep home template evaluation synchronous when operating mode is unavailable');
-  replace('getDisplayedName(t){return ml.get(Da).get(this._prefixMUI+this._typeData[t]+this._postfixMUI)}',
-    'getDisplayedName(t){return ml.get(Da).get(t==null||this._typeData[t]==null?"--":this._prefixMUI+this._typeData[t]+this._postfixMUI)}',
+  replace('getDisplayedName(t){return gl.get(Aa).get(this._prefixMUI+this._typeData[t]+this._postfixMUI)}',
+    'getDisplayedName(t){return gl.get(Aa).get(t==null||this._typeData[t]==null?"--":this._prefixMUI+this._typeData[t]+this._postfixMUI)}',
     'Display unavailable enum values without undefined translation keys', 2);
   replace('call(t,e,...a){return this.subscribeCategory(this.getReplyTopic,t),new Promise((s,d)=>{const f=(this.funcCallbackId++).toString();var c={callId:f,fnName:e,param:a};this.client.publish(this.getCallTopic(t),JSON.stringify(c)),this.cbMap.set(f,s)})}',
     `call(t,e,...a){return require(${rpc}).callRpc(this,t,e,a)}`,
@@ -122,8 +122,8 @@ function transformRenderer(source) {
   replace('let ne={callId:g,reason:"fromFunction",result:yield this.fnMap.get(M)(...S)};',
     `let ne=yield require(${rpc}).rpcReply(g,()=>this.fnMap.get(M)(...S));`,
     'Reply to failed renderer RPC functions with a correlated error');
-  replace('class r2{constructor(t){this._data=void 0,this.init(t),this._func=t}init(t){return pe(this,void 0,void 0,function*(){let e=yield t.call();null!=e&&(this._data=e)})}refresh(){return pe(this,void 0,void 0,function*(){this._data=yield this._func.call()})}get data(){return this._data}}',
-    `class r2 extends require(${view}).CapabilityState{}`,
+  replace('class wl{constructor(t){this._data=void 0,this.init(t),this._func=t}init(t){return pe(this,void 0,void 0,function*(){let e=yield t.call();null!=e&&(this._data=e)})}refresh(){return pe(this,void 0,void 0,function*(){this._data=yield this._func.call()})}get data(){return this._data}}',
+    `class wl extends require(${view}).CapabilityState{}`,
     'Preserve capability failures and invalidate old data without unhandled initialization rejections');
   replace('get size(){return this._data.length}', 'get size(){return Array.isArray(this._data)?this._data.length:0}',
     'Allow unavailable capability collections to render without fabricating a capability list', 2);

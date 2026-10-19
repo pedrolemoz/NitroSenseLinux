@@ -4,7 +4,7 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const { Zip, destination } = require('../lib/zip.cjs');
 const { readAsar } = require('../lib/asar.cjs');
-const KNOWN_ASAR = '57289e9feb165b9a8ac2525d2e60c4b67ffdafa508b24118e0c9cf56031cf034';
+const KNOWN_ASAR = 'c79516a91d2eae93b019d040c786d23d8e69795b18255b709a37d48b9b78a401';
 function digest(data) { return crypto.createHash('sha256').update(data).digest('hex'); }
 function importVendor(input, output, oemSource) {
   const root = path.resolve(output);
@@ -14,7 +14,7 @@ function importVendor(input, output, oemSource) {
   if (digest(asar) !== KNOWN_ASAR) throw new Error('Unsupported Acer package: no reviewed adapter for this ASAR hash');
   const parsed = readAsar(asar);
   const pkg = JSON.parse(parsed.read('package.json').toString('utf8'));
-  if (pkg.name !== 'acernitrosense' || pkg.version !== '5.1.392' || pkg.main !== 'main.js') throw new Error('Unexpected Acer application identity');
+  if (pkg.name !== 'acernitrosense' || pkg.version !== '5.2.84' || pkg.main !== 'main.js') throw new Error('Unexpected Acer application identity');
   const staged = root + '.partial';
   if (fs.existsSync(staged)) throw new Error('Previous import staging directory exists: ' + staged);
   fs.mkdirSync(staged, { recursive: true });
@@ -39,7 +39,7 @@ function importVendor(input, output, oemSource) {
     const reportPath = path.join(path.resolve(oemSource), 'extraction-report.json');
     if (fs.existsSync(reportPath)) {
       const report = JSON.parse(fs.readFileSync(reportPath, 'utf8').replace(/^\uFEFF/, ''));
-      if (report.msiSha256 !== '1a9715c8d4de31a8d88b2b3f61574ec53dca1b81eba07ccb0a00a41a3a3a2e10' ||
+      if (report.msiSha256 !== '113f71cb8e2176acd8e3e08bd036bf74b9ec1c60fee0197677a2f9aeb2b2bbdb' ||
           report.productVersion !== pkg.version) throw new Error('OEM MSI evidence is not the reviewed package');
       for (const file of report.files) {
         const data = fs.readFileSync(destination(path.resolve(oemSource), file.path));
@@ -72,7 +72,7 @@ function importVendor(input, output, oemSource) {
   return { output: root, version: pkg.version, files: hashes.length, oemCommonImported: !!oemSource };
 }
 if (require.main === module) {
-  const [input, output = 'vendor/nitrosense-5.1.392', flag, oem] = process.argv.slice(2);
+  const [input, output = 'vendor/nitrosense-5.2.84', flag, oem] = process.argv.slice(2);
   if (!input || flag && (flag !== '--oem' || !oem)) {
     console.error('Usage: node scripts/import-vendor.cjs <official.appx> [output] [--oem <installed-OEM-directory>]');
     process.exitCode = 1;

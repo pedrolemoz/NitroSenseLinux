@@ -10,6 +10,7 @@ const { rendererPreloadSource } = require('./renderer-modules.cjs');
 const { startReadOnlySession } = require('./readonly-session.cjs');
 const { createFsFacade } = require('./asset-overrides.cjs');
 const { modeBannerSource } = require('./mode-banner.cjs');
+const { acquireInstance } = require('./single-instance.cjs');
 let readOnlySession;
 async function boot() {
   if (process.platform !== 'linux' || !process.versions.electron) throw new Error('Launch with Electron Linux');
@@ -33,9 +34,11 @@ async function boot() {
   // existing certificate flag must also precede Chromium initialization.
   app.commandLine.appendSwitch('ignore-certificate-errors');
   app.setName(readOnly ? 'NitroSense Linux — READ ONLY' : 'NitroSense Linux — UI ONLY');
-  const userData = path.join(stateDir, readOnly ? 'electron-read-only-data' : 'electron-user-data');
+  // Session diagnostics are unique; the desktop lock/profile must be stable.
+  const userData = path.resolve(__dirname, '..', '.state', readOnly ? 'electron-read-only-data' : 'electron-user-data');
   fs.mkdirSync(userData, { recursive: true });
   app.setPath('userData', userData);
+  if (!acquireInstance(app)) return;
   const originalGetPath = app.getPath.bind(app);
   app.getPath = name => name === 'exe' ? path.join(root, 'NitroSense.exe') : originalGetPath(name);
   app.getVersion = () => manifest.version;

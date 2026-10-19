@@ -46,5 +46,5 @@ electron.app.on('browser-window-created', (_e, window) => {
 });
 setTimeout(()=>{report.deadline=true;finish(2)},35000);
 process.env.NITROSENSE_STATE_DIR = path.join(output,'app-state');
-process.argv.push('--read-only','--vendor',path.join(project,'vendor/nitrosense-5.1.392-official'));
+process.argv.push('--read-only','--vendor',path.join(project,'vendor/nitrosense-5.2.84-official'));
 require('../runtime/bootstrap.cjs');

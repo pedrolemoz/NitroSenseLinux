@@ -4,7 +4,7 @@ const path = require('node:path');
 const { extractOemMsi } = require('../lib/msi-oem.cjs');
 const { importVendor } = require('./import-vendor.cjs');
 const { verifyVendor } = require('../lib/vendor.cjs');
-const OFFICIAL_APPX = '51da90fb2fd64a69b6714b41d285f6c7.appx';
+const OFFICIAL_APPX = '92086ed242014d8fadab04e6217e62b4.appx';
 function prepareLinuxVendor(installer, output, { extract = extractOemMsi, importResources = importVendor, verify = verifyVendor } = {}) {
   const source = fs.realpathSync(installer), destination = path.resolve(output), oem = destination + '.oem';
   for (const candidate of [destination, destination + '.partial', oem, oem + '.partial']) {

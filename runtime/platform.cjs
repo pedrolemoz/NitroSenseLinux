@@ -1,6 +1,6 @@
 'use strict';
 
-// Boundary shapes are taken from the supplied 5.1.392 main.js, not the DLL ABI.
+// Boundary shapes are taken from the supplied 5.2.84 main.js, not the DLL ABI.
 const fs = require('node:fs');
 const path = require('node:path');
 const { EventEmitter } = require('node:events');

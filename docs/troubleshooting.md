@@ -22,7 +22,7 @@ The mapping currently requires ANV15-52, Linux 7.0.x and hwmon bound to `acer-wm
 
 ## Import is rejected
 
-Confirm you supplied the official reviewed 5.1.392 package, with both its MSI and AppX. The importer checks exact hashes, not just filenames. `msiinfo` and `cabextract` must be available. Choose a new output directory when a previous or partial extraction exists; inspect and preserve the old directory instead of overwriting it or disabling checks.
+Confirm you supplied the official reviewed 5.2.84 package, with both its MSI and AppX. The importer checks exact hashes, not just filenames. `msiinfo` and `cabextract` must be available. Choose a new output directory when a previous or partial extraction exists; inspect and preserve the old directory instead of overwriting it or disabling checks.
 
 ## The screen appears simulated
 
@@ -31,3 +31,9 @@ Use `npm start`, not `test-linux-ui.sh`. Wait for multiple samples, inspect Moni
 ## Sharing evidence safely
 
 Start with the assessed summary and your observations. Review even summaries before posting. Raw `launch.log`, inventory files, extracted resources and cached application data may include credentials, cookies, serial numbers and personal paths. They are intentionally excluded from Git.
+
+## Automatic setup download
+
+`npm run setup` downloads approximately 947 MiB from Acer over HTTPS. If networking is unavailable, download the official ZIP using the README link and run `npm run setup -- --zip /absolute/path/to/file.zip`. An interrupted download leaves a `.partial` file in `.state/downloads/`; remove that specific file before retrying. A SHA-256 mismatch means the downloaded bytes differ from the reviewed package: remove the cached download and retry the official source, and report persistent mismatches rather than bypassing verification.
+
+Setup refuses partial vendor/OEM imports. Preserve or move the named partial directories for diagnosis before retrying. A completed import is verified and reused. No Windows executable needs to run.

@@ -1,7 +1,7 @@
 const path = require('node:path');
 const { verifyVendor } = require('../lib/vendor.cjs');
 try {
-  const { root, manifest, verifiedFiles } = verifyVendor(path.resolve(process.argv[2] || 'vendor/nitrosense-5.1.392-official'));
+  const { root, manifest, verifiedFiles } = verifyVendor(path.resolve(process.argv[2] || 'vendor/nitrosense-5.2.84-official'));
   console.log(JSON.stringify({ vendorRoot: root, version: manifest.version, requiredElectron: manifest.runtime,
     verifiedFiles, originalAsarIntact: true, oemMsiVerified: true, hostPlatform: process.platform,
     validationScope: 'Vendor integrity only; this command does not test the GUI or hardware.',

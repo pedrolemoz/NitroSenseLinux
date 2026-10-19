@@ -4,7 +4,7 @@ project=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 mode=--read-only
 case "${1:-}" in --read-only|--ui-only) mode=$1; shift;; esac
 if [ "$#" -gt 1 ]; then echo 'Usage: start-linux.sh [--read-only|--ui-only] [vendor-directory]' >&2; exit 1; fi
-vendor=${1:-"$project/vendor/nitrosense-5.1.392-official"}
+vendor=${1:-"$project/vendor/nitrosense-5.2.84-official"}
 electron=${NITROSENSE_ELECTRON:-"$project/.tools/electron-runtime/node_modules/.bin/electron"}
 if [ "$(uname -s)" != Linux ]; then
     echo 'This launcher requires Linux.' >&2; exit 1

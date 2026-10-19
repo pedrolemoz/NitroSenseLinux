@@ -92,6 +92,15 @@ interrupted=0
 trap 'interrupted=1' INT
 if sh scripts/start-linux.sh --read-only > "$output/launch.log" 2>&1; then result=0; else result=$?; fi
 printf '%s\n' "$result" > "$output/exit-code.txt"
+if grep -Fq 'NitroSense is already running; bringing its window forward.' "$output/launch.log"; then
+    echo 'NitroSense is already running. Its existing window has been brought forward.'
+    exit "$result"
+fi
+if [ "$result" -ne 0 ] && grep -Fq 'EADDRINUSE' "$output/launch.log"; then
+    echo 'NitroSense could not start: a local service port is already occupied.' >&2
+    echo 'Stop any older NitroSense session with Ctrl+C in its terminal, then retry npm start.' >&2
+fi
+
 printf 'terminalInterruptObserved=%s\n' "$interrupted" > "$output/collector-status.txt"
 if node scripts/summarize-ui-session.cjs "$output" > "$output/session-summary.json"; then
     cat "$output/session-summary.json"

@@ -6,30 +6,32 @@ const vm = require('node:vm');
 const { EventEmitter } = require('node:events');
 const { createFsFacade } = require('./asset-overrides.cjs');
 const { modeBannerSource } = require('./mode-banner.cjs');
+const { acquireInstance } = require('./single-instance.cjs');
 
-async function runBootstrap(mode, { sessionError = null } = {}) {
+async function runBootstrap(mode, { sessionError = null, lockAvailable = true } = {}) {
   const root = path.resolve('fixture-vendor'), state = path.resolve('fixture-state');
   const entry = path.join(root, 'resources/app.asar/main.js');
   const app = new EventEmitter(), calls = [], written = new Map();
-  Object.assign(app, { commandLine: { appendSwitch: flag => calls.push(['switch', flag]) }, setName: name => calls.push(['name', name]), setPath() {}, getPath: () => 'fixture', exit: code => calls.push(['exit', code]) });
+  Object.assign(app, { commandLine: { appendSwitch: flag => calls.push(['switch', flag]) }, setName: name => calls.push(['name', name]), requestSingleInstanceLock: () => lockAvailable, setPath(name, value) { calls.push(['path', name, value]); }, getPath: () => 'fixture', exit: code => calls.push(['exit', code]) });
   const platform = { native: { getRegistryValue: () => 'stored-preference' }, powershell: { legacy: {} } };
   const session = { renderer: { patches: ['renderer-patched'] }, mapPath: file => file, close: async () => calls.push(['close']) };
   const io = { mkdirSync() {}, cpSync() {}, writeFileSync: (file, value) => written.set(file, value), readFileSync: () => 'fixture original source', promises: {} };
   const Module = { _load() {}, _extensions: { '.js': () => {} } };
   const dependencies = {
     'node:fs': io, 'node:path': path, 'node:module': Module, electron: { app },
-    '../lib/vendor.cjs': { verifyVendor: () => ({ root, manifest: { version: '5.1.392', asarSha256: 'fixture' } }) },
+    '../lib/vendor.cjs': { verifyVendor: () => ({ root, manifest: { version: '5.2.84', asarSha256: 'fixture' } }) },
     './platform.cjs': { createPlatform: () => platform, unsupported: () => new Error('unavailable') },
     './source-patches.cjs': { transformSource: (_src, _oem, _preload, options) => { calls.push(['transform', options]); return { source: 'prepared', patches: [] }; } },
     './renderer-modules.cjs': { rendererPreloadSource: () => 'fixture preload' },
     './readonly-session.cjs': { startReadOnlySession: async () => { calls.push(['service']); if (sessionError) throw sessionError; return session; } },
-    './asset-overrides.cjs': { createFsFacade }, './mode-banner.cjs': { modeBannerSource },
+    './single-instance.cjs': { acquireInstance }, './asset-overrides.cjs': { createFsFacade }, './mode-banner.cjs': { modeBannerSource },
   };
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, 'bootstrap.cjs'), 'utf8'), {
     require(name) {
       if (name === entry) { calls.push(['entry']); Module._extensions['.js']({ _compile: () => calls.push(['compile']) }, entry); return; }
       assert.ok(name in dependencies, name); return dependencies[name];
     },
+    __dirname,
     process: { platform: 'linux', versions: { electron: '26.6.10' }, argv: ['electron', 'runtime', ...mode, '--vendor', root], env: { NITROSENSE_STATE_DIR: state }, getuid: () => 1000 },
     console: { error: (...args) => calls.push(['error', ...args]) },
   });
@@ -74,4 +76,12 @@ test('banner accurately distinguishes waiting, live data, unavailable data and s
   listeners['nitrosense-linux-status']({ detail: { kind: 'monitor', available: true } }); assert.match(node.textContent, /LIVE LINUX/);
   listeners['nitrosense-linux-status']({ detail: { kind: 'monitor', available: false } }); assert.match(node.textContent, /UNAVAILABLE/);
   vm.runInNewContext(modeBannerSource(false), context); assert.match(node.textContent, /SIMULATED/);
+});
+
+test('duplicate launch exits before binding services or loading Acer and uses a stable desktop profile', async () => {
+  const run = await runBootstrap(['--read-only'], { lockAvailable: false });
+  assert.ok(run.calls.some(c => c[0] === 'exit' && c[1] === 0));
+  assert.equal(run.calls.some(c => ['service', 'entry'].includes(c[0])), false);
+  const profile = run.calls.find(c => c[0] === 'path' && c[1] === 'userData')[2];
+  assert.equal(profile, path.resolve(__dirname, '..', '.state/electron-read-only-data'));
 });

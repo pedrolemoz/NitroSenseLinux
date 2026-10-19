@@ -36,7 +36,7 @@ const originalBridge = require('../runtime/readonly-bridge.cjs');
 let fixtureBridge;
 const originalLoad = Module._load;
 const bootstrap = path.join(project, 'runtime/bootstrap.cjs');
-const vendor = path.join(project, 'vendor/nitrosense-5.1.392-official');
+const vendor = path.join(project, 'vendor/nitrosense-5.2.84-official');
 let uiPort;
 const allowedPorts = [];
 const report = { fixtureOnly: true, nativeHardwareAccess: false, rendererErrors: [], pages: [] };

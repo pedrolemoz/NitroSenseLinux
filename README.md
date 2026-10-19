@@ -4,7 +4,7 @@ An experimental compatibility layer that runs the **original Acer NitroSense int
 
 **Current milestone: real read-only monitoring works on the machine below.** The maintainer confirmed the application working after rebooting following an NVIDIA driver update. This is a development build, not a finished NitroSense port or an initial stable release.
 
-> **Bring your own Acer NitroSense ZIP.** You must obtain the official installer ZIP from Acer for your machine and extract it locally. This repository does not provide, mirror, or download Acer installers, application code, icons, images, firmware, or other proprietary resources. Only the reviewed NitroSense **5.1.392** package is currently supported; other versions are rejected by integrity checks.
+> **Download directly from Acer.** `npm run setup` downloads the official **NitroSense 5.2.84** package, verifies its pinned SHA-256, extracts the resources on Linux, and installs the pinned Electron runtime. Acer files stay local and are excluded from Git.
 
 ## Checked compatibility
 
@@ -41,15 +41,15 @@ See [detailed status](docs/status.md) and the [initial release roadmap](docs/roa
 
 ## Requirements
 
-- The official **Acer NitroSense 5.1.392 ZIP**, supplied by you, including its `Setup/` and `UWP/` contents.
+- The official **Acer NitroSense 5.2.84 ZIP**, downloaded automatically by setup or supplied locally.
 - The checked Linux desktop setup above, with readable `/proc` and `/sys` interfaces.
 - **Node.js 18 or newer** and **npm**. The current development machine uses Node.js 22; Node 18 is the declared minimum, not a promise of ongoing upstream support.
-- **msitools** (`msiinfo`) and **cabextract** for extracting the MSI resources on Linux; **unzip** for unpacking your ZIP.
+- **msitools** (`msiinfo`) and **cabextract** for extracting the MSI resources on Linux; **unzip** only if manually unpacking your ZIP.
 - **Electron 26.6.10**, installed locally using npm. The runtime is pinned to the reviewed Acer application; changing Electron versions is not currently supported.
 - Standard Electron desktop libraries (GTK 3, NSS, ALSA, GBM, X11/XWayland dependencies). A normal Ubuntu desktop already supplies many of these.
 - Working **NVIDIA proprietary drivers** and `nvidia-smi` for GPU utilization/name/clocks. The kernel module and userspace driver must match.
 - Kernel `coretemp` and `acer_wmi` interfaces for the corresponding temperatures/fans. `kmod` and `sudo` are needed only if using the optional Acer module preparation command.
-- Internet access for the initial npm/Electron download. Git is needed if cloning the source.
+- Internet access for the initial Acer ZIP and npm/Electron downloads. Git is needed if cloning the source.
 
 The application itself runs as your desktop user, **without sudo**. Optional Acer preparation can request sudo to reload a kernel module for the current boot; it does not install a persistent boot configuration.
 
@@ -76,43 +76,37 @@ sudo apt install libnss3 libgtk-3-0t64 libasound2t64 libgbm1 \
   libxcomposite1 libxdamage1 libxrandr2 libxfixes3 xwayland
 ```
 
-### 2. Install the pinned runtime
+### 2. Download and prepare NitroSense
 
 Clone or download this repository, enter its directory, then run:
 
 ```sh
+npm run setup
+npm start
+```
+
+Setup downloads the [official NitroSense 5.2.84 ZIP](https://global-download.acer.com/GDFiles/Application/Nitro%20Sense/Nitro%20Sense_Acer_5.2.84_W11x64_A.zip?acerid=639270422763622831&Step1=&Step2=&Step3=NITRO%20ANV15-52&OS=ALL&LC=pt&BC=ACER&SC=PA_3) (approximately 947 MiB) from Acer's download server. The source is the [Acer ANV15-52 support page](https://www.acer.com/br-pt/support/product-support/ANV15-52/downloads).
+
+The command verifies the ZIP's pinned SHA-256, extracts only the MSI and main AppX, imports the required resources into `vendor/nitrosense-5.2.84-official`, verifies the import, and installs Electron 26.6.10 into `.tools/electron-runtime`. It does not execute Windows installers. Allow roughly 3 GiB of free space for the download, extraction, and runtime. Run setup as your normal desktop user.
+
+The download is cached under `.state/downloads/`. Re-running setup verifies an existing completed import and installs the runtime. Partial imports are preserved for diagnosis and refused; use the troubleshooting guide before retrying. A changed upstream ZIP fails verification instead of silently accepting different code.
+
+If you already downloaded the official ZIP, use:
+
+```sh
+npm run setup -- --zip '/absolute/path/to/NitroSense_Acer_5.2.84_W11x64_A.zip'
+```
+
+For manual extraction/import:
+
+```sh
+unzip '/absolute/path/to/NitroSense_Acer_5.2.84_W11x64_A.zip' -d .state/installer
+npm run prepare:vendor -- .state/installer/NitroSense_Acer_5.2.84_W11x64 vendor/nitrosense-5.2.84-official
 npm run setup:electron
-```
-
-This downloads Electron into `.tools/electron-runtime/`. No Acer files are installed by npm. The project utilities use Node built-in modules; there is no separate root dependency installation step.
-
-### 3. Supply and extract your Acer ZIP
-
-Obtain the official ZIP from Acer yourself. For example, substituting the actual path to your download:
-
-```sh
-mkdir -p .state/installer
-unzip '/absolute/path/to/your-official-NitroSense.zip' -d .state/installer
-```
-
-Find the extracted directory that contains **both** `Setup/` and `UWP/`. The expected layout is:
-
-```text
-<official-installer-directory>/
-  Setup/NitroSenseConfig.msi
-  UWP/51da90fb2fd64a69b6714b41d285f6c7.appx
-```
-
-Import into a **new** local vendor directory:
-
-```sh
-npm run prepare:vendor -- '/absolute/path/to/official-installer-directory' vendor/nitrosense-5.1.392-official
 npm run check
 ```
 
-The Linux importer extracts data without executing the Windows installer, checks the reviewed MSI/application hashes, and creates a verified local manifest. It also creates an adjacent `.oem` extraction directory. It refuses to overwrite an existing or partial import. Preserve failed output for diagnosis; do not bypass version or integrity checks. A ZIP version label alone does not guarantee the contained files match the reviewed package.
-
-The extraction pipeline has automated coverage; a complete installation from a fresh ZIP on a clean Ubuntu machine remains a release acceptance task. The functioning development installation is not proof of that clean-install path.
+The 5.2.84 source patches and resource import are checked against the official package. The hardware observations above came from the earlier 5.1.392 build; graphical and hardware acceptance testing on 5.2.84 is still required.
 
 ## Run with real data
 
@@ -181,4 +175,4 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md), [development notes](docs/development.md
 
 **No project license has been selected yet; no `LICENSE` file is provided.** The intention is an open-source release, but licensing is still pending. Public source availability does not itself supply an open-source license.
 
-Acer NitroSense and its bundled resources remain separate proprietary material. Users must obtain their own official ZIP. **We do not provide any Acer ZIP, MSI, AppX, ASAR, extracted application resources, or other Acer binaries.** The project is not affiliated with or endorsed by Acer.
+Acer NitroSense and its bundled resources remain separate proprietary material. Setup obtains the official ZIP directly from Acer on the user’s machine. **We do not provide any Acer ZIP, MSI, AppX, ASAR, extracted application resources, or other Acer binaries.** The project is not affiliated with or endorsed by Acer.

@@ -2,7 +2,7 @@
 // These are applied in memory. The vendor ASAR remains untouched.
 const crypto = require('node:crypto');
 const path = require('node:path');
-const MAIN_SHA256 = '52e4d46abd58019e634ea646dfeda512bf9e22d8f0f143278c88ed25212792f7';
+const MAIN_SHA256 = '8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440';
 function transformSource(source, oemRoot, rendererPreload, { readOnly = false } = {}) {
   if (!path.isAbsolute(rendererPreload || '')) throw new Error('Absolute renderer preload required');
   if (crypto.createHash('sha256').update(source).digest('hex') !== MAIN_SHA256) {
@@ -13,6 +13,11 @@ function transformSource(source, oemRoot, rendererPreload, { readOnly = false } 
     if (source.split(before).length !== 2) throw new Error('Reviewed Acer patch no longer matches: ' + reason);
     source = source.replace(before, after); patches.push(reason);
   }
+  // Electron exposes title-bar overlays only on supported desktop platforms.
+  const overlayCall = 'this.mainWin.setTitleBarOverlay(';
+  if (source.split(overlayCall).length !== 4) throw new Error('Reviewed title-bar overlay calls no longer match');
+  source = source.split(overlayCall).join('this.mainWin.setTitleBarOverlay?.(');
+  patches.push('Skip unavailable native title-bar overlays on Linux');
   replaceOnce('"C:/ProgramData/OEM/NitroSense"', JSON.stringify(oemRoot), 'Map OEM resources to user state');
   replaceOnce('this.appWatcher=setInterval(()=>{const e=n.getActiveProcess().pId;this.bCheckPID?this.curPID!=e&&(this.curPID=e,this.ChangeProfile(e)):this.ChangeProfile(e)},this.appWatcherTime)',
     'this.appWatcher=null', 'Disable unavailable Windows foreground-process monitoring');
@@ -28,8 +33,8 @@ function transformSource(source, oemRoot, rendererPreload, { readOnly = false } 
   if (appsAt < 0 || appsEnd < 0) throw new Error('Reviewed installed-app boundary no longer matches');
   replaceOnce(source.slice(appsAt, appsEnd), 'getAllInstalledApps(){return c.getAllInstalledApps()}',
     'Use the Linux desktop catalog without Windows manifest parsing or exe-only filtering');
-  replaceOnce('webPreferences:{nodeIntegration:!0,webviewTag:!0,webSecurity:!1,contextIsolation:!1',
-    `webPreferences:{preload:${JSON.stringify(rendererPreload)},nodeIntegration:!0,webviewTag:!0,webSecurity:!1,contextIsolation:!1`,
+  replaceOnce('webPreferences:{nodeIntegration:!0,webviewTag:!0,webSecurity:!1,contextIsolation:!1,nodeIntegrationInSubFrames:!1',
+    `webPreferences:{preload:${JSON.stringify(rendererPreload)},nodeIntegration:!0,webviewTag:!0,webSecurity:!1,contextIsolation:!1,nodeIntegrationInSubFrames:!1`,
     'Resolve the renderer remote bridge from the original vendor ASAR');
   if (readOnly) {
     const serviceStart = source.indexOf('checkAcerEZServiceExist(){');

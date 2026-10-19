@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
 const { parseIdt, planOemFiles, validateCabinet, extractOemMsi } = require('../lib/msi-oem.cjs');
-const installer = path.join(__dirname, '../Installer/NitroSense_5.1_RC10_v5.1.392_20251115/Setup/NitroSenseConfig.msi');
+const installer = path.join(__dirname, '../Installer/NitroSense_5.1_RC10_v5.2.84_20251115/Setup/NitroSenseConfig.msi');
 const available = fs.existsSync(installer);
 const capturedMappingAvailable = available && ['../analysis/msi-layout.json',
   '../analysis/extracted/msi-oem-verified/extraction-report.json'].every(file => fs.existsSync(path.join(__dirname, file)));
@@ -14,7 +14,7 @@ function tables(content = Buffer.from('resource fixture')) {
     Directory: [{ Directory: 'common', Directory_Parent: 'INSTALLFOLDER_OEM_NitroSense', DefaultDir: 'COMMON~1|Common' },
       { Directory: 'INSTALLFOLDER_OEM_NitroSense', Directory_Parent: 'TARGETDIR', DefaultDir: 'NitroSense' },
       { Directory: 'TARGETDIR', Directory_Parent: 'TARGETDIR', DefaultDir: 'SourceDir' }],
-    Media: [{ DiskId: '1', LastSequence: '1', Cabinet: '#cab1.cab' }], Property: [{ Property: 'ProductVersion', Value: '5.1.392' }] };
+    Media: [{ DiskId: '1', LastSequence: '1', Cabinet: '#cab1.cab' }], Property: [{ Property: 'ProductVersion', Value: '5.2.84' }] };
 }
 function idt(name, rows) {
   const columns = Object.keys(rows[0]);

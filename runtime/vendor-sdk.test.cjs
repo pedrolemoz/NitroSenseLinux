@@ -10,7 +10,7 @@ const { transformRenderer, RENDERER_FILE } = require('./renderer-patches.cjs');
 const { createVendorBridge } = require('./readonly-bridge.cjs');
 const { startAcerServices, createReadOnlyHandler } = require('../lib/acer-service.cjs');
 const rpc = require('./rpc.cjs');
-const archive = path.join(__dirname, '../vendor/nitrosense-5.1.392-official/resources/app.asar');
+const archive = path.join(__dirname, '../vendor/nitrosense-5.2.84-official/resources/app.asar');
 const available = fs.existsSync(archive);
 const protocolMapAvailable = fs.existsSync(path.join(__dirname, '../analysis/protocol-map.json'));
 
@@ -43,9 +43,9 @@ function classSource(source, begin, end) {
 
 test('read-only main and renderer patches match the actual Acer sources and parse', { skip: !available }, () => {
   const { patched, renderer, main } = sources();
-  assert.equal(patched.patches.length, 15); assert.equal(renderer.patches.length, 68);
+  assert.equal(patched.patches.length, 16); assert.equal(renderer.patches.length, 68);
   new vm.Script(patched.source); new vm.Script(renderer.source);
-  assert.equal(transformSource(main, path.resolve('.state/unused-oem'), path.resolve('.state/unused-preload.cjs')).patches.length, 7);
+  assert.equal(transformSource(main, path.resolve('.state/unused-oem'), path.resolve('.state/unused-preload.cjs')).patches.length, 8);
   assert.throws(() => transformRenderer(renderer.source), /Unreviewed Acer/);
 });
 
@@ -77,9 +77,9 @@ test('actual patched lighting getters tolerate missing profiles without asynchro
 
 test('actual renderer DDSC registration keeps repeated view logging out of RPC while monitoring still returns data', { skip: !available }, async () => {
   const { renderer } = sources();
-  const definition = classSource(renderer.source, 'class Pt{', 'let Wi=');
+  const definition = classSource(renderer.source, 'class Mt{', 'let Ni=');
   const Pt = vm.runInNewContext(`(${definition})`, {
-    Pz: class { next() {} complete() {} }, du: awaiter, XS: 'PWARuntime', window: { location: { href: 'fixture' } },
+    Fz: class { next() {} complete() {} }, cu: awaiter, tk: 'PWARuntime', window: { location: { href: 'fixture' } },
     require: name => { assert.equal(name, path.join(__dirname, 'renderer-log.cjs')); return require('./renderer-log.cjs'); },
   });
   const calls = [], sample = { CPU_USAGE: 12, RAM_USAGE: 25 };
@@ -124,11 +124,11 @@ test('original SDK Whisper initialization preserves unsupported status without u
 
 test('actual patched capability wrappers retain unavailable state and original formatters handle missing measurements', { skip: !available }, async () => {
   const { renderer } = sources();
-  const definitions = classSource(renderer.source, 'class r2 extends', 'class HP extends');
-  const classes = vm.runInNewContext(`(()=>{${definitions};return {r2,FP}})()`, { require: name => {
+  const definitions = classSource(renderer.source, 'class wl extends', 'class ty{');
+  const classes = vm.runInNewContext(`(()=>{${definitions};return {wl,BP}})()`, { require: name => {
     assert.equal(name, path.join(__dirname, 'renderer-state.cjs')); return require('./renderer-state.cjs');
   } });
-  const cap = new classes.FP(async () => { throw Object.assign(new Error('denied'), { code: 'ERR_NITROSENSE_SERVICE' }); }, {}, '');
+  const cap = new classes.BP(async () => { throw Object.assign(new Error('denied'), { code: 'ERR_NITROSENSE_SERVICE' }); }, {}, '');
   await cap.ready; assert.equal(cap.size, 0); assert.equal(cap.data, null); assert.equal(cap.state, 'unavailable');
   const methods = [...renderer.source.matchAll(/temperatureConvert\([et]\)\{return require\([^}]+\}/g)].map(m => m[0]);
   assert.equal(methods.length, 3);
@@ -141,9 +141,9 @@ test('actual patched capability wrappers retain unavailable state and original f
 
 test('patched Acer device models clear failed readings, accept newer events and reject optimistic operating modes', { skip: !available }, async () => {
   const { renderer } = sources();
-  const definitions = classSource(renderer.source, 'class ZP extends', 'var Xs=') +
-    classSource(renderer.source, 'class lte extends', 'var o6=');
-  const classes = vm.runInNewContext(`(()=>{${definitions};return {Co,tIe,lte,nIe}})()`, {
+  const definitions = classSource(renderer.source, 'class HP extends', 'class hIe extends') +
+    classSource(renderer.source, 'class ute extends', 'class mIe extends');
+  const classes = vm.runInNewContext(`(()=>{${definitions};return {xo,fIe,ute,cIe}})()`, {
     require: () => require('./renderer-device-state.cjs'), pe: awaiter,
     qr: class { constructor(value) { this.value = value; } next(value) { this.value = value; } },
     Le: {}, bt: { SystemUsageControl: 1 }, clearTimeout, setTimeout,
@@ -156,16 +156,16 @@ test('patched Acer device models clear failed readings, accept newer events and 
     setDeviceData: async () => { throw Object.assign(new Error('readonly'), { code: 'ERR_NITROSENSE_READ_ONLY' }); },
     setDataWithoutScenario: async () => { throw Object.assign(new Error('readonly'), { code: 'ERR_NITROSENSE_READ_ONLY' }); },
   };
-  const power = new classes.lte(ddsc, 'ADAPTOR_STATUS', 0);
+  const power = new classes.ute(ddsc, 'ADAPTOR_STATUS', 0);
   assert.equal(power.getData(), null); await power.refresh(); assert.equal(await power.getDataAsync(), 0);
   fail = true; power.refreshAsync();
   await assert.rejects(power.getDataAsync(), { code: 'EACCES' }); assert.equal(power.getData(), null);
-  const system = new classes.tIe(ddsc, 'AUTO_REFRESH_RATE', 0, null);
+  const system = new classes.fIe(ddsc, 'AUTO_REFRESH_RATE', 0, null);
   await system.refreshAsync(); assert.equal(system.state, 'unavailable'); assert.equal(system.getData(), null);
-  const fan = new classes.Co(ddsc, 'FAN_CONTROL', { mode: 0 }, null);
+  const fan = new classes.xo(ddsc, 'FAN_CONTROL', { mode: 0 }, null);
   await fan.refresh(); assert.equal(fan.getData(), null);
   ddsc.emit('FAN_CONTROL', { mode: 2 }); assert.equal(fan.state, 'available'); assert.equal(fan.getData().mode, 2);
-  const mode = new classes.nIe(ddsc, 'OPERATING_MODE', 1, null);
+  const mode = new classes.cIe(ddsc, 'OPERATING_MODE', 1, null);
   await mode.refresh(); assert.equal(mode.getData(), null);
   for (const setter of ['setMode', 'setModeWithoutScenario', 'setModeWithoutScenario_And_RefreshUI']) {
     await assert.rejects(mode[setter](3), { code: 'ERR_NITROSENSE_READ_ONLY' });
@@ -178,7 +178,7 @@ test('patched Acer startup and power refresh settle partial data without origina
   const methods = classSource(renderer.source, 'fnDataReady(){', 'fnBatteryBoostNotify(e){') +
     classSource(renderer.source, 'SyncBatteryStatus(){', 'setDeviceData(e,a,r){') +
     classSource(renderer.source, 'get IsUnplugAC(){const e=', 'get IsUnplugDC(){');
-  const View = vm.runInNewContext(`(class View {${methods}})`, { require: () => require('./renderer-device-state.cjs'), ou: value => !!(value & 3) });
+  const View = vm.runInNewContext(`(class View {${methods}})`, { require: () => require('./renderer-device-state.cjs'), du: value => !!(value & 3) });
   const { DeviceState } = require('./renderer-device-state.cjs');
   const view = new View(); let power = 1;
   const ddsc = { pssdk: { getUpdatedData: async name => {
@@ -203,7 +203,7 @@ test('original startup hook prepared for read-only mode runs even when Electron 
   let startup = 0, protocol = 0;
   const Ready = vm.runInNewContext(`(class Ready {${method}})`, {
     a: { app: { whenReady: () => Promise.resolve(), on: () => { throw new Error('A late ready listener would be missed'); } } },
-    i: () => { startup++; return Promise.resolve(); }, E: { protocol: { registerFileProtocol: () => protocol++ } },
+    i: () => { startup++; return Promise.resolve(); }, I: { protocol: { registerFileProtocol: () => protocol++ } },
   });
   new Ready().onReady(); await new Promise(resolve => setImmediate(resolve));
   assert.equal(startup, 1); assert.equal(protocol, 1);
@@ -257,10 +257,10 @@ test('original CPU capability method and patched SDK pump consume the Linux serv
 test('actual patched main/renderer MQTT classes propagate success and operation errors in both directions', { skip: !available }, async () => {
   const { patched, renderer } = sources();
   const mainClass = classSource(patched.source, 'class MqttFunctionCall{', 't.MqttFunctionCall=MqttFunctionCall');
-  const rendererClass = classSource(renderer.source, 'class Uo{', 'function d1(');
+  const rendererClass = classSource(renderer.source, 'class No{', 'function ');
   const requireRpc = name => { assert.equal(name, path.join(__dirname, 'rpc.cjs')); return rpc; };
-  const Main = vm.runInNewContext(`(${mainClass})`, { n: { EventEmitter }, Log, i: awaiter, require: requireRpc, Date });
-  const Renderer = vm.runInNewContext(`(${rendererClass})`, { H_e: { EventEmitter }, B_e: Log, du: awaiter, require: requireRpc, Date });
+  const Main = vm.runInNewContext(`(${mainClass})`, { n: { EventEmitter }, Log, i: awaiter, require: requireRpc, Date, decodeBase64: value => Buffer.from(value, "base64").toString() });
+  const Renderer = vm.runInNewContext(`(${rendererClass})`, { W_e: { EventEmitter }, $_e: Log, cu: awaiter, require: requireRpc, Date, K_e: value => Buffer.from(value, "base64").toString() });
   const peers = [];
   const broker = { connect() {
     const peer = new EventEmitter(); peer.topics = new Set(); peers.push(peer);
@@ -346,4 +346,21 @@ test('original battery getters use Linux readings instead of Windows zero defaul
   view.pss.monitorData = { BATTERY_PERCENTAGE: 80, BATTERY_CYCLE_COUNT: 130, BATTERY_MAX_CAPACITY: 93.2 };
   assert.equal(view.BatteryPercentage, '80'); assert.equal(view.Battery_CycleCount, '130');
   assert.equal(view.Battery_MaximumCapacity, '93.2%');
+});
+
+test('theme initialization survives a Linux window without title-bar overlay support', { skip: !available }, () => {
+  const { patched } = sources();
+  const method = classSource(patched.source, 'switchThemeMode(e){', '}},function(e,t){e.exports=require("compare-versions")}');
+  const Theme = vm.runInNewContext(`(class Theme {${method}})`, { l: { LogIt: { getInstance: () => new Log() } } });
+  const theme = new Theme();
+  theme.showTitleBarOverlay = true;
+  theme.mainWin = {};
+  assert.doesNotThrow(() => theme.switchThemeMode(true));
+  assert.equal(theme.currentThemeIsDark, true);
+  const calls = [];
+  theme.mainWin.setTitleBarOverlay = options => calls.push(options);
+  theme.switchThemeMode(false);
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].height, 48);
+  assert.equal(calls[0].color, 'white');
 });

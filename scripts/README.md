@@ -4,6 +4,7 @@ Run commands from the repository root. Normal users should follow the root READM
 
 | Purpose | Entry point |
 | --- | --- |
+| Download official Acer 5.2.84, verify, import and install Electron | `setup.cjs` / `npm run setup` (optional `-- --zip <official.zip>`) |
 | Extract and verify a supplied official installer on Linux | `prepare-linux-vendor.cjs` / `npm run prepare:vendor -- <installer-directory> <new-vendor-directory>` |
 | Verify an existing local import | `check-runtime.cjs` / `npm run check` |
 | Real UI monitoring with private session diagnostics | `test-linux-readonly.sh` / `npm start` |

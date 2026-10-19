@@ -15,7 +15,7 @@ function fixture(t, overrides = {}) {
   for (const dir of [dmiRoot, procRoot, vendorRoot, sysRoot]) fs.mkdirSync(dir);
   for (const [name, value] of Object.entries({ product_name: 'Nitro ANV15-52', product_family: 'Nitro V', chassis_type: '10', product_serial: 'unit-test-serial', product_uuid: 'unit-test-uuid' })) fs.writeFileSync(path.join(dmiRoot, name), value + '\n');
   fs.writeFileSync(path.join(procRoot, 'cpuinfo'), 'model name\t: Intel Core i5-13420H\n');
-  const options = { app: { getLocale: () => 'pt-BR', getLocaleCountryCode: () => 'BR' }, stateDir: path.join(root, 'state'), vendorRoot, productVersion: '5.1.392', dmiRoot, procRoot, sysRoot, ...overrides };
+  const options = { app: { getLocale: () => 'pt-BR', getLocaleCountryCode: () => 'BR' }, stateDir: path.join(root, 'state'), vendorRoot, productVersion: '5.2.84', dmiRoot, procRoot, sysRoot, ...overrides };
   return { root, options, ...createPlatform(options) };
 }
 
@@ -25,7 +25,7 @@ test('virtual installation uses imported version and real supplied DMI, never a 
   assert.equal(native.getRegistryValue(2, bios, 'SystemProductName'), 'Nitro ANV15-52');
   assert.equal(native.getRegistryValue(2, bios, 'SystemFamily'), 'Nitro V');
   const guid = native.getRegistryValue(2, 'SOFTWARE\\Acer\\NitroSense', 'Guid');
-  assert.equal(native.getRegistryValue(2, 'SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\' + guid, 'DisplayVersion'), '5.1.392');
+  assert.equal(native.getRegistryValue(2, 'SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\' + guid, 'DisplayVersion'), '5.2.84');
   assert.equal(native.getRegistryValue(2, 'HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0', 'ProcessorNameString'), 'Intel Core i5-13420H');
   assert.equal(native.getWMIValue('Win32_BIOS', 'SerialNumber'), 'unit-test-serial');
   assert.equal(native.getWMIValue('Win32_ComputerSystemProduct', 'UUID'), 'unit-test-uuid');

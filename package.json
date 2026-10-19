@@ -14,6 +14,7 @@
     "start": "sh scripts/test-linux-readonly.sh",
     "start:acer": "sh scripts/test-linux-readonly.sh --with-acer-wmi",
     "verify:readings": "node scripts/check-manual-readings.cjs",
-    "test": "node --test tests/*.test.cjs runtime/*.test.cjs"
+    "test": "node --test tests/*.test.cjs runtime/*.test.cjs",
+    "setup": "node scripts/setup.cjs"
   }
 }
