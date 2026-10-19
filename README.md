@@ -2,7 +2,7 @@
 
 An experimental compatibility layer that runs the **original Acer NitroSense interface on Linux** and connects it to real Linux monitoring data. This is an independent project, not an official Acer product.
 
-**Current milestone: real read-only monitoring works on the machine below.** The maintainer confirmed the application working after rebooting following an NVIDIA driver update. This is a development build, not a finished NitroSense port or an initial stable release.
+**Current milestone: real Linux monitoring and battery charge-limit control work on the machine below.** Application operation was confirmed after rebooting following an NVIDIA driver update. This is a development build, not a finished NitroSense port or an initial stable release.
 
 > **Download directly from Acer.** `npm run setup` downloads the official **NitroSense 5.2.84** package, verifies its pinned SHA-256, extracts the resources on Linux, and installs the pinned Electron runtime. Acer files stay local and are excluded from Git.
 
@@ -29,7 +29,8 @@ Other Acer models, distributions, kernels, graphics drivers, X11 sessions, and h
 | Real CPU/RAM monitoring | Implemented and exercised in the original UI: usage, CPU clock/temperature, memory usage |
 | NVIDIA monitoring | Implemented through `nvidia-smi`; requires a working driver/userspace combination; user confirmed operation after reboot |
 | Acer fan RPM / GPU temperature | Read-only integration with verified Acer hwmon channels |
-| Battery | Real charge, cycle count, and full/design capacity ratio when the kernel exposes them |
+| Battery | Real readings and verified 80% / 100% charging through the included ANV15-52 WMI driver |
+| Scenario | Original Acer UI restored; capability/profile errors remain pending compatibility work against original-app references |
 | Application catalog | Lists Linux desktop entries; launching and game association remain incomplete |
 | Fan control, performance modes, lighting | **Not implemented or validated for Linux hardware control** |
 | Acer services / full Checkup / complete system information | Incomplete or unsupported |
@@ -37,7 +38,9 @@ Other Acer models, distributions, kernels, graphics drivers, X11 sessions, and h
 
 Missing measurements appear as `--`; they are not replaced by simulated readings. Normal launch commands select **read-only mode with SimulatorMode=0**. A separate, explicitly named UI-only developer experiment still exists and uses the original Acer simulator.
 
-See [detailed status](docs/status.md) and the [initial release roadmap](docs/roadmap.md).
+Original Windows 11 UI captures from the target machine are indexed in the [screenshot validation matrix](references/README.md).
+
+See the [development record](docs/development-history.md), [detailed status](docs/status.md) and the [initial release roadmap](docs/roadmap.md).
 
 ## Requirements
 
@@ -129,6 +132,24 @@ npm run start:acer
 ```
 
 This checks the existing Acer interfaces first and may temporarily reload `acer_wmi` with `predator_v4=1` when required. Module reloads initialize firmware interfaces; see [manual testing](docs/manual-testing.md) before using this option. Neither launch command enables fan/profile/lighting control.
+
+Battery charge-limit control is implemented in the included **ANV15-52 WMI driver**. Both 80% and 100% were verified through firmware readback, and working driver operation has been confirmed on the target machine. The temporary custom Scenario panel has been removed. **Charging controls belong in the original Personal Settings page**; connecting those existing controls to the driver is pending original-app screenshots and compatibility work. No replacement UI is provided.
+
+Enable battery control for the current boot:
+
+```sh
+sh scripts/load-battery-driver.sh
+```
+
+Or install the driver for future boots of the current kernel:
+
+```sh
+sh scripts/install-battery-driver.sh
+```
+
+Ubuntu requests administrator authentication to load/install the module. The UI runs as your desktop user. Building requires `make`, a C compiler and headers matching `uname -r`. Re-run the installer after kernel upgrades; automatic DKMS rebuilding is not implemented. See the [driver documentation](drivers/nitrosense-charge/README.md) for details and removal instructions.
+
+The backend accepts the standard Linux charge-threshold interface or this model-specific driver. It writes only the selected charge limit and verifies firmware readback. It refuses ambiguous batteries and unsupported values. Lowering a limit does not discharge the battery. Monitoring remains read-only; fan/profile/lighting control is still unavailable.
 
 Wait 30–60 seconds and open Monitoring in the original interface. To finish, press **Ctrl+C in the launching terminal**. The original window's X can hide the application while leaving it running. A termination code of 130 after Ctrl+C is expected.
 

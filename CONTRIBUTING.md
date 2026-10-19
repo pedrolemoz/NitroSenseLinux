@@ -8,4 +8,14 @@ For a bug report, provide the laptop model, CPU/GPU, Ubuntu/kernel version, desk
 
 Never submit Acer installer ZIPs, MSI/AppX/ASAR files, extracted application code/resources, credentials or private session logs. The original UI and resources must remain user-supplied. Keep generated data in the ignored local directories and review the staged diff before opening a change.
 
-The [roadmap](docs/roadmap.md) defines initial release scope. Hardware control is future work and needs explicit model-specific validation before being exposed to users.
+The [roadmap](docs/roadmap.md) defines initial release scope. Additional hardware controls require model-specific validation. The battery charge driver has been verified on the target ANV15-52; its original-UI integration remains pending.
+
+## Original UI compatibility requirement
+
+Preserve the original Acer interface, page structure and existing controls. Do not
+add new panels or redesign features. Fix compatibility at the adapter, transport,
+device-state or narrowly scoped original-code boundary. Battery charge-limit
+controls belong in Personal Settings, not Scenario. Follow the reviewed [Windows screenshot matrix](references/README.md) before changing UI behavior. Record its reference IDs and visual/behavioral results in validation evidence. The
+working battery driver and backend must remain independent of UI rework.
+
+See the [development record](docs/development-history.md) for completed work, reverted UI and pending integration.

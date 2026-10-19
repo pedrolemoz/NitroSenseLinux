@@ -26,4 +26,14 @@ Do not commit generated Acer resources, screenshots containing proprietary asset
 
 Preserve unavailable states and data provenance. Do not infer sensor identity from an arbitrary channel number, silently activate the simulator, claim a visible Windows feature works on Linux, or enable hardware writes through an unverified adapter. Broader hardware support requires model-specific evidence and manual confirmation.
 
-The first release's hardening, fresh installation and hardware acceptance work is tracked in the roadmap. Licensing remains undecided; there is no project LICENSE yet.
+The first release's hardening, fresh installation and hardware acceptance work is tracked in the roadmap. The project-wide license remains undecided; there is no root LICENSE yet. The battery driver has its own GPL-2.0-only license and COPYING file.
+
+## Original UI compatibility requirement
+
+Preserve the original Acer interface, page structure and existing controls. Do not
+add new panels or redesign features. Fix compatibility at the adapter, transport,
+device-state or narrowly scoped original-code boundary. Battery charge-limit
+controls belong in Personal Settings, not Scenario. Follow the reviewed [Windows screenshot matrix](../references/README.md) before changing UI behavior. Record its reference IDs and visual/behavioral results in validation evidence. The
+working battery driver and backend must remain independent of UI rework.
+
+See the [development record](development-history.md) for completed work, reverted UI and pending integration.

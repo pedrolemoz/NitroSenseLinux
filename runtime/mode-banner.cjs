@@ -1,5 +1,5 @@
 function modeBannerSource(readOnly) {
-  const label = readOnly ? 'WAITING FOR LINUX READINGS — READ ONLY — HARDWARE CONTROLS UNAVAILABLE' :
+  const label = readOnly ? 'WAITING FOR LINUX READINGS — MONITORING READ ONLY' :
     'INTERFACE ONLY — ACER SIMULATED DATA — HARDWARE CONTROL UNAVAILABLE';
   return `(() => {
     let e = document.getElementById('nitrosense-linux-mode');
@@ -13,8 +13,8 @@ function modeBannerSource(readOnly) {
       window.nitrosenseLinuxStatusInstalled = true;
       window.addEventListener('nitrosense-linux-status', event => {
         if (event.detail?.kind !== 'monitor') return;
-        e.textContent = event.detail.available ? 'LIVE LINUX READINGS — READ ONLY — MISSING VALUES: -- — HARDWARE CONTROLS UNAVAILABLE' :
-          'LINUX READINGS UNAVAILABLE — READ ONLY — HARDWARE CONTROLS UNAVAILABLE';
+        e.textContent = event.detail.available ? 'LIVE LINUX READINGS — MONITORING READ ONLY — MISSING VALUES: --' :
+          'LINUX READINGS UNAVAILABLE — MONITORING READ ONLY';
       });
     }` : ''}
   })()`;

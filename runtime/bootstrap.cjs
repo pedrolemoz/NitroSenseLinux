@@ -95,7 +95,7 @@ async function boot() {
   app.on('before-quit', () => console.error('[compat-app] before-quit'));
   app.on('will-quit', () => console.error('[compat-app] will-quit'));
   if (!process.argv.includes('--forceShow')) process.argv.push('--forceShow');
-  console.error(readOnly ? 'READ-ONLY EXPERIMENT: live Linux sources; unavailable readings remain unknown; hardware controls disabled.' :
+  console.error(readOnly ? 'READ-ONLY EXPERIMENT: live Linux sources; unavailable readings remain unknown; fan/profile/lighting controls disabled; charge driver is available separately.' :
     'INTERFACE-ONLY EXPERIMENT: original Acer simulator; no real hardware control.');
   require(entry);
 }

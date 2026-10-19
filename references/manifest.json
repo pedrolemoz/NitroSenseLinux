@@ -1,0 +1,129 @@
+{
+  "provenance": "Original NitroSense on Windows 11 on the target Acer Nitro ANV15-52; supplied by user",
+  "displayed_version": "5.1.392 (SETTINGS.png)",
+  "linux_import_version": "5.2.84",
+  "review_status": "All 20 source images visually reviewed; Linux comparisons pending",
+  "screenshots": [
+    {
+      "file": "screenshots/APP CENTER.png",
+      "width": 1220,
+      "height": 1440,
+      "sha256": "680ed0f326de449f83c806bbb39ee7b41771752a99893b67b14ad9a6152d4f5a"
+    },
+    {
+      "file": "screenshots/CHECKUP - SYSTEM INFO.png",
+      "width": 1168,
+      "height": 1440,
+      "sha256": "137f926973d4594e9be8adf4d325b64496ba5f3e23e6dcab79fb62171d58755a"
+    },
+    {
+      "file": "screenshots/CHECKUP.png",
+      "width": 1168,
+      "height": 1440,
+      "sha256": "7f84999dd39032b2cba800e40848ebe03d99e0d97762a8683164aa001cbf3573"
+    },
+    {
+      "file": "screenshots/EXPERIENCE ZONE.png",
+      "width": 1220,
+      "height": 1440,
+      "sha256": "bdd76bab329caf1c861df61b8637897c31bcc7ff37748091d288617678aa9f44"
+    },
+    {
+      "file": "screenshots/HELP.png",
+      "width": 1220,
+      "height": 934,
+      "sha256": "2c3901b2ea49a24b964235644d2bdb2fdf6ec0a04dd44f6853857b14ab0417c0"
+    },
+    {
+      "file": "screenshots/HOME - SIDEBAR COLLAPSED.png",
+      "width": 1168,
+      "height": 934,
+      "sha256": "7ed52237e7411833d295bac4d4da492de70537a88c7dc4ea7ea013835e557131"
+    },
+    {
+      "file": "screenshots/HOME - SIDEBAR OPEN.png",
+      "width": 1168,
+      "height": 934,
+      "sha256": "9a56a9bd14df89782fe19fb44714b4dd81678ce9d45bbbae9845e072f9c48b31"
+    },
+    {
+      "file": "screenshots/MONITORING.png",
+      "width": 1168,
+      "height": 1440,
+      "sha256": "9fc0858f6547780ca1c407079f17703f43106b99b603199e19bca522ca00cf8d"
+    },
+    {
+      "file": "screenshots/PERSONAL SETTINGS 1.png",
+      "width": 1168,
+      "height": 1440,
+      "sha256": "d8f820a1b34ef2a29ad0c06f7eb4e635294985ea3c63932c3bc8aaa497b98b45"
+    },
+    {
+      "file": "screenshots/PERSONAL SETTINGS 2.png",
+      "width": 1168,
+      "height": 1440,
+      "sha256": "8b276c309e607a5b7626a5f41db8b2315cbadb8dcbab2fad1698d761fe955425"
+    },
+    {
+      "file": "screenshots/SCENARIO - ADVANCED SETTINGS.png",
+      "width": 1168,
+      "height": 934,
+      "sha256": "abcb93729df395e26c3f501217df8bffc2b8044ee7fab2aece42d97536bddf87"
+    },
+    {
+      "file": "screenshots/SCENARIO - BALANCED SELECTED - AC PLUGGED IN.png",
+      "width": 1168,
+      "height": 934,
+      "sha256": "23d8fb6fb6500f89702a3daf50959b56f3869d912dc518f302a24ba714901e06"
+    },
+    {
+      "file": "screenshots/SCENARIO - BALANCED SELECTED - BATTERY POWER.png",
+      "width": 1168,
+      "height": 934,
+      "sha256": "f87139af16512f9735fa5973d569a1a64a5ee1aab1da252ad80298a5a90a835b"
+    },
+    {
+      "file": "screenshots/SCENARIO - ECO SELECTED - BATTERY POWER.png",
+      "width": 1168,
+      "height": 934,
+      "sha256": "f162e7daa78eced9773ec2be146e7aa1815a2bd8d3bbcbbd82f065f72f4e5446"
+    },
+    {
+      "file": "screenshots/SCENARIO - FAN CONTROL AUTO.png",
+      "width": 1168,
+      "height": 934,
+      "sha256": "29ae752e38bbcd9dc28cbfd3432bc217301ffe70246c4e26ee9804b394500b05"
+    },
+    {
+      "file": "screenshots/SCENARIO - FAN CONTROL CUSTOM.png",
+      "width": 1168,
+      "height": 934,
+      "sha256": "1808380cf34025a4afe5ea8d779d6280a78b98465d782bf07d2dce89ee0d6912"
+    },
+    {
+      "file": "screenshots/SCENARIO - FAN CONTROL MAX.png",
+      "width": 1168,
+      "height": 934,
+      "sha256": "d8b3cf598bbfe6d19b2557fcd7f2e45eb379b0e7589e8b5e4a2ed129a1932f7c"
+    },
+    {
+      "file": "screenshots/SCENARIO - PERFORMANCE SELECTED - AC PLUGGED IN.png",
+      "width": 1168,
+      "height": 934,
+      "sha256": "aa20f71ce448f91aecfddb8f58e6477072d7f9af4212daaa9ea0702c7a8db09f"
+    },
+    {
+      "file": "screenshots/SCENARIO - QUIET SELECTED - AC PLUGGED IN.png",
+      "width": 1168,
+      "height": 934,
+      "sha256": "be844f9351e71c012f9b84dda64be7715a5e0cd2004dfc67dc5ed49617112fd8"
+    },
+    {
+      "file": "screenshots/SETTINGS.png",
+      "width": 1220,
+      "height": 934,
+      "sha256": "e272bd9dc3cff523c0df6f419e1ed9b741029c55297bcafc35c9011bced88cf3"
+    }
+  ],
+  "ui_applicability": "Authoritative baseline for current 5.2.84 UI; user confirmed the newer interface is unchanged"
+}

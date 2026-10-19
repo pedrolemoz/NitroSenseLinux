@@ -58,7 +58,9 @@ async function readOptionalIdentity(view, ddsc) {
   return state;
 }
 function createReadOnlyHome(view, modes, port) {
-  const visible = !view.gos.reCreateHome || Boolean(view.gos.showUI);
+  // Home's webview is an overlay. Creating it for another tab hides that tab
+  // beneath an empty /aframe guest, even though its component rendered correctly.
+  const visible = view.gos.activeTab === 'Home' && (!view.gos.reCreateHome || Boolean(view.gos.showUI));
   if (!visible) { view.gos._embeddedUrl = null; return false; }
   // Template getters must never create Promises. An unavailable operating mode
   // used to reject getDataAsync on every Angular check, scheduling another check

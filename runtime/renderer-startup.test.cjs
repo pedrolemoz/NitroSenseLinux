@@ -65,3 +65,18 @@ test('optional integrations settle rejections and disabled Planet9 performs no i
   assert.equal(await settleOptional(view, 'lighting', () => { throw { code: 'private-code-secret' }; }), null);
   assert.deepEqual(view._linuxOptionalState.lighting, { state: 'unavailable', code: 'ERR_NITROSENSE_OPTIONAL' });
 });
+
+
+test('Home overlay is removed on Scenario and other tabs, then recreated on Home', () => {
+  const { createReadOnlyHome } = require('./renderer-startup.cjs');
+  const view = { gos: { reCreateHome: false, showUI: true, activeTab: 'Home' }, pss: {} };
+  assert.equal(createReadOnlyHome(view, {}, '12345'), true);
+  for (const tab of ['Scenario', 'Monitoring', 'PersonalSettings', 'AppCenter']) {
+    view.gos.activeTab = tab;
+    assert.equal(createReadOnlyHome(view, {}, '12345'), false);
+    assert.equal(view.gos._embeddedUrl, null);
+  }
+  view.gos.activeTab = 'Home';
+  assert.equal(createReadOnlyHome(view, {}, '12345'), true);
+  assert.match(view.gos._embeddedUrl, /startupTab=Home$/);
+});

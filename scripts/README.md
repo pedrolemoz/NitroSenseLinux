@@ -29,3 +29,16 @@ npm install --prefix .tools/rea --no-audit --no-fund @babel/parser
 These tools are not part of the normal installation or source-only test prerequisites. Their output can contain proprietary code and must stay in ignored `analysis/`. `import-vendor.cjs` is the lower-level AppX/OEM importer; prefer the Linux preparation wrapper for end users.
 
 `windows/*.ps1` preserves historical Windows MSI/AppX/WMI inspection tools. They are optional research utilities, not Linux prerequisites. Run them from the repository root if continuing Windows research; document any future need to return to Windows separately. No Windows execution was required for this reorganization.
+
+## Battery charge driver
+
+- `sh scripts/load-battery-driver.sh`: build and load the ANV15-52 driver for this
+  boot. Ubuntu authentication is required only for module loading and access to
+  the validated charge attribute.
+- `sh scripts/install-battery-driver.sh`: additionally install for future boots
+  of the current kernel. Re-run after kernel upgrades; no DKMS rebuild is added.
+
+See [driver documentation](../drivers/nitrosense-charge/README.md) for protocol,
+permission scope, manual checks and removal. The driver and Node backend remain
+available independently of the original UI. Personal Settings integration is
+pending; the temporary custom Scenario UI and its inspection script were removed.

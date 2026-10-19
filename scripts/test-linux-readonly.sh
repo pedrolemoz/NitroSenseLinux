@@ -82,7 +82,7 @@ fi
 if ! node scripts/read-linux-sensors.cjs "$output/sensors-at-launch.json"; then
     echo 'Sensor inventory failed; CPU/RAM/GPU availability will still be recorded by the backend.' >&2
 fi
-echo 'Opening original Acer UI with Linux readings, SimulatorMode=0. Hardware controls unavailable.'
+echo 'Opening Acer UI with Linux monitoring, SimulatorMode=0. Battery control is available with the charge driver.'
 echo 'Wait 30-60 seconds, inspect monitoring and AppCenter; do not change profiles/fans/settings.'
 echo 'To finish, press Ctrl+C in THIS terminal, then wait for the summary below.'
 echo 'The original X hides the window and may leave the process running.'

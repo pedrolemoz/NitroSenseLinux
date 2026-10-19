@@ -364,3 +364,12 @@ test('theme initialization survives a Linux window without title-bar overlay sup
   assert.equal(calls[0].height, 48);
   assert.equal(calls[0].color, 'white');
 });
+
+test('original Scenario component and template remain intact', { skip: !available }, () => {
+  const asar = readAsar(fs.readFileSync(archive));
+  const original = asar.read(RENDERER_FILE).toString();
+  const patched = transformRenderer(original).source;
+  assert.equal(classSource(patched, 'xc=class{', 'const pWe=["ThemeChangeMenu"]'),
+    classSource(original, 'xc=class{', 'const pWe=["ThemeChangeMenu"]'));
+  assert.doesNotMatch(patched, /renderer-scenario\.cjs|nitrosense-linux-scenario/);
+});

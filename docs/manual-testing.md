@@ -2,6 +2,23 @@
 
 Use only the [checked configuration](../README.md#checked-compatibility) for the current acceptance run. Finish the README setup first. This checklist does not require Windows.
 
+## Original Windows screenshot baseline
+
+Use the [reviewed reference matrix](../references/README.md) and
+[image manifest](../references/manifest.json) for every affected page. The 20
+captures were supplied from Windows 11 on the target ANV15-52. Settings shows
+NitroSense 5.1.392; the Linux import is 5.2.84. The user confirmed that the
+newer interface is unchanged, so this is the authoritative UI baseline for both. Follow the matrix's comparison
+procedure and record reference IDs, viewport/scale, power/mode/sidebar state,
+Linux evidence paths, visual results and separately verified behavior. These
+references have been reviewed; comparison against the restored Linux UI remains
+pending. Screenshot review alone is not Linux acceptance.
+
+Scenario must retain its Mode/Fan Control/Advanced Settings structure. AC captures
+show Quiet/Balanced/Performance; battery captures show Eco/Balanced. Charging must
+use the existing Personal Settings → Battery & Charge radio choices. USB charging
+and calibration are separate functions and are not covered by the health driver.
+
 ## Start and stop
 
 1. Run `nvidia-smi` in your desktop terminal. It must identify the GPU without a driver/library mismatch.
@@ -34,3 +51,25 @@ For the initial release, repeat after a cold boot and suspend/resume, test AC/ba
 Include the project revision, OS/kernel, session type, laptop model, driver version, exact command, affected field and expected/actual behavior. Identify whether you used `start:acer` and whether a reboot helped. Review summaries before sharing; raw diagnostics can contain private identifiers and credentials. Never attach Acer archives, extracted code/resources, or the entire `.state` directory.
 
 The developer command `sh scripts/test-linux-ui.sh` is explicitly a simulator experiment. It cannot validate real hardware readings.
+
+## Battery driver and original UI
+
+1. Build/load the driver with `sh scripts/load-battery-driver.sh`, or install it
+   for future boots using `sh scripts/install-battery-driver.sh`. Authenticate in
+   Ubuntu's dialog; keep the desktop app unprivileged.
+2. Read the current limit from
+   `/sys/bus/wmi/devices/79772EC5-04B1-4BFD-843C-61E7F77B6CC9/charge_control_end_threshold`.
+   The backend `lib/battery-charge.cjs` exposes `status()` and `setLimit(80|100)`
+   for deliberate manual driver checks. Record and restore the original setting.
+3. Firmware readback verifies the selected setting, not physical charging across
+   a full cycle. Observe charge behavior over time on AC.
+4. After persistent installation, reboot and confirm module autoload, user write
+   permission and the selected limit. Rebuild after a kernel upgrade.
+5. Use the supplied [original-app screenshots](../references/README.md) for UI validation. Preserve
+   the original Scenario and Personal Settings layouts and controls. Charge-limit
+   integration belongs in Personal Settings. Scenario compatibility and charging
+   through the original UI are currently pending; the custom panel was removed.
+
+Previous custom-panel screenshots and button checks are historical evidence only.
+They do not verify the restored original UI. The custom-panel inspection harness
+was removed along with that UI.
