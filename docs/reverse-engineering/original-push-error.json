@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "feature": "Preserve original push receiver plain-string errors without secondary renderer exception",
+  "original": [
+    {
+      "member": "dist/widgets/main/main.ce24a9a875916226.js",
+      "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+      "symbols": [
+        "NOTIFICATION_SERVICE_ERROR"
+      ]
+    },
+    {
+      "member": "node_modules/electron-fcm-push-receiver/src/index.js",
+      "sha256": "13e15985c4668020b17e8fd6ebd9df7d5e614630a6c408a8020aeda377f08b4b",
+      "symbols": [
+        "webContents.send(NOTIFICATION_SERVICE_ERROR, e.message)"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "frontend/host/renderer-patches.cjs",
+      "sha256": "c0481303615bbd997f15de5988ef19e307151e158523f2f458927149c45ac9a6"
+    }
+  ],
+  "trace": {
+    "control": "Original notification service error event; no UI/control replacement.",
+    "model": "Bundled electron-fcm-push-receiver 2.1.7 forwards Error.message as a string.",
+    "transport": "Original NOTIFICATION_SERVICE_ERROR IPC event.",
+    "osOrFirmware": "Remote push registration failure; no firmware operation.",
+    "replyAndRefresh": "Original renderer attempted JSON.parse on the plain message. Narrow source-guarded replacement logs the original string.",
+    "linuxAdaptation": "Preserves actual failure without fabricating service success or altering original components."
+  },
+  "validation": [
+    {
+      "status": "pass",
+      "behavior": "Actual source handler throws for raw error before patch; patched handler preserves plain, empty and JSON-looking strings. Reapplication refuses.",
+      "evidence": "frontend/host/original-notification-error.test.cjs; .state/rust-validation/final-tests.log"
+    },
+    {
+      "status": "pass",
+      "behavior": "Six original pages reported no renderer errors in final bounded read-only capture.",
+      "evidence": ".state/rust-frontend-YEKt2mYO/frontend/inspection/report.json"
+    },
+    {
+      "status": "blocked",
+      "behavior": "Actual push notification functionality remains unavailable: upstream registration returns 404.",
+      "evidence": "Final private frontend log."
+    }
+  ],
+  "windows": {
+    "status": "not-required",
+    "reason": "The error payload contract is explicit in verified original receiver and renderer source; this does not establish any online feature contract."
+  },
+  "remainingGaps": "Push registration/account/online workflows and full notification delivery are not accepted."
+}

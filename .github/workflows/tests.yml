@@ -14,6 +14,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - run: cargo fmt --manifest-path backend/Cargo.toml --all -- --check
+      - run: cargo test --manifest-path backend/Cargo.toml --locked
+      - run: cargo clippy --manifest-path backend/Cargo.toml --locked --all-targets -- -D warnings
+      - run: cargo run --manifest-path backend/Cargo.toml --locked -p nitrosense-tools -- checklist --check
+      - run: npm run test:frontend
       # Core utilities use built-in modules. No Electron or Acer assets in CI.
       - run: npm test
       - name: Require reverse engineering evidence for implementation changes

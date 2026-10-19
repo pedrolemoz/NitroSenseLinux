@@ -1,0 +1,149 @@
+{
+  "schema": 1,
+  "originalVersion": "5.2.84",
+  "asarSha256": "c79516a91d2eae93b019d040c786d23d8e69795b18255b709a37d48b9b78a401",
+  "original": [
+    {
+      "member": "main.js",
+      "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+      "symbols": [
+        "getMonitorData",
+        "getSupportCPUInfo",
+        "getSupportGPUInfo",
+        "getAllInstalledApps",
+        "getScenario",
+        "ProfilePool"
+      ]
+    },
+    {
+      "member": "dist/widgets/main/main.ce24a9a875916226.js",
+      "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+      "symbols": [
+        "ChangeBatteryMode",
+        "setBatteryHealthy",
+        "getBatteryHealthy",
+        "UPDATE_MONITOR_DATA"
+      ]
+    }
+  ],
+  "windows": {
+    "status": "required",
+    "reason": "Native mode/fan/audio, USB charging, calibration and boot-logo contracts remain unresolved. Static original/native entrypoint inspection is not sufficient to implement their writes. See docs/migration/windows-capture.md; this Linux session has no direct Windows inspection access."
+  },
+  "remainingGaps": "Full Windows parity remains incomplete: original Care Center charge-radio integration, native controls/capabilities, missing sensor fields, complete visual and hardware/recovery acceptance, supported Electron and TLS/sandbox hardening, security/dependency audit, remaining Node retirement and release packaging. No historical Node pass is inherited.",
+  "feature": "Independent Rust Linux backend foundation for original NitroSense 5.2.84; partial functional acceptance",
+  "files": [
+    {
+      "path": "backend/Cargo.lock",
+      "sha256": "a4891355009b7822068bfcec32ff547268ba43d430ef76c55cf01e47d6c9cccf"
+    },
+    {
+      "path": "backend/Cargo.toml",
+      "sha256": "ddf863d79bf5aa1d88bedca91a3e3d5b60a5499d98b6cf001e3b2a024470c0e1"
+    },
+    {
+      "path": "backend/README.md",
+      "sha256": "9c8ae1538a0230fefc19081e8d4fca00d73c92cb84bf7ea665324a2c553e5ec4"
+    },
+    {
+      "path": "backend/crates/application/Cargo.toml",
+      "sha256": "c6b21d6086976a0b53da43b2679168867e34736841e407c4f165633ebaf574c6"
+    },
+    {
+      "path": "backend/crates/application/src/lib.rs",
+      "sha256": "89d07dfd7076d0c38cfb77b25c15ca51e75522756cac8bba0dc9dbb655d0409e"
+    },
+    {
+      "path": "backend/crates/domain/Cargo.toml",
+      "sha256": "48cfd84dc607f1aaa259062a4fe03a5bb1ca9c3d14b201f263a8025f45072fde"
+    },
+    {
+      "path": "backend/crates/domain/src/lib.rs",
+      "sha256": "7d5f5e31cf8aeb144570a4ab9e92f8d94221f4def2a21f18a301f3ced8acc0c6"
+    },
+    {
+      "path": "backend/crates/linux/Cargo.toml",
+      "sha256": "d809a42f8c7b3db4c26cac7076d908a739ddd99a243abcb22726001a5a036f26"
+    },
+    {
+      "path": "backend/crates/linux/src/charge.rs",
+      "sha256": "cde5d46667a23fc4e73f72cbf0b8fe474634a32047f2b0b985986944a611a6bd"
+    },
+    {
+      "path": "backend/crates/linux/src/desktop.rs",
+      "sha256": "f5420b2608151761f001972497dcf59ce3a4a328d4ac64ad1ea8bf73f3a1b442"
+    },
+    {
+      "path": "backend/crates/linux/src/lib.rs",
+      "sha256": "d49904a8c1ac0cd3eb30dd1a9d9a2ec599e3371ca71bf8836c4c80675325f322"
+    },
+    {
+      "path": "backend/crates/linux/src/nvidia.rs",
+      "sha256": "ba7063032c88c3726c6773839b5915167474932aa6febed873ca0c7371863217"
+    },
+    {
+      "path": "backend/crates/linux/src/telemetry.rs",
+      "sha256": "e59feae3b8907af0b8c11ce622c1e2abba7e15cd3838f79f731de1416fe4717b"
+    },
+    {
+      "path": "backend/crates/service/Cargo.toml",
+      "sha256": "9365b37c21c594188de76567434908fcfa4861768e3173c940a9f6b405bafcfb"
+    },
+    {
+      "path": "backend/crates/service/src/acer.rs",
+      "sha256": "f0d42c221742136ca6496fc5628bdc3d6472b22bc4899a4a033278e22bc40a42"
+    },
+    {
+      "path": "backend/crates/service/src/lib.rs",
+      "sha256": "d9db118ca5c5b92b0422ed098102458a8dfc4adde20d80e7562f855d388ab86a"
+    },
+    {
+      "path": "backend/crates/service/src/main.rs",
+      "sha256": "2ef79802a3505f71108ff74162af87aa25dd58f903e63bc3d3c08d2d6fbe43d8"
+    },
+    {
+      "path": "backend/crates/service/src/socket.rs",
+      "sha256": "01572a2fd3bf6ea8b20a9aa82521e40d88d08fd8c60fbc5bead36548d44147da"
+    }
+  ],
+  "trace": {
+    "control": "Original Home, Monitoring and Checkup obtain real telemetry through Acer SDK queries. Personal Settings ChangeBatteryMode is traced to setBatteryHealthy and the Care Center BatteryHealthy request; its UI integration is still absent.",
+    "model": "Retained original factories and UI consume Acer field names; the new domain models independent metric/unit/source readings, observed charge state, requested commands and preferences. Domain/application crates contain no Acer or concrete Linux dependencies.",
+    "transport": "The retained host sends versioned, correlated JSON over a private Unix socket. The service delivery Acer adapter maps only verified initialization/monitor/adaptor queries and never dispatches unknown native writes. The public snapshot/command/subscription API is frontend-independent.",
+    "osOrFirmware": "New Linux adapters read procfs/sysfs and bounded nvidia-smi queries. Acer hwmon attribution is restricted to the documented model/kernel/driver. Charge uses the retained model-scoped C driver or standard threshold ABI; only 80/100 are representable and explicit write policy plus independent readback are required. No charge write was exercised in this rewrite.",
+    "replyAndRefresh": "Available readings include actual source and units; fresh failures omit fields rather than replay old values. Original UPDATE_MONITOR_DATA updates the original components. Backend replies preserve success-null versus error, enforce deadlines/limits and correlate subscriptions. Preferences and hardware observations are distinct.",
+    "linuxAdaptation": "Rust use cases depend on ports; Linux adapters own OS discovery, atomic preference persistence and a state-directory lock. Service delivery enforces private directory/socket permissions, peer UID, bounded clients/frames and clean shutdown. Positive mains observations are distinguished from ambiguous USB-only supply states."
+  },
+  "validation": [
+    {
+      "status": "pass",
+      "behavior": "21 Rust source/contract tests cover CPU counter resets/topology, partial/recovered sources including unavailable maximum frequency when any policy fails, battery ambiguity, readback mismatch, preferences/state lock, malformed/fragmented frames, null replies, subscriptions and request rejection without hardware writes.",
+      "evidence": ".state/rust-validation/rust-tests.log; cargo test --offline --manifest-path backend/Cargo.toml; Clippy passed with warnings denied."
+    },
+    {
+      "status": "pass",
+      "behavior": "Real socket snapshots, eight concurrent correlated replies, malformed/version recovery, subscriptions, read-only command rejection and independent temporal procfs memory comparisons passed. Real CPU/RAM/battery/NVIDIA data were observed.",
+      "evidence": ".state/rust-validation/socket-probe.json; applications.json contains 27 genuine Linux desktop entries; direct-diagnostics.json separately queried the original 80% driver setting."
+    },
+    {
+      "status": "pass",
+      "behavior": "A second service using the same state directory was rejected with Busy; normal shutdown removed only the service-owned socket.",
+      "evidence": "Live duplicate-state smoke test and .state/rust-validation/ socket cleanup observed; unit tests also exercise state locking and preservation of existing files."
+    },
+    {
+      "status": "not-tested",
+      "behavior": "Real firmware writes through the rewritten backend, physical charging, reboot/suspend/AC transitions, complete original controls and every screenshot state.",
+      "evidence": "docs/migration/features.json and checklist.md; historical C-driver verification is retained separately and is not Rust/UI acceptance."
+    },
+    {
+      "status": "pass",
+      "behavior": "Reviewed CPU-maximum failure handling now rejects a partially readable policy set rather than reporting a lower partial maximum. The new regression covers failure/recovery and final direct real adapter samples still report the CPU maximum.",
+      "evidence": ".state/rust-validation/rust-tests.log; direct-diagnostics-final.json; telemetry.rs partial_frequency_policy_failure_cannot_understate_the_maximum."
+    },
+    {
+      "status": "pass",
+      "behavior": "Removed unused Tokio process and multithread runtime features; current-thread service still passes workspace tests, offline build and Clippy. CPU maximum fails closed when any policy read fails.",
+      "evidence": ".state/rust-validation/; final-tests.log; backend/crates/linux/src/telemetry.rs regression tests."
+    }
+  ]
+}

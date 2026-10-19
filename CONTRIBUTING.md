@@ -1,5 +1,10 @@
 # Contributing
 
+The active rewrite lives in `backend/` (Rust) and `frontend/` (the original Acer
+host plus minimal glue). Read their architecture notes. Run Cargo tests/Clippy,
+the Rust original-source evidence audit, retained frontend tests and the legacy
+regression suite where applicable. No historical Node pass certifies Rust parity.
+
 This project is preparing for an open-source release; a license has not been selected yet. Please clarify licensing before proposing substantial code contributions. Do not add a license or third-party material on someone else's behalf.
 
 For development, read the [architecture and test notes](docs/development.md), then run `npm test`. Keep changes focused and describe what changed, why, which tests ran, and whether real hardware was involved. Source-only tests do not require Acer files; vendor integration tests need your own local import and may skip without it.

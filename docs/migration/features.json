@@ -1,0 +1,2227 @@
+{
+  "schema": 1,
+  "target": "Acer Nitro ANV15-52",
+  "original_version": "5.2.84",
+  "references": {
+    "HOME-01": "screenshots/HOME - SIDEBAR COLLAPSED.png",
+    "HOME-02": "screenshots/HOME - SIDEBAR OPEN.png",
+    "MODE-AC-B": "screenshots/SCENARIO - BALANCED SELECTED - AC PLUGGED IN.png",
+    "MODE-AC-Q": "screenshots/SCENARIO - QUIET SELECTED - AC PLUGGED IN.png",
+    "MODE-AC-P": "screenshots/SCENARIO - PERFORMANCE SELECTED - AC PLUGGED IN.png",
+    "MODE-DC-B": "screenshots/SCENARIO - BALANCED SELECTED - BATTERY POWER.png",
+    "MODE-DC-E": "screenshots/SCENARIO - ECO SELECTED - BATTERY POWER.png",
+    "FAN-A": "screenshots/SCENARIO - FAN CONTROL AUTO.png",
+    "FAN-M": "screenshots/SCENARIO - FAN CONTROL MAX.png",
+    "FAN-C": "screenshots/SCENARIO - FAN CONTROL CUSTOM.png",
+    "SCENARIO-ADV": "screenshots/SCENARIO - ADVANCED SETTINGS.png",
+    "PERSONAL-01": "screenshots/PERSONAL SETTINGS 1.png",
+    "PERSONAL-02": "screenshots/PERSONAL SETTINGS 2.png",
+    "CHECKUP-01": "screenshots/CHECKUP.png",
+    "CHECKUP-INFO": "screenshots/CHECKUP - SYSTEM INFO.png",
+    "MONITOR-01": "screenshots/MONITORING.png",
+    "APPS-01": "screenshots/APP CENTER.png",
+    "EXPERIENCE-01": "screenshots/EXPERIENCE ZONE.png",
+    "HELP-01": "screenshots/HELP.png",
+    "SETTINGS-01": "screenshots/SETTINGS.png"
+  },
+  "validation_note": "Located symbols are research entrypoints, not complete traces. No historical JavaScript/hardware pass is inherited by Rust.",
+  "features": [
+    {
+      "id": "home-telemetry",
+      "name": "Home telemetry and real unavailable states",
+      "references": [
+        "HOME-01",
+        "HOME-02"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getMonitorData",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 97046
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "UPDATE_MONITOR_DATA",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 118123
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1560038
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "Rust implemented; live acceptance pending",
+      "integration": "live partial",
+      "visual": "fail",
+      "behavior": "fail",
+      "blockers": [
+        "System temperature and actual operating mode remain unavailable; live CPU/GPU readings do not complete Home"
+      ],
+      "next_action": "Verify live gauges against Linux sources",
+      "validation_evidence": [
+        ".state/rust-frontend-t4LCoNRy/frontend/inspection/report.json"
+      ]
+    },
+    {
+      "id": "home-navigation",
+      "name": "Home navigation and sidebar toggle",
+      "references": [
+        "HOME-01",
+        "HOME-02"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "createHomeTab",
+          "locations": [
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1637029
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "createHomeTab",
+          "locations": [
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1637029
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "getScenario",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 81222
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1285065
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "original Acer UI retained",
+      "integration": "host migrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Capture both sidebar states"
+    },
+    {
+      "id": "home-summary",
+      "name": "Sidebar profile/mode/fan summary",
+      "references": [
+        "HOME-01",
+        "HOME-02"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getScenario",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 81222
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1285065
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "getFanDialInfo",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 31355
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1723955
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "saved state distinct from hardware",
+      "integration": "original models retained",
+      "visual": "fail",
+      "behavior": "fail",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Trace summaries to confirmed hardware state",
+      "validation_evidence": [
+        ".state/rust-frontend-t4LCoNRy/frontend/inspection/report.json"
+      ]
+    },
+    {
+      "id": "home-shortcuts",
+      "name": "Sidebar shortcuts and details",
+      "references": [
+        "HOME-01",
+        "HOME-02"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getPinApps",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 147192
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1238628
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "getAllWidgetApps",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 145845
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1239399
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Trace original control and native boundary"
+    },
+    {
+      "id": "home-update",
+      "name": "Home live update",
+      "references": [
+        "HOME-01",
+        "HOME-02"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getAppAndOptionalStorePackageUpdatesAsync",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 22220
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Trace original control and native boundary"
+    },
+    {
+      "id": "profiles",
+      "name": "Scenario profile creation/selection/persistence",
+      "references": [
+        "MODE-AC-B",
+        "MODE-AC-Q",
+        "MODE-AC-P",
+        "MODE-DC-B",
+        "MODE-DC-E"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getInitialProfile",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 74766
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1432008
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "InsertProfile",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 74747
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "saveScenario",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 74929
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1286776
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "ScenarioChanged",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 3248
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1284862
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "original factories retained; stable original store; Rust preferences separate",
+      "integration": "store reuse verified; manager acceptance pending",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Second launch reused the original store and omitted first-run consent; profile edits, automatic switching and firmware application still unverified"
+      ],
+      "next_action": "Exercise manager dialogs and persistence",
+      "validation_evidence": [
+        ".state/rust-validation/original-store-after-restart.json"
+      ]
+    },
+    {
+      "id": "profile-association",
+      "name": "Profile application associations and automatic switching",
+      "references": [
+        "MODE-AC-B",
+        "MODE-AC-Q",
+        "MODE-AC-P",
+        "MODE-DC-B",
+        "MODE-DC-E"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "ChangeProfile",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 79820
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "getActiveProcess",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 79746
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Trace original control and native boundary"
+    },
+    {
+      "id": "balanced-ac",
+      "name": "Balanced on AC",
+      "references": [
+        "MODE-AC-B"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getSupportOperatingMode",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 100103
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1308781
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "getFanDialInfo",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 31355
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1723955
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "fail",
+      "behavior": "fail",
+      "blockers": [
+        "Native operating-mode capabilities, writes and readback not established; saved mode is not firmware evidence"
+      ],
+      "next_action": "Inspect native service and capture Windows mode transition",
+      "validation_evidence": [
+        ".state/rust-frontend-t4LCoNRy/frontend/inspection/report.json"
+      ]
+    },
+    {
+      "id": "quiet-ac",
+      "name": "Quiet on AC",
+      "references": [
+        "MODE-AC-Q"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getSupportOperatingMode",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 100103
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1308781
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "getFanDialInfo",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 31355
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1723955
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Native operating-mode capabilities, writes and readback not established; saved mode is not firmware evidence"
+      ],
+      "next_action": "Inspect native service and capture Windows mode transition"
+    },
+    {
+      "id": "performance-ac",
+      "name": "Performance on AC",
+      "references": [
+        "MODE-AC-P"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getSupportOperatingMode",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 100103
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1308781
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "getFanDialInfo",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 31355
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1723955
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Native operating-mode capabilities, writes and readback not established; saved mode is not firmware evidence"
+      ],
+      "next_action": "Inspect native service and capture Windows mode transition"
+    },
+    {
+      "id": "balanced-dc",
+      "name": "Balanced on battery",
+      "references": [
+        "MODE-DC-B"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getSupportOperatingMode",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 100103
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1308781
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "getFanDialInfo",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 31355
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1723955
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Native operating-mode capabilities, writes and readback not established; saved mode is not firmware evidence"
+      ],
+      "next_action": "Inspect native service and capture Windows mode transition"
+    },
+    {
+      "id": "eco-dc",
+      "name": "Eco on battery",
+      "references": [
+        "MODE-DC-E"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getSupportOperatingMode",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 100103
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1308781
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "getFanDialInfo",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 31355
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1723955
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Native operating-mode capabilities, writes and readback not established; saved mode is not firmware evidence"
+      ],
+      "next_action": "Inspect native service and capture Windows mode transition"
+    },
+    {
+      "id": "ac-transition",
+      "name": "AC/battery mode availability and restoration",
+      "references": [
+        "MODE-AC-B",
+        "MODE-AC-Q",
+        "MODE-AC-P",
+        "MODE-DC-B",
+        "MODE-DC-E"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "ADAPTOR_STATUS",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 44359
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 760876
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "checkPowerStauts",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 73455
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "Rust positive-mains and ambiguous-USB observation implemented",
+      "integration": "Acer status adapter implemented",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Unit-tested discovery; no physical unplug/replug acceptance or native adapter flag verification"
+      ],
+      "next_action": "Verify unplug/replug transitions and error recovery"
+    },
+    {
+      "id": "whisper",
+      "name": "Original NVIDIA Whisper notices and behavior",
+      "references": [
+        "MODE-AC-Q",
+        "MODE-DC-E"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "startWhisperMonitor",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 116126
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "setWhisperMode",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 116619
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1287426
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Windows NVIDIA feature has no validated equivalent; notice does not prove support"
+      ],
+      "next_action": "Trace original control and native boundary"
+    },
+    {
+      "id": "fan-auto",
+      "name": "Fan Auto",
+      "references": [
+        "FAN-A"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getSupportFanControl",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 100970
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1307969
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "getFanDialInfo",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 31355
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1723955
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "setFanDialInfo",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 31305
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1308138
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Fan capability, accepted range, commands and recovery need native/Windows evidence"
+      ],
+      "next_action": "Capture fan command plus actual RPM/readback on Windows"
+    },
+    {
+      "id": "fan-max",
+      "name": "Fan Max",
+      "references": [
+        "FAN-M"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getSupportFanControl",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 100970
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1307969
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "getFanDialInfo",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 31355
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1723955
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "setFanDialInfo",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 31305
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1308138
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Fan capability, accepted range, commands and recovery need native/Windows evidence"
+      ],
+      "next_action": "Capture fan command plus actual RPM/readback on Windows"
+    },
+    {
+      "id": "fan-custom",
+      "name": "Independent CPU/GPU fan sliders and per-fan Auto",
+      "references": [
+        "FAN-C"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getSupportFanControl",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 100970
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1307969
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "getFanDialInfo",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 31355
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1723955
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "setFanDialInfo",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 31305
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1308138
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Fan capability, accepted range, commands and recovery need native/Windows evidence"
+      ],
+      "next_action": "Capture fan command plus actual RPM/readback on Windows"
+    },
+    {
+      "id": "fan-rpm",
+      "name": "CPU/GPU fan RPM attribution",
+      "references": [
+        "FAN-A",
+        "FAN-M",
+        "FAN-C"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getMonitorData",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 97046
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "Rust hwmon adapter scoped to verified model/driver/kernel",
+      "integration": "bridge implemented",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Compare actual RPM with independent hwmon reads"
+    },
+    {
+      "id": "audio",
+      "name": "TrueHarmony presets and custom audio",
+      "references": [
+        "SCENARIO-ADV"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getSupportAudioMode",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 100446
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1308939
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Audio DSP/native contract and Linux effect path unresolved"
+      ],
+      "next_action": "Inspect original audio service; capture speaker/headphone behavior"
+    },
+    {
+      "id": "health-limit",
+      "name": "Optimized 80% / Full 100% charging",
+      "references": [
+        "PERSONAL-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "BATTERY_CHARGE_MODE",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 34528
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 5598902
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "getBatteryBoost",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 97304
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 829819
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "Rust charge adapter and readback use case implemented",
+      "integration": "original control connection pending",
+      "visual": "fail",
+      "behavior": "fail",
+      "blockers": [
+        "Original Personal Settings radio controls still absent; backend observed 80% only; no rewritten UI/firmware command or physical charging acceptance"
+      ],
+      "next_action": "Integrate the original Care Center BatteryHealthy boundary; then verify radio/readback and recovery",
+      "validation_evidence": [
+        ".state/rust-frontend-t4LCoNRy/frontend/inspection/report.json"
+      ]
+    },
+    {
+      "id": "health-info",
+      "name": "Battery health information and navigation",
+      "references": [
+        "PERSONAL-01",
+        "CHECKUP-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getBatteryLastCheckedInfo",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 27570
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1265817
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Trace original control and native boundary"
+    },
+    {
+      "id": "usb-charge",
+      "name": "Power-off USB Charger",
+      "references": [
+        "PERSONAL-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "PersonalSettingsItem",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 34550
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Distinct USB charging firmware contract unresolved; battery health ABI does not implement this"
+      ],
+      "next_action": "Trace original control and native boundary"
+    },
+    {
+      "id": "usb-threshold",
+      "name": "USB charge limit while on battery",
+      "references": [
+        "PERSONAL-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "PersonalSettingsItem",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 34550
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "30% USB threshold is not the laptop health-charge threshold"
+      ],
+      "next_action": "Trace original control and native boundary"
+    },
+    {
+      "id": "screen-blue",
+      "name": "Bluelight Shield and reduction level",
+      "references": [
+        "PERSONAL-01",
+        "PERSONAL-02"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "gettempBlueLight",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 28032
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1264571
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "settempBlueLight",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 27978
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1264678
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Trace original control and native boundary"
+    },
+    {
+      "id": "keyboard-sticky",
+      "name": "Sticky keys",
+      "references": [
+        "PERSONAL-01",
+        "PERSONAL-02"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "PersonalSettingsItem",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 34550
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Trace original control and native boundary"
+    },
+    {
+      "id": "keyboard-backlight",
+      "name": "Backlight off after 30 seconds",
+      "references": [
+        "PERSONAL-01",
+        "PERSONAL-02"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getSupportKerboardInfo",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 100803
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1306791
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Trace original control and native boundary"
+    },
+    {
+      "id": "boot-logo",
+      "name": "Boot logo browse/preview/validation/apply",
+      "references": [
+        "PERSONAL-02"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getSupportBootLogo",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 101599
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1309343
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "getSupportBootLogoV2",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 101761
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1309390
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Firmware image validation and write/recovery contract unknown; do not substitute Linux boot splash"
+      ],
+      "next_action": "Trace original control and native boundary"
+    },
+    {
+      "id": "checkup-all",
+      "name": "Checkup All and per-component diagnostics",
+      "references": [
+        "CHECKUP-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "CareCenterWS",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 34573
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "fail",
+      "behavior": "fail",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Trace original control and native boundary",
+      "validation_evidence": [
+        ".state/rust-frontend-t4LCoNRy/frontend/inspection/report.json"
+      ]
+    },
+    {
+      "id": "checkup-battery",
+      "name": "Battery charge/temperature/cycles/health",
+      "references": [
+        "CHECKUP-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getBatteryLastCheckedInfo",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 27570
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1265817
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "getMonitorData",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 97046
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "Rust percentage/cycles/health where available; temperature missing",
+      "integration": "live partial",
+      "visual": "fail",
+      "behavior": "fail",
+      "blockers": [
+        "Percentage/cycles/health displayed; temperature and original diagnostic/calibration behavior unresolved"
+      ],
+      "next_action": "Verify all fields and original check result flow",
+      "validation_evidence": [
+        ".state/rust-frontend-t4LCoNRy/frontend/inspection/report.json"
+      ]
+    },
+    {
+      "id": "calibration",
+      "name": "Battery calibration lifecycle and last check",
+      "references": [
+        "CHECKUP-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getBatteryCalibrationLastCheckTime",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 27736
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1250204
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "setBatteryCalibrationLastCheckTime",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 27646
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1267067
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Calibration is a separate destructive/time-consuming native workflow; kernel charge driver does not provide it"
+      ],
+      "next_action": "Trace original control and native boundary"
+    },
+    {
+      "id": "checkup-storage",
+      "name": "Per-drive storage health and checks",
+      "references": [
+        "CHECKUP-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "DiskMediaType",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 34453
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "CareCenterWS",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 34573
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "fail",
+      "behavior": "fail",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Trace original control and native boundary",
+      "validation_evidence": [
+        ".state/rust-frontend-t4LCoNRy/frontend/inspection/report.json"
+      ]
+    },
+    {
+      "id": "checkup-memory",
+      "name": "RAM check and diagnostics",
+      "references": [
+        "CHECKUP-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "CareCenterWS",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 34573
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "fail",
+      "behavior": "fail",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Trace original control and native boundary",
+      "validation_evidence": [
+        ".state/rust-frontend-t4LCoNRy/frontend/inspection/report.json"
+      ]
+    },
+    {
+      "id": "system-info",
+      "name": "System Info fields and navigation",
+      "references": [
+        "CHECKUP-INFO"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getWMIValue",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 17455
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "DeviceInfoWS",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 34588
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "Rust basic identity; full inventory pending",
+      "integration": "native query bridge partial",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Trace and implement actual Linux fields without Windows fixtures"
+    },
+    {
+      "id": "monitor-cpu",
+      "name": "CPU temperature/usage/frequency/fan/history",
+      "references": [
+        "MONITOR-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "UPDATE_MONITOR_DATA",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 118123
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1560038
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "Rust sampler implemented; temporal acceptance pending",
+      "integration": "live partial",
+      "visual": "fail",
+      "behavior": "fail",
+      "blockers": [
+        "Temperature/usage/frequency reached original plots; fan RPM absent on this boot; full temporal/failure acceptance remains incomplete"
+      ],
+      "next_action": "Verify units, extrema, gaps and live sources",
+      "validation_evidence": [
+        ".state/rust-frontend-t4LCoNRy/frontend/inspection/report.json"
+      ]
+    },
+    {
+      "id": "monitor-gpu",
+      "name": "GPU temperature/usage/frequency/fan/history",
+      "references": [
+        "MONITOR-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getSupportGPUInfo",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 101447
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1309299
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "getMonitorData",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 97046
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "Rust NVIDIA plus scoped hwmon implemented",
+      "integration": "live partial",
+      "visual": "fail",
+      "behavior": "fail",
+      "blockers": [
+        "Temperature/usage/frequency reached original plots; fan RPM absent on this boot; full temporal/failure acceptance remains incomplete"
+      ],
+      "next_action": "Verify idle/failure/recovery and driver mismatch",
+      "validation_evidence": [
+        ".state/rust-frontend-t4LCoNRy/frontend/inspection/report.json"
+      ]
+    },
+    {
+      "id": "monitor-system",
+      "name": "System temperature",
+      "references": [
+        "MONITOR-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "SYS1_TEMPERATURE",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 194071
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1310594
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "fail",
+      "behavior": "fail",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Trace original control and native boundary",
+      "validation_evidence": [
+        ".state/rust-frontend-t4LCoNRy/frontend/inspection/report.json"
+      ]
+    },
+    {
+      "id": "monitor-memory",
+      "name": "Memory usage and clock",
+      "references": [
+        "MONITOR-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "RAM_USAGE",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 120700
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1309854
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "RAM_FREQUENCY",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 200418
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1554212
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "Rust usage implemented; clock unresolved",
+      "integration": "bridge partial",
+      "visual": "fail",
+      "behavior": "fail",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Validate usage; establish RAM clock source",
+      "validation_evidence": [
+        ".state/rust-frontend-t4LCoNRy/frontend/inspection/report.json"
+      ]
+    },
+    {
+      "id": "monitor-network",
+      "name": "Ethernet and Wi-Fi throughput",
+      "references": [
+        "MONITOR-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "ETHERNET_DOWNLOAD",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 200232
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1554252
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "WIFI_DOWNLOAD",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 120743
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1554290
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "fail",
+      "behavior": "fail",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Trace original control and native boundary",
+      "validation_evidence": [
+        ".state/rust-frontend-t4LCoNRy/frontend/inspection/report.json"
+      ]
+    },
+    {
+      "id": "apps-discovery",
+      "name": "App discovery/search/filter/sort/refresh",
+      "references": [
+        "APPS-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getAllInstalledApps",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 148157
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1241162
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "getAppCenterFilterByType",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 154827
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1389790
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "Rust XDG catalog implemented; compatibility audit pending",
+      "integration": "bridge implemented; default Preload inspected",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Preload category is empty because no corresponding Windows preload is installed; installed-app category/search/sort acceptance still pending"
+      ],
+      "next_action": "Verify desktop visibility, overrides and original controls"
+    },
+    {
+      "id": "apps-pin",
+      "name": "Application pinning and sidebar shortcuts",
+      "references": [
+        "APPS-01",
+        "HOME-02"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getPinApps",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 147192
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1238628
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "setPinApps",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 147054
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1239215
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Trace original control and native boundary"
+    },
+    {
+      "id": "apps-launch",
+      "name": "Launch and Cannot find app workflow",
+      "references": [
+        "APPS-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "LaunchApp",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 9125
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1245746
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "shellExecute",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 66959
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Discovery does not establish safe launch and association semantics"
+      ],
+      "next_action": "Trace original control and native boundary"
+    },
+    {
+      "id": "experience-carousel",
+      "name": "Experience carousel and navigation",
+      "references": [
+        "EXPERIENCE-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "setupWebApp",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 166082
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Trace original control and native boundary"
+    },
+    {
+      "id": "experience-content",
+      "name": "Recommended Apps and Highlight Features",
+      "references": [
+        "EXPERIENCE-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "setupWebApp",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 166082
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Real Acer content availability and privacy contract need verification; no invented promotions"
+      ],
+      "next_action": "Trace original control and native boundary"
+    },
+    {
+      "id": "account",
+      "name": "Membership signup/signin and registration",
+      "references": [
+        "HELP-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getAcerIdKey",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 30102
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 820857
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "getSerialNumber",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 17355
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 793170
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Trace original control and native boundary"
+    },
+    {
+      "id": "support-update",
+      "name": "Acer Live Update",
+      "references": [
+        "HELP-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getAppAndOptionalStorePackageUpdatesAsync",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 22220
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Windows Store updates and Linux host updates require distinct verified contracts"
+      ],
+      "next_action": "Trace original control and native boundary"
+    },
+    {
+      "id": "support-links",
+      "name": "Find an Answer/country/service center search",
+      "references": [
+        "HELP-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getCurrentLocation",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 17929
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "not implemented",
+      "integration": "not integrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Trace original control and native boundary"
+    },
+    {
+      "id": "settings-about",
+      "name": "About, actual version and update controls",
+      "references": [
+        "SETTINGS-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getAppVersion",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 20189
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1318882
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "Rust original import verifier implemented",
+      "integration": "actual imported version retained",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Verify version and update workflow separately"
+    },
+    {
+      "id": "settings-privacy",
+      "name": "Privacy preference and downstream consent",
+      "references": [
+        "SETTINGS-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getIsAgreePrivacyPolicy",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 23461
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 815077
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "setIsAgreePrivacyPolicy",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 23777
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 819343
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "Rust preference store implemented",
+      "integration": "original consent model retained",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Trace consent propagation and unavailable integrations"
+    },
+    {
+      "id": "settings-units",
+      "name": "Celsius/Fahrenheit and persistence",
+      "references": [
+        "SETTINGS-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "getTemperatureUnit",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 23203
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 814919
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        },
+        {
+          "symbol": "setTemperatureUnit",
+          "locations": [
+            {
+              "member": "main.js",
+              "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+              "utf16_offset": 23307
+            },
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1743915
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "Rust preference store implemented",
+      "integration": "original conversion retained",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Verify conversion across gauges/history and restart"
+    },
+    {
+      "id": "settings-avatar",
+      "name": "Homepage live-3D avatar toggle",
+      "references": [
+        "SETTINGS-01"
+      ],
+      "original_evidence": [
+        {
+          "symbol": "createHomeTab",
+          "locations": [
+            {
+              "member": "dist/widgets/main/main.ce24a9a875916226.js",
+              "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+              "utf16_offset": 1637029
+            }
+          ],
+          "status": "located; full end-to-end trace pending"
+        }
+      ],
+      "backend": "original Acer asset and UI retained",
+      "integration": "host migrated",
+      "visual": "not-tested",
+      "behavior": "not-tested",
+      "blockers": [
+        "Original end-to-end contract and Linux adaptation require investigation"
+      ],
+      "next_action": "Verify toggle, loading and navigation regression"
+    }
+  ],
+  "global_gaps": [
+    "Supported Electron/runtime security hardening",
+    "Remaining Node research/operator-tool retirement",
+    "Preference migration and release packaging",
+    "Full original/native traces and Windows capture",
+    "Complete per-feature original UI/hardware acceptance"
+  ]
+}

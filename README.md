@@ -1,201 +1,66 @@
 # NitroSense Linux
 
-An independent reverse engineering project to make the **original Acer NitroSense application and its Windows features work on Linux**. Implementation follows the original code, protocols and behavior; screenshots are validation references, not specifications for a recreation. The current implementation uses Linux adapters and narrow in-memory patches. This is not an official Acer product.
+An independent reverse engineering project to make Acer NitroSense's original Windows features work on Linux. The current rewrite separates an independent **Rust backend** from the **original Acer frontend**. No custom frontend or screenshot recreation is included.
 
-All agents and contributors must follow [AGENTS.md](AGENTS.md), including original-code research, behavioral evidence and the prohibition on replacement screens/components.
+The implementation is incomplete. Original-source traces, real Linux behavior and independent readback determine completion; screenshots organize the required controls and visual comparisons. See the [50-feature checklist](docs/migration/checklist.md), [machine-readable ledger](docs/migration/features.json) and [current status](docs/status.md).
 
-**Current milestone: real Linux monitoring and battery charge-limit control work on the machine below.** Application operation was confirmed after rebooting following an NVIDIA driver update. This is a development build, not a finished NitroSense port or an initial stable release.
+## Build and run
 
-> **Download directly from Acer.** `npm run setup` downloads the official **NitroSense 5.2.84** package, verifies its pinned SHA-256, extracts the resources on Linux, and installs the pinned Electron runtime. Acer files stay local and are excluded from Git.
-
-## Checked compatibility
-
-Compatibility has **only** been checked with this setup:
-
-| Component | Verified setup |
-| --- | --- |
-| Laptop | Acer Nitro V15 **ANV15-52** |
-| CPU | Intel Core **i5-13420H** |
-| GPU | NVIDIA GeForce **RTX 4050 Laptop GPU** |
-| OS | **Ubuntu 26.04.1 LTS**, x86_64 |
-| Desktop session | **Wayland** |
-| Graphics driver | **NVIDIA proprietary drivers** |
-
-Other Acer models, distributions, kernels, graphics drivers, X11 sessions, and hardware combinations are unverified. A Wayland desktop does not establish that Electron is running natively through Wayland; XWayland may be used. Acer fan/GPU temperature channel mapping is currently restricted in code to this model with the `acer-wmi` driver on **Linux 7.0.x**.
-
-## Development status
-
-| Area | Status |
-| --- | --- |
-| Original UI | Opens under the pinned Linux Electron runtime; original ASAR remains unchanged |
-| Real CPU/RAM monitoring | Implemented and exercised in the original UI: usage, CPU clock/temperature, memory usage |
-| NVIDIA monitoring | Implemented through `nvidia-smi`; requires a working driver/userspace combination; user confirmed operation after reboot |
-| Acer fan RPM / GPU temperature | Read-only integration with verified Acer hwmon channels |
-| Battery | Real readings and verified 80% / 100% charging through the included ANV15-52 WMI driver |
-| Scenario | Original Acer UI restored; capability/profile errors remain pending compatibility work against original-app references |
-| Application catalog | Lists Linux desktop entries; launching and game association remain incomplete |
-| Fan control, performance modes, lighting | **Not implemented or validated for Linux hardware control** |
-| Acer services / full Checkup / complete system information | Incomplete or unsupported |
-| Packaging / first release | Source-run workflow only; no ready-made Linux installer |
-
-Missing measurements appear as `--`; they are not replaced by simulated readings. Normal launch commands select **read-only mode with SimulatorMode=0**. A separate, explicitly named UI-only developer experiment still exists and uses the original Acer simulator.
-
-Original Windows 11 UI captures from the target machine are indexed in the [screenshot validation matrix](references/README.md).
-
-See the [development record](docs/development-history.md), [detailed status](docs/status.md) and the [initial release roadmap](docs/roadmap.md).
-
-## Requirements
-
-- The official **Acer NitroSense 5.2.84 ZIP**, downloaded automatically by setup or supplied locally.
-- The checked Linux desktop setup above, with readable `/proc` and `/sys` interfaces.
-- **Node.js 18 or newer** and **npm**. The current development machine uses Node.js 22; Node 18 is the declared minimum, not a promise of ongoing upstream support.
-- **msitools** (`msiinfo`) and **cabextract** for extracting the MSI resources on Linux; **unzip** only if manually unpacking your ZIP.
-- **Electron 26.6.10**, installed locally using npm. The runtime is pinned to the reviewed Acer application; changing Electron versions is not currently supported.
-- Standard Electron desktop libraries (GTK 3, NSS, ALSA, GBM, X11/XWayland dependencies). A normal Ubuntu desktop already supplies many of these.
-- Working **NVIDIA proprietary drivers** and `nvidia-smi` for GPU utilization/name/clocks. The kernel module and userspace driver must match.
-- Kernel `coretemp` and `acer_wmi` interfaces for the corresponding temperatures/fans. `kmod` and `sudo` are needed only if using the optional Acer module preparation command.
-- Internet access for the initial Acer ZIP and npm/Electron downloads. Git is needed if cloning the source.
-
-The application itself runs as your desktop user, **without sudo**. Optional Acer preparation can request sudo to reload a kernel module for the current boot; it does not install a persistent boot configuration.
-
-## Install from source
-
-Run these commands from the repository root in a terminal inside your graphical session. No Windows installation or Windows execution is required for this workflow.
-
-### 1. Install Linux tools
+The first target is Acer Nitro ANV15-52. The Rust workspace has been compiled and checked using Rust/Cargo 1.99.1; minimum-version acceptance remains pending. Node/npm are needed only for the retained Electron frontend and legacy regression tooling.
 
 ```sh
-sudo apt update
-sudo apt install nodejs npm git unzip msitools cabextract kmod
-node --version
-npm --version
+cargo build --manifest-path backend/Cargo.toml --locked
+cargo test --manifest-path backend/Cargo.toml --locked
 ```
 
-`node --version` must report at least 18. You can update the rest of Ubuntu separately with `sudo apt upgrade`; a full system upgrade is not an application dependency. Reboot if an OS or NVIDIA driver update requires it.
-
-For a minimal desktop missing Electron libraries, install:
+`npm run setup` now orchestrates the verified import and frontend runtime through Rust. You may also supply your own original Acer NitroSense 5.2.84 resources. For a fresh import from the reviewed official ZIP, install `unzip`, `msitools` and `cabextract`, then:
 
 ```sh
-sudo apt install libnss3 libgtk-3-0t64 libasound2t64 libgbm1 \
-  libatk-bridge2.0-0t64 libcups2t64 libxkbcommon0 \
-  libxcomposite1 libxdamage1 libxrandr2 libxfixes3 xwayland
+backend/target/debug/nitrosense-tools import --zip /path/to/official.zip --output /absolute/path/to/new-import
+backend/target/debug/nitrosense-tools check-original --vendor /absolute/path/to/new-import
 ```
 
-### 2. Download and prepare NitroSense
+The importer checks pinned ZIP/AppX/MSI/ASAR hashes, extracts data without executing Windows binaries or custom actions, and publishes a verified private import. It refuses existing destinations and staging. Acer files, extracted source, native disassembly and captures stay local and ignored; they are never release contents.
 
-Clone or download this repository, enter its directory, then run:
+Install the currently required frontend runtime with `npm run setup:electron`. For the existing default import:
 
 ```sh
-npm run setup
-npm start
+sh frontend/start.sh --experimental-runtime
 ```
 
-Setup downloads the [official NitroSense 5.2.84 ZIP](https://global-download.acer.com/GDFiles/Application/Nitro%20Sense/Nitro%20Sense_Acer_5.2.84_W11x64_A.zip?acerid=639270422763622831&Step1=&Step2=&Step3=NITRO%20ANV15-52&OS=ALL&LC=pt&BC=ACER&SC=PA_3) (approximately 947 MiB) from Acer's download server. The source is the [Acer ANV15-52 support page](https://www.acer.com/br-pt/support/product-support/ANV15-52/downloads).
+An alternate verified import can follow the flag. The frontend launcher starts a separate Rust service on a private Unix socket with hardware writes disabled. Ctrl+C stops both processes. `--inspect` after the experimental flag performs bounded original-page captures under `.state/`.
 
-The command verifies the ZIP's pinned SHA-256, extracts only the MSI and main AppX, imports the required resources into `vendor/nitrosense-5.2.84-official`, verifies the import, and installs Electron 26.6.10 into `.tools/electron-runtime`. It does not execute Windows installers. Allow roughly 3 GiB of free space for the download, extraction, and runtime. Run setup as your normal desktop user.
+**The frontend remains experimental:** the inherited Electron 26.6.10 host still requires sandbox/TLS exceptions. Supported-runtime migration and security hardening are release blockers. Starting the application does not establish hardware-control parity.
 
-The download is cached under `.state/downloads/`. Re-running setup verifies an existing completed import and installs the runtime. Partial imports are preserved for diagnosis and refused; use the troubleshooting guide before retrying. A changed upstream ZIP fails verification instead of silently accepting different code.
-
-If you already downloaded the official ZIP, use:
+For a frontend-independent backend or another future frontend:
 
 ```sh
-npm run setup -- --zip '/absolute/path/to/NitroSense_Acer_5.2.84_W11x64_A.zip'
+backend/target/debug/nitrosense-backend serve
+backend/target/debug/nitrosense-backend snapshot
+backend/target/debug/nitrosense-backend capabilities
 ```
 
-For manual extraction/import:
+See the [backend API and architecture](backend/README.md) and [frontend boundary](frontend/README.md). Hardware state and user preferences are separate. Missing readings are unavailable, and no simulator backs the Rust production path.
+
+## Evidence and remaining work
+
+The Rust import has reproduced all 762 baseline resource members byte-for-byte. Rust adapters and socket delivery have observed real CPU/RAM/battery/NVIDIA readings on the target laptop. The existing battery C driver is retained separately; its earlier 80/100 firmware verification is not inherited by the rewritten original-UI integration or physical charge/reboot acceptance.
+
+Fan/performance/audio/USB charging/calibration/boot-logo behavior, complete Checkup and system information, all screenshot states, extended reliability, security auditing and release packaging remain incomplete. The frontend still needs original Care Center integration for its battery-health radio controls. No unverified firmware/EC writes are permitted.
+
+Root `lib/`, `runtime/` and legacy scripts are retained as explicit migration/regression evidence while corresponding acceptance is completed. They are not dependencies of the new frontend or Rust backend. `npm run start:legacy` selects the old path deliberately. Some historical research utilities and driver operator scripts still await retirement or migration; this is not yet an entirely retired Node project.
+
+## Development checks
 
 ```sh
-unzip '/absolute/path/to/NitroSense_Acer_5.2.84_W11x64_A.zip' -d .state/installer
-npm run prepare:vendor -- .state/installer/NitroSense_Acer_5.2.84_W11x64 vendor/nitrosense-5.2.84-official
-npm run setup:electron
-npm run check
-```
-
-The 5.2.84 source patches and resource import are checked against the official package. The hardware observations above came from the earlier 5.1.392 build; graphical and hardware acceptance testing on 5.2.84 is still required.
-
-## Run with real data
-
-First confirm the NVIDIA driver is healthy:
-
-```sh
-nvidia-smi
-```
-
-Then launch:
-
-```sh
-npm start
-```
-
-If Acer fan/temperature interfaces need preparation for this boot, use:
-
-```sh
-npm run start:acer
-```
-
-This checks the existing Acer interfaces first and may temporarily reload `acer_wmi` with `predator_v4=1` when required. Module reloads initialize firmware interfaces; see [manual testing](docs/manual-testing.md) before using this option. Neither launch command enables fan/profile/lighting control.
-
-Battery charge-limit control is implemented in the included **ANV15-52 WMI driver**. Both 80% and 100% were verified through firmware readback, and working driver operation has been confirmed on the target machine. The temporary custom Scenario panel has been removed. **Charging controls belong in the original Personal Settings page**; connecting those existing controls to the driver is pending original-app screenshots and compatibility work. No replacement UI is provided.
-
-Enable battery control for the current boot:
-
-```sh
-sh scripts/load-battery-driver.sh
-```
-
-Or install the driver for future boots of the current kernel:
-
-```sh
-sh scripts/install-battery-driver.sh
-```
-
-Ubuntu requests administrator authentication to load/install the module. The UI runs as your desktop user. Building requires `make`, a C compiler and headers matching `uname -r`. Re-run the installer after kernel upgrades; automatic DKMS rebuilding is not implemented. See the [driver documentation](drivers/nitrosense-charge/README.md) for details and removal instructions.
-
-The backend accepts the standard Linux charge-threshold interface or this model-specific driver. It writes only the selected charge limit and verifies firmware readback. It refuses ambiguous batteries and unsupported values. Lowering a limit does not discharge the battery. Monitoring remains read-only; fan/profile/lighting control is still unavailable.
-
-Wait 30–60 seconds and open Monitoring in the original interface. To finish, press **Ctrl+C in the launching terminal**. The original window's X can hide the application while leaving it running. A termination code of 130 after Ctrl+C is expected.
-
-Each launch saves private diagnostics under `.state/linux-readonly-<timestamp>/`. To assess the latest session:
-
-```sh
-npm run verify:readings
-```
-
-This checks CPU/RAM backend evidence and simulator state; it does not certify every visible field. Follow the [manual test checklist](docs/manual-testing.md) to compare the screen with your real hardware.
-
-## Known limitations and security
-
-The compatibility runtime currently retains Acer's experimental settings, including `--no-sandbox`, `--ignore-certificate-errors`, and permissive application integration. **Normal Electron sandbox and certificate protections are not in place.** Electron 26 is an old compatibility dependency. Security hardening and a supported-runtime migration are release blockers, not completed work.
-
-Some original UI controls remain visible even though the Linux backend does not implement their operations. Do not interpret their appearance as hardware support. Unsupported capabilities and missing sensors should remain unavailable.
-
-Raw application logs can contain tokens, cookies, machine identifiers, and personal paths. Keep `.state/`, `analysis/`, and `vendor/` private; share only reviewed, redacted diagnostics. See [troubleshooting](docs/troubleshooting.md).
-
-## Repository layout
-
-```text
-lib/             Linux telemetry, services, protocols, archive/import utilities
-runtime/         Electron bootstrap and in-memory compatibility patches
-scripts/         Linux launch, preparation, diagnostics and developer tools
-scripts/windows/ Historical Windows inspection/extraction tools; optional research only
-tests/           Automated tests using synthetic fixtures where appropriate
-docs/            Status, roadmap, manual testing and development notes
-```
-
-`vendor/`, `.tools/`, `.state/`, and `analysis/` are generated/local-only and excluded from Git. Historical development notes are preserved locally under `.state/local-history/`, outside the public source tree.
-
-## Development
-
-```sh
+cargo clippy --manifest-path backend/Cargo.toml --all-targets -- -D warnings
+backend/target/debug/nitrosense-tools audit
+backend/target/debug/nitrosense-tools audit --verify-original
+backend/target/debug/nitrosense-tools checklist --check
 npm test
+npm run test:frontend
 ```
 
-The source-only test suite runs without Acer files or an Electron installation. Tests that inspect original Acer code or captured reference data are skipped when those private inputs are absent. Automated tests do not open the UI or perform the optional real module reload.
+Both Rust and legacy audit entrypoints remain available. The evidence gate requires file-bound research records; it is a heuristic, not proof of behavior or a completed security audit. Source-only CI must not download Acer assets. See [AGENTS.md](AGENTS.md), [CONTRIBUTING.md](CONTRIBUTING.md), [research workflow](docs/reverse-engineering/README.md) and the [Windows investigation procedure](docs/migration/windows-capture.md).
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md), [development notes](docs/development.md), and the [script guide](scripts/README.md).
-
-## Licensing and Acer assets
-
-**No project license has been selected yet; no `LICENSE` file is provided.** The intention is an open-source release, but licensing is still pending. Public source availability does not itself supply an open-source license.
-
-Acer NitroSense and its bundled resources remain separate proprietary material. Setup obtains the official ZIP directly from Acer on the user’s machine. **We do not provide any Acer ZIP, MSI, AppX, ASAR, extracted application resources, or other Acer binaries.** The project is not affiliated with or endorsed by Acer.
+This is not an official Acer product. The project-wide license remains undecided; no license is selected by this rewrite. The retained battery kernel module has its own GPL-2.0-only license.

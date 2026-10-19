@@ -1,5 +1,13 @@
 # Development notes
 
+The active rewrite uses the independent Rust workspace in `backend/` and the
+original Acer host in `frontend/`. Read their README files for the architecture,
+socket API and current commands. `npm start` selects this path;
+`npm run start:legacy` explicitly selects the earlier Node experiment. Root
+`lib/` and `runtime/` remain migration/regression evidence until replacements
+have acceptance coverage. Their original structure is documented below for
+historical research, not as the intended new architecture.
+
 This is a reverse engineering project with original Windows feature behavior as its goal. Read the mandatory [agent rules](../AGENTS.md) and [research workflow](reverse-engineering/README.md) before implementation. A compatibility layer is the current technique; read-only monitoring is an intermediate milestone. Screenshots alone never establish feature completion.
 
 ## Structure and runtime boundary

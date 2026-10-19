@@ -1,0 +1,20 @@
+[workspace]
+resolver = "2"
+members = ["crates/domain", "crates/application", "crates/linux", "crates/service", "crates/tools"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+publish = false
+
+[workspace.dependencies]
+nitrosense-domain = { path = "crates/domain" }
+nitrosense-application = { path = "crates/application" }
+nitrosense-linux = { path = "crates/linux" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+libc = "0.2"
+tokio = { version = "1", features = ["rt", "macros", "net", "io-util", "sync", "signal", "time"] }
+

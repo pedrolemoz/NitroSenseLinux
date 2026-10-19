@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "installer_sha256": "a9e2ca1efff836a045b65e50ec54945488b4804e56b3f77852e9334f76d60908",
+  "tool": "GNU objdump (GNU Binutils for Ubuntu) 2.46",
+  "binaries": [
+    {
+      "member": "NitroSense_Acer_5.2.84_W11x64/AgentService/driver/x64/AcerAgentService.exe",
+      "sha256": "9d67f15e8775ac7705d998be5a427a8c3b4b28d755ba5d3e25068f7a57434699",
+      "bytes": 695376,
+      "inspection": "objdump PE imports/sections/disassembly plus ASCII and UTF-16LE strings; no execution",
+      "local_outputs": "analysis/rust-migration/native/AcerAgentService.exe"
+    },
+    {
+      "member": "NitroSense_Acer_5.2.84_W11x64/AgentService/driver/x64/AcerHardwareService.exe",
+      "sha256": "77672fd3ea582902c11796337c39e4bce8ebaa4c093c638749bc480742672ba0",
+      "bytes": 310352,
+      "inspection": "objdump PE imports/sections/disassembly plus ASCII and UTF-16LE strings; no execution",
+      "local_outputs": "analysis/rust-migration/native/AcerHardwareService.exe"
+    },
+    {
+      "member": "NitroSense_Acer_5.2.84_W11x64/AgentService/driver/x64/DtsApoAppWin32DLL.dll",
+      "sha256": "dac2c3eb44092100b0bd1de7398eaa206cd967cc501a448332079fe924c928ba",
+      "bytes": 41592,
+      "inspection": "objdump PE imports/sections/disassembly plus ASCII and UTF-16LE strings; no execution",
+      "local_outputs": "analysis/rust-migration/native/DtsApoAppWin32DLL.dll"
+    },
+    {
+      "member": "NitroSense_Acer_5.2.84_W11x64/AgentService/driver/x64/AcerUSBController.dll",
+      "sha256": "98b076d2cc0595fe5bc4f5ea899eda15efe0ebf777fa056a87ae4fe0d2d34428",
+      "bytes": 125248,
+      "inspection": "objdump PE imports/sections/disassembly plus ASCII and UTF-16LE strings; no execution",
+      "local_outputs": "analysis/rust-migration/native/AcerUSBController.dll"
+    },
+    {
+      "member": "NitroSense_Acer_5.2.84_W11x64/AcerSystemMonitorService/x64/AcerSysMonitorService.exe",
+      "sha256": "247590191a63ae87dc91164629d371e4427a2d94464ac8c14b2b90ab7d9e30f3",
+      "bytes": 666704,
+      "inspection": "objdump PE imports/sections/disassembly plus ASCII and UTF-16LE strings; no execution",
+      "local_outputs": "analysis/rust-migration/native/AcerSysMonitorService.exe"
+    },
+    {
+      "member": "NitroSense_Acer_5.2.84_W11x64/AcerQAAgent/AcerQAAgent.exe",
+      "sha256": "bd6335047624a145d513e8720b7536f11cb416a1b2f9401ef6667836ce72518a",
+      "bytes": 6223992,
+      "inspection": "objdump PE imports/sections/disassembly plus ASCII and UTF-16LE strings; no execution",
+      "local_outputs": "analysis/rust-migration/native/AcerQAAgent.exe"
+    }
+  ],
+  "limitation": "Static dumps establish inspection entrypoints, not completed function-level reverse engineering or a verified Linux control protocol."
+}

@@ -1,0 +1,152 @@
+{
+  "schema": 1,
+  "originalVersion": "5.2.84",
+  "asarSha256": "c79516a91d2eae93b019d040c786d23d8e69795b18255b709a37d48b9b78a401",
+  "original": [
+    {
+      "member": "main.js",
+      "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+      "symbols": [
+        "getMonitorData",
+        "getSupportCPUInfo",
+        "getSupportGPUInfo",
+        "getAllInstalledApps",
+        "getScenario",
+        "ProfilePool"
+      ]
+    },
+    {
+      "member": "dist/widgets/main/main.ce24a9a875916226.js",
+      "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+      "symbols": [
+        "ChangeBatteryMode",
+        "setBatteryHealthy",
+        "getBatteryHealthy",
+        "UPDATE_MONITOR_DATA"
+      ]
+    }
+  ],
+  "windows": {
+    "status": "required",
+    "reason": "Native mode/fan/audio, USB charging, calibration and boot-logo contracts remain unresolved. Static original/native entrypoint inspection is not sufficient to implement their writes. See docs/migration/windows-capture.md; this Linux session has no direct Windows inspection access."
+  },
+  "remainingGaps": "Full Windows parity remains incomplete: original Care Center charge-radio integration, native controls/capabilities, missing sensor fields, complete visual and hardware/recovery acceptance, supported Electron and TLS/sandbox hardening, security/dependency audit, remaining Node retirement and release packaging. No historical Node pass is inherited.",
+  "feature": "Original Acer 5.2.84 frontend host separation and Rust transport boundary; original controls retained",
+  "files": [
+    {
+      "path": "frontend/README.md",
+      "sha256": "4175b9bb70839c3cefecfbaf450d5ac6f01d7708025f2349a210a48c4e0f373a"
+    },
+    {
+      "path": "frontend/host/asset-overrides.cjs",
+      "sha256": "c4c39b62f54c20afe25b720a0ffefd456595ab8b66b7fe6d861f1bc574dd8169"
+    },
+    {
+      "path": "frontend/host/backend-client.cjs",
+      "sha256": "2db73d9ac48ad85368e5304da94ba52894cd0914d0e5a3783823db2893b17492"
+    },
+    {
+      "path": "frontend/host/bootstrap.cjs",
+      "sha256": "58174c284a68946a92551ef0b1e96c143985106b61811a216449082080a9c304"
+    },
+    {
+      "path": "frontend/host/inspect.cjs",
+      "sha256": "3d04b4c2705f485cea7f5f6cc913bc2bdd9d82693145c888ffcf5d6c60a71991"
+    },
+    {
+      "path": "frontend/host/monitor-fields.cjs",
+      "sha256": "66dcff6ba7d5ed3add67dccff9eed42cf1adbfd1fa6e4cdb67b89d85f2f32a89"
+    },
+    {
+      "path": "frontend/host/package.json",
+      "sha256": "82a3eec89781b5b57c6338ac45c1d97a7c57718cf74c8eb481017ef083421b8a"
+    },
+    {
+      "path": "frontend/host/platform.cjs",
+      "sha256": "d52c61dca6a82802155a84a4166d5812a600862b2e7266953b1d9b346bc55c83"
+    },
+    {
+      "path": "frontend/host/readonly-bridge.cjs",
+      "sha256": "cf03dcc04688e9bba6b5f2f0d270e8f37243b68d797d4c90adabbf42f77b2a0d"
+    },
+    {
+      "path": "frontend/host/readonly-session.cjs",
+      "sha256": "f009778c6be17e211abd0fcf6bb304bef6dce7bde208e21a9dcd4e665a4f940a"
+    },
+    {
+      "path": "frontend/host/renderer-device-state.cjs",
+      "sha256": "2c10f7b7244fe365d859dadded0aa3230783917ba149a8b6bcd798846d7465f3"
+    },
+    {
+      "path": "frontend/host/renderer-log.cjs",
+      "sha256": "d035e14e47e05c89390f9e9d389a6e3ae5a1e5372667ea8ac2d4340359237d71"
+    },
+    {
+      "path": "frontend/host/renderer-modules.cjs",
+      "sha256": "b919d9230f99807a3dbefa66fc999d860313d8691a1bf02828952ac2cecefa1f"
+    },
+    {
+      "path": "frontend/host/renderer-patches.cjs",
+      "sha256": "c0481303615bbd997f15de5988ef19e307151e158523f2f458927149c45ac9a6"
+    },
+    {
+      "path": "frontend/host/renderer-startup.cjs",
+      "sha256": "96cbe682d6f8b5e5a0da2ac8bb93f2ca0f90104140a91f42878e1693c72387e2"
+    },
+    {
+      "path": "frontend/host/renderer-state.cjs",
+      "sha256": "f8b2c1c6d292ca26a33e22579c5a64f35778215635cf291984d41f3fe340174e"
+    },
+    {
+      "path": "frontend/host/rpc.cjs",
+      "sha256": "f0dcb28b382ff422a47befac3082057b8e8adf89949bffc889d45947554b861b"
+    },
+    {
+      "path": "frontend/host/single-instance.cjs",
+      "sha256": "3f1d590a9a50daea1eebd26346cbfc05f0234cbf8143c5f89fa54d1944f95e48"
+    },
+    {
+      "path": "frontend/host/source-patches.cjs",
+      "sha256": "7b13c895676293e1a6ae4d0082312105e5e4b14c71618cfd2b960b98b67dbf23"
+    },
+    {
+      "path": "frontend/start.sh",
+      "sha256": "a56911a5f5082ebcc184845412fd666a0aa3beb5eed4004449302e4b8a43e26d"
+    }
+  ],
+  "trace": {
+    "control": "The original imported Home, Scenario, Personal Settings, Checkup, Monitoring and AppCenter components/templates remain in the verified ASAR. No replacement component, hardcoded screenshot reading or custom production banner was added.",
+    "model": "Original Scenario profile factories, stores and transitions are retained. Original Store explicitly uses oemFolder/ProfilePool, so that root now resides in stable XDG frontend state; per-session diagnostics no longer reset the original profile/first-run store.",
+    "transport": "Minimal Electron/native-addon and SDK shape adapters delegate our OS queries/preferences to the independent Rust socket API. The synchronous CLI wrapper preserves the original native-addon calling convention, including successful null values. Existing RPC deadline/reply guards remain.",
+    "osOrFirmware": "Our frontend host contains no procfs/sysfs sampling, NVIDIA subprocess, desktop-entry discovery or firmware write implementation. Real OS adapters live in Rust. The launcher starts the backend with hardware writes disabled; missing Care Center/native functionality remains incomplete.",
+    "replyAndRefresh": "Original SDK methods and UPDATE_MONITOR_DATA refresh original UI components with real Rust-supplied data. Unsupported queries fail instead of replaying Windows capabilities. Original dialogs are navigated only by the diagnostic harness; optional consent is never enabled.",
+    "linuxAdaptation": "Existing hash-bound main/renderer compatibility transformations were retained deliberately as frontend glue; they were not translated into Rust or used as a substitute backend. The new host verifies original resources through Rust and uses private per-session overlays. The inherited Electron 26 sandbox/TLS exceptions are an explicit unresolved release blocker."
+  },
+  "validation": [
+    {
+      "status": "pass",
+      "behavior": "Retained frontend and legacy regression assertions passed; the source-bound notification error regression separately passed. Final combined counts are in docs/migration/handoff.md and the final test log.",
+      "evidence": ".state/rust-validation/frontend-tests.log; .state/rust-validation/legacy-tests.log."
+    },
+    {
+      "status": "pass",
+      "behavior": "The original six inspected pages rendered with real Rust telemetry after a moved-module error and success-null protocol bug were fixed. A second launch reused the same original store and did not show the first-run dialog.",
+      "evidence": ".state/rust-frontend-LjmeecOB/frontend/inspection/report.json; .state/rust-validation/original-store-before-restart.json and original-store-after-restart.json; second session .state/rust-frontend-J6cQS3i1/."
+    },
+    {
+      "status": "fail",
+      "behavior": "Matched screenshot acceptance and complete original feature behavior. Missing mode cards, extra lighting tab, absent charge radio/boot-effect sections, unavailable monitoring fields remain. Sidebar framing differs from collapsed references.",
+      "evidence": ".state/rust-frontend-t4LCoNRy/frontend/inspection/ page captures visually inspected against references; docs/migration/features.json records feature gaps."
+    },
+    {
+      "status": "not-tested",
+      "behavior": "Supported Electron migration, sandbox/TLS isolation, arbitrary profile edits/migration, all 20 reference states and full end-to-end hardware control/recovery.",
+      "evidence": "frontend/README.md and docs/migration/windows-capture.md; UI startup is not completion."
+    },
+    {
+      "status": "pass",
+      "behavior": "Diagnostic-only error source/stack instrumentation traced a plain-string push service error. The guarded renderer fix preserves its text; six final original pages reported no renderer errors. Underlying remote 404 persists and is not notification acceptance.",
+      "evidence": ".state/rust-frontend-YEKt2mYO/frontend/inspection/report.json; frontend/host/original-notification-error.test.cjs; original-push-error.json."
+    }
+  ]
+}

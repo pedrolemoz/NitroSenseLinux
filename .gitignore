@@ -21,4 +21,5 @@ node_modules/
 *.tap
 core
 core.*
+target/
 .DS_Store

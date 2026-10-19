@@ -1,5 +1,12 @@
 # Script guide
 
+The active backend and research/import/setup/audit tools are now Rust. Root npm
+commands wrap those Rust binaries; see the root and `backend/` README files.
+This directory retains earlier Node utilities and explicit kernel-operator
+scripts as migration/regression evidence. Tables below describe those historical
+entrypoints. They are not dependencies of the new frontend's backend. Use
+`npm run start:legacy` only when deliberately testing the earlier implementation.
+
 Run commands from the repository root. Normal users should follow the root README and its npm commands.
 
 | Purpose | Entry point |

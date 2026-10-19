@@ -40,3 +40,9 @@ test('audit covers replacement UI outside conventional runtime directories', () 
     assert.equal(implementation(file), true, file);
   }
 });
+
+test('audit covers the Rust workspace, tooling and frontend bridge', () => {
+  for (const file of ['backend/Cargo.toml', 'backend/Cargo.lock', 'backend/crates/tools/src/main.rs',
+    'frontend/host/bootstrap.cjs', 'tools/audit.rs']) assert.equal(implementation(file), true, file);
+  assert.equal(implementation('backend/target/debug/generated.rs'), false);
+});

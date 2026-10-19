@@ -1,0 +1,11 @@
+[package]
+name = "nitrosense-linux"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+[dependencies]
+nitrosense-domain.workspace = true
+nitrosense-application.workspace = true
+libc.workspace = true
+serde_json.workspace = true

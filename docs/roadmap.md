@@ -1,5 +1,19 @@
 # Roadmap to an initial release
 
+## Active Rust rewrite
+
+- [x] Separate independent Rust backend and original Acer frontend directories.
+- [x] Establish domain/application ports, Linux adapters and private socket delivery.
+- [x] Reimplement original-resource verification, static inspection, fresh import, evidence audit and checklist generation in Rust.
+- [x] Inventory baseline files and generate 50 feature goals covering all 20 screenshots.
+- [ ] Complete original end-to-end traces; located symbols/native dumps alone are insufficient.
+- [ ] Complete original controls, hardware readback/behavior, recovery and matched visuals per ledger item.
+- [ ] Retire remaining Node implementation/tooling after equivalent acceptance; preserve research history.
+- [ ] Complete preference migration, supported frontend runtime, TLS/sandbox hardening and release packaging/security review.
+
+The goals below describe the earlier Node milestone. They do not reduce the
+Rust rewrite's objective of original Windows-equivalent functionality.
+
 The proposed first release is scoped to **reliable read-only monitoring on the verified ANV15-52 configuration**. Complete Windows NitroSense feature parity is a later goal. There is no release date yet.
 
 The overall project goal is to reverse engineer the original Acer NitroSense and make the features in the Windows references work equivalently on Linux. The initial read-only release below is an intermediate milestone, not a redefinition of that goal. All work follows [AGENTS.md](../AGENTS.md); no replacement UI or screenshot-only completion is permitted.

@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "originalVersion": "5.2.84",
+  "asarSha256": "c79516a91d2eae93b019d040c786d23d8e69795b18255b709a37d48b9b78a401",
+  "original": [
+    {
+      "member": "main.js",
+      "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+      "symbols": [
+        "getMonitorData",
+        "getSupportCPUInfo",
+        "getSupportGPUInfo",
+        "getAllInstalledApps",
+        "getScenario",
+        "ProfilePool"
+      ]
+    },
+    {
+      "member": "dist/widgets/main/main.ce24a9a875916226.js",
+      "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+      "symbols": [
+        "ChangeBatteryMode",
+        "setBatteryHealthy",
+        "getBatteryHealthy",
+        "UPDATE_MONITOR_DATA"
+      ]
+    }
+  ],
+  "windows": {
+    "status": "required",
+    "reason": "Native mode/fan/audio, USB charging, calibration and boot-logo contracts remain unresolved. Static original/native entrypoint inspection is not sufficient to implement their writes. See docs/migration/windows-capture.md; this Linux session has no direct Windows inspection access."
+  },
+  "remainingGaps": "Full Windows parity remains incomplete: original Care Center charge-radio integration, native controls/capabilities, missing sensor fields, complete visual and hardware/recovery acceptance, supported Electron and TLS/sandbox hardening, security/dependency audit, remaining Node retirement and release packaging. No historical Node pass is inherited.",
+  "feature": "Rust verified import, static original inspection, checklist and evidence/architecture audit infrastructure",
+  "files": [
+    {
+      "path": "backend/crates/tools/Cargo.toml",
+      "sha256": "34befaaa0de65e10ec7dc8f12d29bfa792cafc79527501a43f92919c6d9407ac"
+    },
+    {
+      "path": "backend/crates/tools/src/audit.rs",
+      "sha256": "e731afe97546e7f039b6bde5f0ab4ea9a9d401f82ecc20d8085ac3a94d358c0f"
+    },
+    {
+      "path": "backend/crates/tools/src/checklist.rs",
+      "sha256": "d283908be49887fc9fcee0ebc92e7bbc275a44109fdee1465c98c80a58a92aee"
+    },
+    {
+      "path": "backend/crates/tools/src/import.rs",
+      "sha256": "53046d05deccdf8a35b5e97a2ce4dc929c5887181231899150f69080be59ae42"
+    },
+    {
+      "path": "backend/crates/tools/src/main.rs",
+      "sha256": "67b60f908a676d05c9781eec89b69215a5ae27addf42ae92b17a94a40c5c216e"
+    },
+    {
+      "path": "backend/crates/tools/src/original.rs",
+      "sha256": "f0da10f54aa9c67c08b2599d5b670fe6171c8d0cf727da3a674c40241cdb568b"
+    },
+    {
+      "path": "backend/crates/tools/src/setup.rs",
+      "sha256": "c1bf04602d50c36f5cdef8a3a3b69733784aea21fdac8d20eec47f2c1b72fd81"
+    },
+    {
+      "path": "scripts/audit-reverse-engineering.cjs",
+      "sha256": "526170fda4bbdc674aed4ec89cdf4ef1695a5b237207303f5ec98f2ad9a791a9"
+    }
+  ],
+  "trace": {
+    "control": "Every original control depends on a correctly imported original application and OEM resources. These utilities verify that boundary and organize screenshot goals; they do not implement native hardware features or replace UI controls.",
+    "model": "The original package identity and main/renderer source hashes are pinned. The screenshot manifest is checked against all 20 reference files. The generated feature ledger separates research, implementation, integration, visual status and actual behavioral evidence.",
+    "transport": "Import uses trusted Linux unzip/msiinfo/cabextract processes only after the pinned official archive hashes are checked. Windows installers/custom actions/native binaries are never executed. Static ASAR member extraction does not decompile DLLs.",
+    "osOrFirmware": "No firmware operation is performed by these tools. Fresh import stages resource bytes privately, validates MSI table/directory/cabinet bounds and publishes a verified import. Setup provisions only the frontend runtime through npm; original binaries remain data.",
+    "replyAndRefresh": "Verifier outputs report integrity scope explicitly. Audit rejects source changes without current file-bound original-source records, checks inward dependency boundaries and reports its heuristic limitations. Checklist generation checks screenshot coverage/hashes and does not equate a selected card or a mock with behavior.",
+    "linuxAdaptation": "The Rust importer/setup/inspector/audit/checklist are new implementations around verified contracts. Existing JavaScript tools remain explicit legacy regression targets. Download and fresh-machine runtime provisioning still need operator acceptance; cached setup and direct fresh import were exercised."
+  },
+  "validation": [
+    {
+      "status": "pass",
+      "behavior": "A new import from the verified official ZIP reproduced all 762 baseline member paths, lengths and SHA-256 hashes, preserving the original ASAR. No Acer executable or MSI action was run.",
+      "evidence": ".state/rust-import-verification/import.json; .state/rust-validation/import-comparison.json; original and new import manifests compared exactly."
+    },
+    {
+      "status": "pass",
+      "behavior": "Rust static original-member verification/indexing, table/path/cabinet rejection tests and checklist generation across all 20 screenshot references passed. Cached Rust setup verified the existing import without downloading or changing assets.",
+      "evidence": ".state/rust-validation/static-inspection.log; .state/rust-validation/rust-tests.log; docs/migration/checklist.md; setup --no-runtime smoke test."
+    },
+    {
+      "status": "not-tested",
+      "behavior": "Fresh network download/provisioning, interrupted remote setup, hosted CI and release packaging/security audit. Static native dumps are not complete native-function reverse engineering.",
+      "evidence": "docs/migration/native-inventory.json lists six statically inspected original binaries; docs/migration/windows-capture.md records unresolved contracts and capture requirements."
+    }
+  ],
+  "heuristicReviews": [
+    {
+      "path": "backend/crates/tools/src/audit.rs",
+      "sha256": "e731afe97546e7f039b6bde5f0ab4ea9a9d401f82ecc20d8085ac3a94d358c0f",
+      "reason": "Manually reviewed detector self-match: this exact Rust audit file contains literal replacement-UI patterns and negative regression examples, not UI creation or injection. Both audits retain this finding visibly and still require current original-source evidence; no other source path may use this narrow self-review."
+    }
+  ]
+}

@@ -1,0 +1,884 @@
+{
+  "schema": 1,
+  "revision": "110c71576c10ed5da6cb6af36650b158bac5e06e",
+  "scope": "Every baseline tracked file; classification is a migration disposition, not a completed audit",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "sha256": "1d5d71dcc6ccd28ab46a335349ecc74742ca4b81f4fcad212f8d134f70f1f13e",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": ".github/workflows/tests.yml",
+      "sha256": "3c9da925e40045fce66d40b45f15c28773227a8ea67311851f653c1a92a2024d",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "c42fd74220cc3b8004442171a9b01bb4ea87ec87a644c46e47cef920534f8e28",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "a5aa180273a65ceb4f23d9c878cda46be712190c95cc96714ac39dcac02e9b81",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "1f93ffb823ab890eb2ee3b7ae329c116abdb237d03a423b7bfcf0182557991e6",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "README.md",
+      "sha256": "beaf4c5c9571f32497e60a650c48108442ef89cc726778ea7380f7f61a2e5d84",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "docs/development-history.md",
+      "sha256": "1c10dad30e153e02821f17d013f31c3f30e9432ed5c84d20b281fd003b9836f5",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "docs/development.md",
+      "sha256": "e6f3ab4f712a0534f2bf002d63cc496e096e7d286608c361a08e195be4404fae",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "docs/manual-testing.md",
+      "sha256": "f7701bb431d6a2de6303877c48a001c3ac443b2415d0d59fca26813db31ea50d",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "docs/reverse-engineering/README.md",
+      "sha256": "839b7ffe68b4e168d2fca5e1c4e14ac2f45e28f94c6d7c14caba804886448c30",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "docs/reverse-engineering/scenario-initialization.json",
+      "sha256": "d4367a05b06a998bd168f46ac1c73fe912b543dc6d483a6f97e36327a1e7deb8",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "docs/roadmap.md",
+      "sha256": "12be343f749b3057ea26d52a8b9d13b2cde2d8dfcd4d49f3bfad233d7bd3b080",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "docs/status.md",
+      "sha256": "fc7f8b722efeb3226637ec599dc1da7df48db208cb9d02b3294cc21e97447b83",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "docs/troubleshooting.md",
+      "sha256": "16d82135e20b8f71bb7b85f896dd3da0473d447112d9c2d86839ade287198066",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "drivers/nitrosense-charge/.gitignore",
+      "sha256": "e9b7c4885bfb1573722d3db59cd4fc2bc4fa3f2be4445e279d45e7a6e52583c5",
+      "classification": "retain-audit-driver",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "drivers/nitrosense-charge/COPYING",
+      "sha256": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6",
+      "classification": "retain-audit-driver",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "drivers/nitrosense-charge/Makefile",
+      "sha256": "0d52518980573e4851db49bb02a045326b0bd0289f08eaf32abc661c926a8b55",
+      "classification": "retain-audit-driver",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "drivers/nitrosense-charge/README.md",
+      "sha256": "eb2ce844d40681e9324023bd7082806f6d5b7c19e40cb3ab691a2ccafaa2d7f9",
+      "classification": "retain-audit-driver",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "drivers/nitrosense-charge/nitrosense_charge.c",
+      "sha256": "095fa84d8bc1adea3901599baf49d17cddceaa278968b4d41b449650a9284fbc",
+      "classification": "retain-audit-driver",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "lib/acer-client.cjs",
+      "sha256": "45d3a7a39e65a7d850be45b5b3b2a952428f20c7cdaa92716d835493a8714723",
+      "classification": "rewrite-rust",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "lib/acer-requests.cjs",
+      "sha256": "2244e8b30db4349a7c0083835d7e94767c727ec673a0c23aea29a147c37553d5",
+      "classification": "rewrite-rust",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "lib/acer-service.cjs",
+      "sha256": "3821d1f324e42be7125fd528f209e55cceeb288304dd6825da7c3aa8bfadedc4",
+      "classification": "rewrite-rust",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "lib/asar.cjs",
+      "sha256": "8fc2cff1f7812e36341e5029137accfcc5221004507a495701db51121b4f0080",
+      "classification": "rewrite-rust",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "lib/battery-charge.cjs",
+      "sha256": "d192b1121e90dfaa7219f5c3b8ae960a36fa716689773fc916b2a1ee7e70b14e",
+      "classification": "rewrite-rust",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "lib/desktop-apps.cjs",
+      "sha256": "fab08dbff22212ae33b598fd410b43c8b8df2f2d180f33de6cb4242470b09ac4",
+      "classification": "rewrite-rust",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "lib/linux-monitor.cjs",
+      "sha256": "68ef91d92b1ec5418365d5ff2d12d7c67abeca229788e9f47423d199e1475f75",
+      "classification": "rewrite-rust",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "lib/linux-platform-state.cjs",
+      "sha256": "d7aa568bd6f5566993af7a4c270d10322430553e74bf0674aa006ab08f40e765",
+      "classification": "rewrite-rust",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "lib/linux-sensors.cjs",
+      "sha256": "ccab2423fe49040fc5ffb168f36c49d6bd749f12f2ae054b364658305485e907",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "lib/linux-telemetry.cjs",
+      "sha256": "fdc7d5d3500bf7d2b0c615dfe0126e2094a2794f42920771933ab9f1ee33559a",
+      "classification": "rewrite-rust",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "lib/monitor-fields.cjs",
+      "sha256": "66dcff6ba7d5ed3add67dccff9eed42cf1adbfd1fa6e4cdb67b89d85f2f32a89",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "lib/msi-oem.cjs",
+      "sha256": "3fa9bde27bbbb3b481169e8f5851a44967886c3518b5b41263aff31a71e8017b",
+      "classification": "rewrite-rust",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "lib/nvidia-monitor.cjs",
+      "sha256": "8c6a594192773c5bbf3ddacea9ecdd7c75f8f98d9a958d8d2d906770fffaadbe",
+      "classification": "rewrite-rust",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "lib/protocol.cjs",
+      "sha256": "ce9dd55e4398ae54c459b1f5e518f8a11398d1ec61c9449f39b59f954cebea16",
+      "classification": "rewrite-rust",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "lib/reference.cjs",
+      "sha256": "8dbb75be66c0e4b53fcf25d6ed5e81db57f2f8d2fb7ae9d14b891f4a01dd0787",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "lib/ui-session.cjs",
+      "sha256": "93728a9be0db7aa6d4ea9e7f1812ec012fc70c968b425f3e3e17a2eb8fd09fb2",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "lib/vendor.cjs",
+      "sha256": "d9e9ea6b9940c084b7906c659ecf3ff64ae1a7914990c808d9195558a1cef2b3",
+      "classification": "rewrite-rust",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "lib/zip.cjs",
+      "sha256": "a92981b2a3568f610855ac6746fca4d452aa17e81beab5c772cdbbc6de2de6aa",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "d3f69ba2412a4d9c36f81ab3e35ec82de2629cfffa2f6ca50fb3ae1409a109b6",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "package.json",
+      "sha256": "a1e214134fad1b02bcf446dcec1834a93e390354ec13ef6dcd4cc0b0f1de3159",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/README.md",
+      "sha256": "e21420f31a76b108f1152c15d941a76fa97d1522e178c4b0a6066e3539889d70",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/manifest.json",
+      "sha256": "f265e0b1471e91e2b0e1d458474509810cd4457ac4058d7f088eaea7d73223cd",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/screenshots/APP CENTER.png",
+      "sha256": "680ed0f326de449f83c806bbb39ee7b41771752a99893b67b14ad9a6152d4f5a",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/screenshots/CHECKUP - SYSTEM INFO.png",
+      "sha256": "137f926973d4594e9be8adf4d325b64496ba5f3e23e6dcab79fb62171d58755a",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/screenshots/CHECKUP.png",
+      "sha256": "7f84999dd39032b2cba800e40848ebe03d99e0d97762a8683164aa001cbf3573",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/screenshots/EXPERIENCE ZONE.png",
+      "sha256": "bdd76bab329caf1c861df61b8637897c31bcc7ff37748091d288617678aa9f44",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/screenshots/HELP.png",
+      "sha256": "2c3901b2ea49a24b964235644d2bdb2fdf6ec0a04dd44f6853857b14ab0417c0",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/screenshots/HOME - SIDEBAR COLLAPSED.png",
+      "sha256": "7ed52237e7411833d295bac4d4da492de70537a88c7dc4ea7ea013835e557131",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/screenshots/HOME - SIDEBAR OPEN.png",
+      "sha256": "9a56a9bd14df89782fe19fb44714b4dd81678ce9d45bbbae9845e072f9c48b31",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/screenshots/MONITORING.png",
+      "sha256": "9fc0858f6547780ca1c407079f17703f43106b99b603199e19bca522ca00cf8d",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/screenshots/PERSONAL SETTINGS 1.png",
+      "sha256": "d8f820a1b34ef2a29ad0c06f7eb4e635294985ea3c63932c3bc8aaa497b98b45",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/screenshots/PERSONAL SETTINGS 2.png",
+      "sha256": "8b276c309e607a5b7626a5f41db8b2315cbadb8dcbab2fad1698d761fe955425",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/screenshots/SCENARIO - ADVANCED SETTINGS.png",
+      "sha256": "abcb93729df395e26c3f501217df8bffc2b8044ee7fab2aece42d97536bddf87",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/screenshots/SCENARIO - BALANCED SELECTED - AC PLUGGED IN.png",
+      "sha256": "23d8fb6fb6500f89702a3daf50959b56f3869d912dc518f302a24ba714901e06",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/screenshots/SCENARIO - BALANCED SELECTED - BATTERY POWER.png",
+      "sha256": "f87139af16512f9735fa5973d569a1a64a5ee1aab1da252ad80298a5a90a835b",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/screenshots/SCENARIO - ECO SELECTED - BATTERY POWER.png",
+      "sha256": "f162e7daa78eced9773ec2be146e7aa1815a2bd8d3bbcbbd82f065f72f4e5446",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/screenshots/SCENARIO - FAN CONTROL AUTO.png",
+      "sha256": "29ae752e38bbcd9dc28cbfd3432bc217301ffe70246c4e26ee9804b394500b05",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/screenshots/SCENARIO - FAN CONTROL CUSTOM.png",
+      "sha256": "1808380cf34025a4afe5ea8d779d6280a78b98465d782bf07d2dce89ee0d6912",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/screenshots/SCENARIO - FAN CONTROL MAX.png",
+      "sha256": "d8b3cf598bbfe6d19b2557fcd7f2e45eb379b0e7589e8b5e4a2ed129a1932f7c",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/screenshots/SCENARIO - PERFORMANCE SELECTED - AC PLUGGED IN.png",
+      "sha256": "aa20f71ce448f91aecfddb8f58e6477072d7f9af4212daaa9ea0702c7a8db09f",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/screenshots/SCENARIO - QUIET SELECTED - AC PLUGGED IN.png",
+      "sha256": "be844f9351e71c012f9b84dda64be7715a5e0cd2004dfc67dc5ed49617112fd8",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "references/screenshots/SETTINGS.png",
+      "sha256": "e272bd9dc3cff523c0df6f419e1ed9b741029c55297bcafc35c9011bced88cf3",
+      "classification": "retain-project-metadata",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/asset-overrides.cjs",
+      "sha256": "c4c39b62f54c20afe25b720a0ffefd456595ab8b66b7fe6d861f1bc574dd8169",
+      "classification": "frontend-glue-review",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/bootstrap.cjs",
+      "sha256": "64c12083ecbaf9928844252156b307a363c0e9503323a5c8bcfdefe5e80556fc",
+      "classification": "frontend-glue-review",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "runtime/bootstrap.test.cjs",
+      "sha256": "465064793b9755e03cebafa80c94668d1003633ef9fa356c41b9ec51e8e9e2b1",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/mode-banner.cjs",
+      "sha256": "48877875720a2eb3cdd2206b6ffc4260e7606730cadf5c609616be039db7ec8d",
+      "classification": "frontend-glue-review",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/package.json",
+      "sha256": "1c3c1e075a7ef1350dda2a4312cbc11c1fd51b19a267a32ddaef77977bd1470d",
+      "classification": "frontend-glue-review",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/platform.cjs",
+      "sha256": "cb80f0a9fd9aba730d291861f74b1b4070f9659273f695ce7264a68363f52f05",
+      "classification": "frontend-glue-review",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "runtime/platform.test.cjs",
+      "sha256": "1f65aaa9d9575a761e22d15b1e1afd394cae11b1912b0086f581cb7cf58529aa",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/readonly-bridge.cjs",
+      "sha256": "c94d7bcebb0123ec5bac607c936871f82d6b9acac2c83a488f233f01959457b3",
+      "classification": "frontend-glue-review",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "runtime/readonly-bridge.test.cjs",
+      "sha256": "8102f3dfcdc4af568a70e3fb971b0554c6bcc17777af707cb62ace05265aa3fd",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/readonly-session.cjs",
+      "sha256": "a39fae5b34b96558e57414d277707d6a37ca7cbc32b04f57f91f9593a7a3e08d",
+      "classification": "frontend-glue-review",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "runtime/readonly-session.test.cjs",
+      "sha256": "81e1ab62ba71df5940d39a9495d549e5c2e439f0971fdce24660f9bc3032b1fb",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/renderer-device-state.cjs",
+      "sha256": "2c10f7b7244fe365d859dadded0aa3230783917ba149a8b6bcd798846d7465f3",
+      "classification": "frontend-glue-review",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/renderer-device-state.test.cjs",
+      "sha256": "b324ef31da3caefe622d531a383890a9b85af71939ed1c97b1fc3ecf75e4e97c",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/renderer-log.cjs",
+      "sha256": "d035e14e47e05c89390f9e9d389a6e3ae5a1e5372667ea8ac2d4340359237d71",
+      "classification": "frontend-glue-review",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/renderer-log.test.cjs",
+      "sha256": "bf27b7188431d1c89d6481154c43a233a9d5d65945896a3b92d22a411b51758a",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/renderer-modules.cjs",
+      "sha256": "b919d9230f99807a3dbefa66fc999d860313d8691a1bf02828952ac2cecefa1f",
+      "classification": "frontend-glue-review",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/renderer-modules.test.cjs",
+      "sha256": "7cbb7196bd64595cb78198b8fabb7750fd819f3ac07710cd9e7a890b8b7c6f61",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/renderer-patches.cjs",
+      "sha256": "886b006de3277fb8c35b88314e56d2c292a6a368395c7b2d3c2bc2ec6a7501cd",
+      "classification": "frontend-glue-review",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/renderer-startup.cjs",
+      "sha256": "96cbe682d6f8b5e5a0da2ac8bb93f2ca0f90104140a91f42878e1693c72387e2",
+      "classification": "frontend-glue-review",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/renderer-startup.test.cjs",
+      "sha256": "b7f5799f959e6c12c7bc9b7de2888c34fd651b43532d85f16cd1f38baf54851e",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/renderer-state.cjs",
+      "sha256": "ed240878c9f2010ebb101a6b33c933fbb9cb3ff3a7a762e7ad8fe397c0cb6f88",
+      "classification": "frontend-glue-review",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/renderer-state.test.cjs",
+      "sha256": "c2ba8588e519648ebda3f838b1f3299aede5b067d566b7501fe13ad2cde2baf7",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/rpc.cjs",
+      "sha256": "f0dcb28b382ff422a47befac3082057b8e8adf89949bffc889d45947554b861b",
+      "classification": "frontend-glue-review",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/rpc.test.cjs",
+      "sha256": "74d264852b53075d3ef428504325fe4ede680b67c011f4f950354822c7552338",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/single-instance.cjs",
+      "sha256": "3f1d590a9a50daea1eebd26346cbfc05f0234cbf8143c5f89fa54d1944f95e48",
+      "classification": "frontend-glue-review",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/single-instance.test.cjs",
+      "sha256": "a73f45796b558b5112d4fa0258388587ceed61be6395ebf94faa6e6e3ced1821",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/source-patches.cjs",
+      "sha256": "7b13c895676293e1a6ae4d0082312105e5e4b14c71618cfd2b960b98b67dbf23",
+      "classification": "frontend-glue-review",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "runtime/vendor-sdk.test.cjs",
+      "sha256": "3130645a3a42cc55a882d9d68651a8777b01f61d41702841b9944f2355334c80",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/README.md",
+      "sha256": "90d9d883982c387ab4ffc582f9e9836ab819f7c700c5f939b9ba193428d02386",
+      "classification": "retain-operator-tool-until-replaced",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/audit-reverse-engineering.cjs",
+      "sha256": "7c89c30b746acea331d85a46263d7e8e965a75074c2741f5230c729024dda6f6",
+      "classification": "rewrite-rust",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "scripts/capture-reference.cjs",
+      "sha256": "f0bbaaa51bd6c953aec045149579959c3e64d044282da03f058fdf5443afdf3f",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/check-manual-readings.cjs",
+      "sha256": "aea1dc58f4affbba1e51658150f5df553dea6910ecf0d6dcf4535a741807f0f8",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/check-runtime.cjs",
+      "sha256": "f60bf65fd1db2ed7db618c4c5750da518db4ee172ee4ba1ca8855022fe4dad35",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/import-vendor.cjs",
+      "sha256": "01e968dd852821e16f85996cab441766fba8d9119cb1ffe4986d87fe18dbd61f",
+      "classification": "rewrite-rust",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "scripts/inspect-asar.cjs",
+      "sha256": "d032116636e3ddd153c4a0a8988be4112ae06052204a0ca18d4e2f5ae368e132",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/inspect-linux.cjs",
+      "sha256": "ca9c24a2ea014d358ef7c6987001b9032bed9ae3d98c8e2e977c74d311bd59d1",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/inspect-live-ui.cjs",
+      "sha256": "fb9dc526739393f007e7b964b21d689c9ea464524dbe94b68a2c4a862027452c",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/inspect-original.cjs",
+      "sha256": "f7dd4d65198e9726d2657a2a99ffe216850d2b0ae4d57d8cb01d2116263e7e88",
+      "classification": "rewrite-rust",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "scripts/inspect-runtime.cjs",
+      "sha256": "45ff26ea3c15c7935576ed38f8ae9739e2cba3e81df6972faee46abd42d27689",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/install-battery-driver.sh",
+      "sha256": "3ee7cd778d390d5f4c4c3e03ed2da3dca1808fd61ce51f7a81f848962cd51ca0",
+      "classification": "retain-operator-tool-until-replaced",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/load-battery-driver.sh",
+      "sha256": "789b4505c67fb5a428bb7ff07a34e7568288881e960ec6cd75314d473c12f54e",
+      "classification": "retain-operator-tool-until-replaced",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/map-boundaries.cjs",
+      "sha256": "8d717884b2dec523b4f7abc2812b91a4d48a5dcf17207dd2f984f7339b0f77a1",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/map-protocol.cjs",
+      "sha256": "eba87779778c98c70ea8d0d6ce171cca5f3ecc618f1790f47c0b4e98c49eb5e5",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/map-startup.cjs",
+      "sha256": "702738ac417397ad0307742ce43b587d3a9d21a797e6cd278e51d80970f62ab1",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/prepare-linux-vendor.cjs",
+      "sha256": "b0df42ea2459f7547e4779a2298f070373c387e5e489c50a08dd9bf38f5b4a80",
+      "classification": "rewrite-rust",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "scripts/probe-acer-wmi.sh",
+      "sha256": "0663ee1eb0397f3f06e2e321de18e2e200440f5685229af03275a3804097ca35",
+      "classification": "retain-operator-tool-until-replaced",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/read-linux-sensors.cjs",
+      "sha256": "e13de746dc2ccf3b82512a96cbeeb30e665fa86ca3b05fc70510c15bf4b4758b",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/setup.cjs",
+      "sha256": "dd49393e5437ce542fe5089ffb0e6e966c363c6d266537de32d1ccf59ecac3d8",
+      "classification": "rewrite-rust",
+      "audit_status": "boundary reviewed; full feature/security audit remains incomplete"
+    },
+    {
+      "path": "scripts/smoke-original-ui.cjs",
+      "sha256": "d190365b95c1f1886dcbb151cbc671c6d55b0016f194e12aa115df11f4c110b9",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/start-linux.sh",
+      "sha256": "d516af37419cee28fdad9372769e1a072b145fcd3548ddfd5ce5f996bc24e1ae",
+      "classification": "retain-operator-tool-until-replaced",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/start-readonly-service.cjs",
+      "sha256": "f17d2128adc5c5421128144a835085f969602e82ab95b074e06b32e71265254c",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/summarize-linux.cjs",
+      "sha256": "d9fc4d5e5018c7de5dabb128cc990068380abdc7ae27afe24b15a76379c913f8",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/summarize-reference.cjs",
+      "sha256": "b3547c5a35dc2361bc964995ed886c824d6492c98519da94751eaa205615ff4f",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/summarize-ui-session.cjs",
+      "sha256": "b9cced065a2b9ba208eeab0cffb6974c7906a4c80ce0fa3a26dd75d5b1f1d2e7",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/test-linux-readonly.sh",
+      "sha256": "30d77c5ee0d3b529bd0f853de63422d6790189f89e4cc46eb2bce26a22efbbbe",
+      "classification": "retain-operator-tool-until-replaced",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/test-linux-ui.sh",
+      "sha256": "d1a11d602b8319a12fb4394a89ab38c39d27067b26bb7818c85fc8e77cf92ff4",
+      "classification": "retain-operator-tool-until-replaced",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/ui-smoke-isolation.cjs",
+      "sha256": "83f5729a50fc126be44582b8f554eda46d34f0373e84d2a08c20d0f1e5c18b9b",
+      "classification": "rewrite-rust",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/validate-linux-sensors.sh",
+      "sha256": "fceb2f54f77e73ee4ebf32faa11410caa70fe1e3e80b9ecb546c45ce4f31758c",
+      "classification": "retain-operator-tool-until-replaced",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/windows/extract-appx.ps1",
+      "sha256": "1a591bc7841ff4455a8902288477d917dcde76655ff67c20e245388ec5fab9ae",
+      "classification": "retain-operator-tool-until-replaced",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/windows/extract-msi-oem.ps1",
+      "sha256": "5b01ffe7f9b7daaa5c3cf0015da1770076f96af4fffd2c4b957618876edf0f3b",
+      "classification": "retain-operator-tool-until-replaced",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/windows/inspect-msi.ps1",
+      "sha256": "d96f1ece6d914cc0a85c4fd10d787663a88839c105f4454bbc2879ca4c25e394",
+      "classification": "retain-operator-tool-until-replaced",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "scripts/windows/inspect-wmi.ps1",
+      "sha256": "82b4dc9a4fc41e70ec026c398e311dfbdeaa3996f15ed5e78399f318984f06ee",
+      "classification": "retain-operator-tool-until-replaced",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/acer-client.test.cjs",
+      "sha256": "73d221fc84ee74034c1333cc208469775ec0ffec11a8462cef75381addc176c6",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/acer-service.test.cjs",
+      "sha256": "1b010bb2cf155ba55e24d3c1f40854ac7d228e14f3f13428bc5a09215991f648",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/acer-wmi-preparation.test.cjs",
+      "sha256": "ddf9077fe8368da56d5adeb7b5520c2bdca7e731551059c8994385d79d154194",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/archives.test.cjs",
+      "sha256": "ac3c1ef5c7e6ebd6b725e800786ec8b41ea032b4c91bca3ae58e985429fbbc9b",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/battery-charge.test.cjs",
+      "sha256": "499114cd7bd4d9f0e8eb17ac146b05b7b49eeb414351aeb2d5d9e6b9b437ad1a",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/desktop-apps.test.cjs",
+      "sha256": "f8e8ac02023d96017183d1c5bb56eb2987c8cac5878f7bf8d7374ddeb0f8f35f",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/linux-inventory.test.cjs",
+      "sha256": "f8b0df1db3e054d460346b1836fa10e891781c5ff6c9db2513224cacc199684e",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/linux-launcher.test.cjs",
+      "sha256": "e003673dc8e68ddf843e007faa40a05806ab2f85670cdd6e5df3e8251980e28e",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/linux-monitor.test.cjs",
+      "sha256": "83e7923c032a547254753f44816a4e22089a578e3f1b8a003cea6a746ea90347",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/linux-platform-state.test.cjs",
+      "sha256": "52dd236ed0a6b063af41591c0e0942baae2d49b03d74aeee4767144e00f49607",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/linux-sensors.test.cjs",
+      "sha256": "9d3d594f07e5ffe59f58b95ad8e26d6ce54af1a07809660fe8d17c31182cab44",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/linux-telemetry.test.cjs",
+      "sha256": "b6c5de77c7751fe44b9e58640255299fb0ad72735624103fcc7accf7085a3a3a",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/manual-readings.test.cjs",
+      "sha256": "c4a5bf157853d359edaea6db7122e4d2efd7dab4c9cf95f16a03c09ce02977e1",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/msi-oem.test.cjs",
+      "sha256": "2cce98fb0b12c10ab7bcdae95337930d6eee06813d199bf7d1ca7d7656fcdab9",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/nvidia-monitor.test.cjs",
+      "sha256": "bfc04e067b4161c4176c6ee396ec721ab85886a40372785070c813a19d58334f",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/prepare-linux-vendor.test.cjs",
+      "sha256": "ce3baa3ceeecb84723922d06785d7648f7ca19b6321d592c4ed8746490ffc389",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/protocol.test.cjs",
+      "sha256": "c654f823177deddc3617085ed402c848f087deda78eb3c683fa5785897aa0aa2",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/reference.test.cjs",
+      "sha256": "5bf3a5543a9531fddd1509b31a044c0789d4eac441590b5d7f7659b59c6c8ed0",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/reverse-engineering-audit.test.cjs",
+      "sha256": "e5e226032090eb8bf944b4dcbe9264981320ff92b646e130517aa573f3eb7b9e",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/setup.test.cjs",
+      "sha256": "ca5254f54b2281e7f2a249438c37930ea65773cb374ed7a4475b16ce84d5f83f",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/ui-session.test.cjs",
+      "sha256": "2b6c4b096e616ee549625c010edc96cdfa0d0d241feba1ea78e192953a6a055f",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/ui-smoke-isolation.test.cjs",
+      "sha256": "7b1c345c0e80ec1f1a79792815824996dbff3d251729782f945da4e9e59815b3",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    },
+    {
+      "path": "tests/vendor.test.cjs",
+      "sha256": "21683250a2be986d5220a39cd693e3cba05c5c4291c1fd0bd5787f3bce770243",
+      "classification": "regression-evidence",
+      "audit_status": "inventoried; review pending"
+    }
+  ],
+  "limitation": "This is the pre-rewrite tracked-file inventory and migration disposition, not a claim that every source file or native contract has been fully audited."
+}
