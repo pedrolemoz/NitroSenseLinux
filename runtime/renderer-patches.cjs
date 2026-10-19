@@ -21,6 +21,21 @@ function transformRenderer(source) {
     if (start < 0 || until < 0) throw new Error('Reviewed renderer section no longer matches: ' + reason);
     replace(source.slice(start, until), after, reason);
   }
+  replace('t.data.length)&&(this.menuList=this.menuList.filter(a=>a!==ra.AdvanceSettings))',
+    't.data?.length)&&(this.menuList=this.menuList.filter(a=>a!==ra.AdvanceSettings))',
+    'Allow Scenario initialization while audio capability data is unavailable');
+  replace('get scenarioName(){var t=this.pss.dataModel.scenario.getData();return t.profiles[t.active].name}',
+    'get scenarioName(){const t=this.pss.dataModel?.scenario.getData();return t?.profiles?.[t.active]?.name??"--"}',
+    'Display an unavailable Scenario profile without inventing a selected profile');
+  replace('onBatteryPowerMode(t){if(this.IsDC){',
+    'onBatteryPowerMode(t){if(!Array.isArray(t))return [];if(this.IsDC){',
+    'Render no mode cards when Scenario operating mode discovery is unavailable');
+  replace('get currentMode(){return this.pss.CurrentProfile.opMode}',
+    'get currentMode(){return this.pss.CurrentProfile?.opMode}',
+    'Keep Scenario mode rendering independent of a missing selected profile');
+  replace('operatingMode.getData():this.pss.CurrentProfile.opMode}',
+    'operatingMode.getData():this.pss.CurrentProfile?.opMode}',
+    'Allow the original mode view to evaluate an unavailable profile');
   replace('this.getCategory(r)[s]=(...f)=>this.client.call(tk,"ddsc",r,s,f)',
     `this.getCategory(r)[s]=require(${logging}).rendererFunction(this.client,tk,r,s)`,
     'Keep renderer diagnostics synchronous and bounded outside the hardware RPC queue');

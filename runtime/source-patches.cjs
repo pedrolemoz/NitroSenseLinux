@@ -37,6 +37,9 @@ function transformSource(source, oemRoot, rendererPreload, { readOnly = false } 
     `webPreferences:{preload:${JSON.stringify(rendererPreload)},nodeIntegration:!0,webviewTag:!0,webSecurity:!1,contextIsolation:!1,nodeIntegrationInSubFrames:!1`,
     'Resolve the renderer remote bridge from the original vendor ASAR');
   if (readOnly) {
+    replaceOnce('getScenario(){return this.scenario}',
+      'getScenario(){if(this.IsProfileEmpty()){this.scenario.active=0,this.scenario.select=0,this.InsertProfile(this.getInitialProfile("MUI_DAILY_USE"))}else{let e=!1;const t=e=>Number.isInteger(e)&&e>=0&&e<this.scenario.profiles.length;!t(this.scenario.select)&&(this.scenario.select=0,e=!0),!t(this.scenario.active)&&(this.scenario.active=this.scenario.select,e=!0),e&&this.saveScenario()}return this.scenario}',
+      'Initialize the original Daily Use profile without waiting for Windows keyboard lighting discovery and repair invalid selection indices');
     const serviceStart = source.indexOf('checkAcerEZServiceExist(){');
     const serviceEnd = source.indexOf('setNewWarrantyInfo(e){', serviceStart);
     if (serviceStart < 0 || serviceEnd < 0) throw new Error('Reviewed Acer service check boundary no longer matches');

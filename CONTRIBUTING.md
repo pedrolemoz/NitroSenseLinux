@@ -10,7 +10,11 @@ Never submit Acer installer ZIPs, MSI/AppX/ASAR files, extracted application cod
 
 The [roadmap](docs/roadmap.md) defines initial release scope. Additional hardware controls require model-specific validation. The battery charge driver has been verified on the target ANV15-52; its original-UI integration remains pending.
 
-## Original UI compatibility requirement
+## Reverse engineering requirement
+
+Read and obey [AGENTS.md](AGENTS.md) before any implementation. Trace the original Acer code and its service/native contract first. The goal is original Windows functionality on Linux, not screenshot compliance or a recreated frontend. Record source hashes/symbols, the end-to-end trace, Linux adaptation and behavioral evidence in `docs/reverse-engineering/*.json`. Run `npm run audit:changes` (use `-- --verify-original` with the local import). Passing this heuristic/evidence gate does not certify parity. When the native contract is unresolved, request a targeted Windows inspection session as described in AGENTS.md.
+
+## Original UI preservation
 
 Preserve the original Acer interface, page structure and existing controls. Do not
 add new panels or redesign features. Fix compatibility at the adapter, transport,

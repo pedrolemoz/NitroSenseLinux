@@ -2,6 +2,8 @@
 
 The proposed first release is scoped to **reliable read-only monitoring on the verified ANV15-52 configuration**. Complete Windows NitroSense feature parity is a later goal. There is no release date yet.
 
+The overall project goal is to reverse engineer the original Acer NitroSense and make the features in the Windows references work equivalently on Linux. The initial read-only release below is an intermediate milestone, not a redefinition of that goal. All work follows [AGENTS.md](../AGENTS.md); no replacement UI or screenshot-only completion is permitted.
+
 ## Completed foundation
 
 - [x] Launch the original user-supplied Acer UI on Linux.

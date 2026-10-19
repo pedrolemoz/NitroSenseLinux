@@ -1,0 +1,69 @@
+{
+  "schema": 1,
+  "feature": "Original Scenario initialization and missing-state crash investigation, 5.2.84",
+  "original": [
+    {
+      "member": "main.js",
+      "sha256": "8dfad247b6fc019e9c308e86e982eda6e99ffc8f7e2fbb761bb7a6bf3d3fa440",
+      "symbols": [
+        "CheckPresetKeyboardLighting",
+        "getInitialProfile",
+        "getDefaultProfile",
+        "InsertProfile",
+        "getScenario",
+        "saveScenario",
+        "ScenarioChanged"
+      ]
+    },
+    {
+      "member": "dist/widgets/main/main.ce24a9a875916226.js",
+      "sha256": "0034ac95bd5e805fb480f6829f8504acddf19edb8115bc95c047d671c55f388c",
+      "symbols": [
+        "class hIe extends xo",
+        "get scenarioName()",
+        "onBatteryPowerMode(t)",
+        "get currentMode()"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "runtime/source-patches.cjs",
+      "sha256": "7b13c895676293e1a6ae4d0082312105e5e4b14c71618cfd2b960b98b67dbf23"
+    },
+    {
+      "path": "runtime/renderer-patches.cjs",
+      "sha256": "886b006de3277fb8c35b88314e56d2c292a6a368395c7b2d3c2bc2ec6a7501cd"
+    }
+  ],
+  "trace": {
+    "control": "Original Scenario profile dropdown and sidebar read the existing Scenario model; MODE-AC-B is the Windows structural reference.",
+    "model": "Original renderer hIe refresh calls ddsc.scenario.getScenario; the original Scenario class stores active/select/profiles. Original preset initialization is coupled to keyboard/lighting discovery.",
+    "transport": "Existing ddsc MQTT RPC dispatch invokes original main Scenario methods. Original saveScenario stores state and ScenarioChanged broadcasts the updated model.",
+    "osOrFirmware": "Profile storage is application preference state. Its creation does not prove operating-mode, fan or lighting firmware support. Windows keyboard discovery is unavailable; real mode capability mapping remains unresolved.",
+    "replyAndRefresh": "Original getScenario reply populates hIe; original components translate MUI_DAILY_USE and display Daily Use. Original insertion saves and notifies through ScenarioChanged.",
+    "linuxAdaptation": "On an empty original profile list, original getScenario invokes Acer getInitialProfile(MUI_DAILY_USE) and InsertProfile. Valid profiles/selections are preserved; invalid indices repaired. Renderer guards absent data without replacing components."
+  },
+  "validation": [
+    {
+      "status": "pass",
+      "behavior": "Original factory dispatch, insertion, storage, notification, idempotence and index repair exercised in isolated vendor methods.",
+      "evidence": "runtime/vendor-sdk.test.cjs; .state/profile-tests.log: 170 passed, 4 skipped."
+    },
+    {
+      "status": "pass",
+      "behavior": "Actual Linux Electron displayed Daily Use in both original selectors and rendered the original mode description.",
+      "evidence": ".state/linux-live-inspection-2026-10-19T04-08-50-501Z/Scenario.png and report.json; manually inspected."
+    },
+    {
+      "status": "not-tested",
+      "behavior": "Full Windows-equivalent mode/fan/lighting behavior and matched screenshot acceptance.",
+      "evidence": "Mode cards absent and extra lighting tab visible. No firmware writes exercised. Full functional parity is not established."
+    }
+  ],
+  "windows": {
+    "status": "not-required",
+    "reason": "Original JS establishes the local Daily Use factory and query contract and Linux execution confirmed selection. Native mode/fan capability contracts still require separate research and possibly Windows inspection before implementation."
+  },
+  "remainingGaps": "Missing supported-mode cards, extra lighting tab, incomplete profile manager interactions, hardware writes and charge UI. This record documents an initialization fix, not complete Windows parity."
+}

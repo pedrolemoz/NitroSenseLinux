@@ -1,5 +1,7 @@
 # Development notes
 
+This is a reverse engineering project with original Windows feature behavior as its goal. Read the mandatory [agent rules](../AGENTS.md) and [research workflow](reverse-engineering/README.md) before implementation. A compatibility layer is the current technique; read-only monitoring is an intermediate milestone. Screenshots alone never establish feature completion.
+
 ## Structure and runtime boundary
 
 - `lib/` implements archive parsing/import validation, Linux monitoring, desktop entry discovery and local read-only protocol services.

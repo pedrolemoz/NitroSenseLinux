@@ -30,7 +30,7 @@ electron.app.on('browser-window-created', (_e, window) => {
    await clickText('Start Now');
    await wait(1500);
    for(let i=0;i<8;i++){let action=false;for(const t of ['Next','Got it','Close'])if(await clickText(t)){action=true;break}if(!action)break;await wait(300)}
-   for (const [name,id] of [['Home','Home_el'],['Monitoring','Monitoring_el'],['AppCenter','AppCenter_el'],['Checkup','Checkup_el']]) {
+   for (const [name,id] of [['Home','Home_el'],['Scenario','Scenario_el'],['PersonalSettings','PersonalSettings_el'],['Monitoring','Monitoring_el'],['AppCenter','AppCenter_el'],['Checkup','Checkup_el']]) {
     // Diagnostic clicks bypass first-run overlays; screenshots preserve them.
     await window.webContents.executeJavaScript(`document.getElementById(${JSON.stringify(id)})?.click()`);
     await wait(1300);

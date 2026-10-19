@@ -142,3 +142,50 @@ calibration are separate functions. Source anomalies and gaps in captured states
 are documented. Validation now requires reference IDs, comparable Linux captures
 and separate behavioral/backend evidence. No new UI or driver changes were made
 for this review; Linux visual comparisons remain pending.
+
+## Scenario missing-data iteration (2026-10-19)
+
+Added five reviewed renderer guards for absent audio data, profile names,
+mode lists and two current-mode getters. Real Electron inspection exposed the
+successive failures and verified the original Scenario page can render its
+CPU/GPU gauges without those repeated exceptions. Expanded the inspection page
+list to include Scenario and Personal Settings. Source preservation and isolated
+vendor tests cover the narrow adaptations. See status for the failed/incomplete
+MODE-AC-B visual comparison and evidence path. Original charge UI integration,
+missing profiles/capabilities and the undefined mode description remain pending.
+
+## Original Daily Use initialization (2026-10-19)
+
+Decoupled the original Scenario query's empty-list initialization from Windows
+keyboard/lighting discovery. The compatibility patch calls Acer's own Daily Use
+factory, insertion, storage and notification methods; it preserves existing
+profiles and valid selections and repairs invalid selection indices. The vendor
+profile definitions and original Scenario components/templates were not changed.
+The user reiterated that all future work must adapt the original app and must
+never introduce replacement screens or components.
+
+Regression checks exercise original factory dispatch, insertion, persistence,
+notification, idempotence and selection repair: 170 passed, 4 skipped. Real
+Electron inspection confirmed Daily Use in both original selectors and the
+correct original mode description. Remaining missing capability cards and other
+visual gaps are tracked in status; saved profile values do not establish hardware
+control support.
+
+## Mandatory reverse engineering policy and audit (2026-10-19)
+
+The user clarified that the project goal is original Windows feature behavior on
+Linux, not a recreated UI or screenshot compliance. Root AGENTS.md now mandates
+original-code/native/protocol research before implementation for every agent,
+prohibits replacement screens/components, and requires a targeted Windows-session
+request when available evidence cannot resolve an original contract. README,
+contributing guidance and roadmap now distinguish that goal from interim
+read-only milestones.
+
+Added static verified-original JavaScript extraction/symbol indexing, and a diff
+audit requiring trace/behavior records tied to current implementation hashes.
+The audit flags common replacement UI patterns and runs in PR CI. Its heuristic
+and written-evidence limitations are explicit: it cannot prove intent or parity.
+Original assets/extracted sources remain ignored and untouched. No native binary
+decompilation or new Windows capture was performed for this policy/tooling work.
+The existing Scenario investigation is recorded with original hashes/symbols,
+actual Linux evidence and outstanding functional gaps.

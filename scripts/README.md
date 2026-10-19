@@ -42,3 +42,19 @@ See [driver documentation](../drivers/nitrosense-charge/README.md) for protocol,
 permission scope, manual checks and removal. The driver and Node backend remain
 available independently of the original UI. Personal Settings integration is
 pending; the temporary custom Scenario UI and its inspection script were removed.
+
+## Mandatory reverse engineering checks
+
+- `npm run inspect:original -- --symbol <symbol>` verifies the pinned ASAR and
+  main/renderer hashes, extracts inert JavaScript and indexes literal symbol
+  offsets under ignored `analysis/original-5.2.84/`. It does not execute Acer code,
+  decompile native binaries, or recover the original source project.
+- `npm run audit:changes` checks current implementation changes against research
+  records and flags common replacement-UI patterns. `-- --base <revision>` selects
+  a diff base; `-- --verify-original` additionally verifies recorded members and
+  symbols against the local original ASAR. Exit 1 means findings or invalid input.
+
+Follow [AGENTS.md](../AGENTS.md) and the [evidence workflow](../docs/reverse-engineering/README.md).
+Screenshots complement behavioral verification; visual similarity is never the
+implementation goal. Request targeted Windows inspection when local evidence
+cannot resolve an original native/service contract.

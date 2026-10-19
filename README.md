@@ -1,6 +1,8 @@
-# NitroSense Linux Compatibility
+# NitroSense Linux
 
-An experimental compatibility layer that runs the **original Acer NitroSense interface on Linux** and connects it to real Linux monitoring data. This is an independent project, not an official Acer product.
+An independent reverse engineering project to make the **original Acer NitroSense application and its Windows features work on Linux**. Implementation follows the original code, protocols and behavior; screenshots are validation references, not specifications for a recreation. The current implementation uses Linux adapters and narrow in-memory patches. This is not an official Acer product.
+
+All agents and contributors must follow [AGENTS.md](AGENTS.md), including original-code research, behavioral evidence and the prohibition on replacement screens/components.
 
 **Current milestone: real Linux monitoring and battery charge-limit control work on the machine below.** Application operation was confirmed after rebooting following an NVIDIA driver update. This is a development build, not a finished NitroSense port or an initial stable release.
 

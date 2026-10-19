@@ -59,3 +59,46 @@ See the [driver documentation](../drivers/nitrosense-charge/README.md) and
 After the custom UI rollback, the full regression suite passed: **165 passed, 4 skipped, 0 failed**. The original Scenario class/template preservation test and driver-backend tests passed. This is source/integration evidence, not original Scenario graphical acceptance.
 
 The 20 Windows 11 screenshots from the target machine have been reviewed and incorporated into the [validation matrix](../references/README.md). Settings displays 5.1.392; the user confirmed the interface is unchanged in the 5.2.84 Linux import, so the captures are authoritative for current UI validation. Reference review is complete; matched Linux visual acceptance remains pending.
+
+## Scenario missing-data guards (2026-10-19)
+
+Narrow in-memory patches now guard unavailable audio capability data, active
+profile names, operating-mode lists and mode getters. The original Scenario
+component/template remains in place. Regression coverage checks missing values,
+recovery and preservation of the original component apart from those guards.
+The full suite passed 168 tests with 4 private-input skips; an additional isolated
+mode-getter regression also passed afterward.
+
+Real read-only Electron inspection reached Scenario, Personal Settings and four
+other pages. The final Scenario capture shows original CPU/GPU gauges and no
+repeated `length`, `name`, `filter` or `opMode` errors in the bounded diagnostic
+report. A separate existing JSON parsing error remains. Local evidence is in
+`.state/linux-live-inspection-2026-10-19T04-04-58-788Z/`.
+
+Comparison with MODE-AC-B is still **fail/incomplete**: no active profile or
+supported mode cards, an extra Pulsar Lighting tab, and
+`MUI_Mode_Intro_undefined` remain. Viewport/sidebar framing also differs.
+Personal Settings still omits Battery Charge Mode; its original controls are not
+yet integrated with the driver. No charge setting or other hardware state was
+written during this iteration. This is crash-path progress, not complete Scenario
+or battery UI acceptance.
+
+## Original default profile compatibility (2026-10-19)
+
+The missing profile was traced to Acer's preset initialization being coupled to
+Windows keyboard/lighting discovery. In read-only Linux mode, the original
+`Scenario.getScenario()` now initializes an empty list through Acer's existing
+`getInitialProfile("MUI_DAILY_USE")` and `InsertProfile()` methods. Existing
+profiles and valid selections are preserved; invalid active/select indices are
+repaired and saved through the original store. No replacement UI, component or
+profile schema was added, and the original profile factories are unchanged.
+
+The full suite passed **170 tests, 4 skipped, 0 failed**. Real Electron capture
+`.state/linux-live-inspection-2026-10-19T04-08-50-501Z/Scenario.png` shows **Daily
+Use** selected in the original page and sidebar, with the original everyday-use
+mode description. This supersedes the missing-profile and undefined-description
+findings above. The sidebar's Balanced/Auto labels describe the saved Acer
+profile, not verified firmware settings. No hardware write was made.
+MODE-AC-B remains incomplete because supported mode cards are absent and the
+extra lighting tab remains. Battery controls and the existing JSON parsing error
+remain separate pending work.

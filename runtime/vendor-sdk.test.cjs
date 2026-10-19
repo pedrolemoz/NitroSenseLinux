@@ -43,7 +43,7 @@ function classSource(source, begin, end) {
 
 test('read-only main and renderer patches match the actual Acer sources and parse', { skip: !available }, () => {
   const { patched, renderer, main } = sources();
-  assert.equal(patched.patches.length, 16); assert.equal(renderer.patches.length, 68);
+  assert.equal(patched.patches.length, 17); assert.equal(renderer.patches.length, 73);
   new vm.Script(patched.source); new vm.Script(renderer.source);
   assert.equal(transformSource(main, path.resolve('.state/unused-oem'), path.resolve('.state/unused-preload.cjs')).patches.length, 8);
   assert.throws(() => transformRenderer(renderer.source), /Unreviewed Acer/);
@@ -365,11 +365,120 @@ test('theme initialization survives a Linux window without title-bar overlay sup
   assert.equal(calls[0].color, 'white');
 });
 
-test('original Scenario component and template remain intact', { skip: !available }, () => {
+test('original Scenario component and template retain only reviewed missing-data guards', { skip: !available }, () => {
   const asar = readAsar(fs.readFileSync(archive));
   const original = asar.read(RENDERER_FILE).toString();
   const patched = transformRenderer(original).source;
   assert.equal(classSource(patched, 'xc=class{', 'const pWe=["ThemeChangeMenu"]'),
-    classSource(original, 'xc=class{', 'const pWe=["ThemeChangeMenu"]'));
+    classSource(original, 'xc=class{', 'const pWe=["ThemeChangeMenu"]')
+      .replace('t.data.length)&&(this.menuList=this.menuList.filter(a=>a!==ra.AdvanceSettings))', 't.data?.length)&&(this.menuList=this.menuList.filter(a=>a!==ra.AdvanceSettings))')
+      .replace('get scenarioName(){var t=this.pss.dataModel.scenario.getData();return t.profiles[t.active].name}', 'get scenarioName(){const t=this.pss.dataModel?.scenario.getData();return t?.profiles?.[t.active]?.name??"--"}'));
   assert.doesNotMatch(patched, /renderer-scenario\.cjs|nitrosense-linux-scenario/);
+});
+
+test('original Scenario name renders unavailable profiles and recovers to the actual active name', { skip: !available }, () => {
+  const { renderer } = sources();
+  const getter = classSource(renderer.source, 'get scenarioName(){', 'get sysTab(){');
+  const View = vm.runInNewContext(`(class View {${getter}})`);
+  const view = new View();
+  let data = null;
+  view.pss = { dataModel: { scenario: { getData: () => data } } };
+  for (data of [null, {}, { profiles: [], active: 0 }, { profiles: [{ name: 'Daily Use' }], active: 9 }]) {
+    assert.equal(view.scenarioName, '--');
+  }
+  data = { profiles: [{ name: 'Daily Use' }, { name: 'Gaming' }], active: 1 };
+  assert.equal(view.scenarioName, 'Gaming');
+  data = null;
+  assert.equal(view.scenarioName, '--');
+});
+
+test('original Scenario audio menu handles unavailable discovery separately from an empty capability list', { skip: !available }, () => {
+  const { renderer } = sources();
+  const begin = '0==(null===(t=this.pss.HWSupport.audioMode)';
+  const at = renderer.source.indexOf(begin);
+  assert.ok(at > 0);
+  const end = renderer.source.indexOf('})}ngOnDestroy()', at);
+  assert.ok(end > at);
+  const update = vm.runInNewContext(`(function(){let t;${renderer.source.slice(at, end)}})`, { ra: { AdvanceSettings: 'advanced' } });
+  for (const data of [null, undefined, [1]]) {
+    const view = { pss: { HWSupport: { audioMode: { data } } }, menuList: ['mode', 'advanced'] };
+    update.call(view);
+    assert.deepEqual(view.menuList, ['mode', 'advanced']);
+  }
+  const view = { pss: { HWSupport: { audioMode: { data: [] } } }, menuList: ['mode', 'advanced'] };
+  update.call(view);
+  assert.deepEqual(view.menuList, ['mode']);
+});
+
+
+test('original Scenario mode cards do not filter missing capabilities or invent an Eco option', { skip: !available }, () => {
+  const { renderer } = sources();
+  const method = classSource(renderer.source, 'onBatteryPowerMode(t){', 'openNitroModeIntroDlg(){');
+  const View = vm.runInNewContext(`(class View {${method}})`, { Le: { DEFAULT: 0, ECO: 1 } });
+  const view = new View();
+  for (const dc of [false, true]) {
+    view.IsDC = dc;
+    for (const data of [null, undefined]) assert.equal(view.onBatteryPowerMode(data).length, 0);
+  }
+  view.IsDC = false;
+  assert.deepEqual(Array.from(view.onBatteryPowerMode([0, 1, 2])), [0, 2]);
+  view.IsDC = true;
+  assert.deepEqual(Array.from(view.onBatteryPowerMode([0, 1, 2])), [1, 0]);
+});
+
+test('original current mode getter tolerates a missing profile and recovers without a default mode', { skip: !available }, () => {
+  const { renderer } = sources();
+  const getter = classSource(renderer.source, 'get currentMode(){return this.pss.CurrentProfile?.opMode}', 'get scenarioActive(){');
+  const View = vm.runInNewContext(`(class View {${getter}})`);
+  const view = new View();
+  view.pss = {};
+  assert.equal(view.currentMode, undefined);
+  view.pss.CurrentProfile = { opMode: 0 };
+  assert.equal(view.currentMode, 0);
+  view.pss.CurrentProfile = null;
+  assert.equal(view.currentMode, undefined);
+});
+
+test('original Scenario initializes Daily Use through its own factory, persists once and preserves existing profiles', { skip: !available }, () => {
+  const { patched, main } = sources();
+  const definitions = classSource(patched.source, 'class Scenario{', 't.Scenario=Scenario');
+  const writes = [], broadcasts = [];
+  const Scenario = vm.runInNewContext(`(${definitions})`, {
+    console: { log() {} },
+    s: { LogIt: { getInstance: () => new Log() } },
+    o: { MqttFunctionCall: { getInstance: () => ({ broadcast: (...args) => broadcasts.push(args) }) }, Event_ScenarioChanged: 'ScenarioChanged' },
+  });
+  // Avoid the Windows constructor. Exercise the real factory dispatch, insertion,
+  // persistence, broadcast and query methods with an observable default getter.
+  const daily = { name: 'vendor-default', opMode: 1, lighting: { devices: [] } };
+  let defaults = 0;
+  const scenario = Object.create(Scenario.prototype);
+  Object.defineProperty(scenario, 'DefaultProfile', { get() { defaults++; return structuredClone(daily); } });
+  scenario.scenario = { active: 0, select: 0, profiles: [] };
+  scenario.store = { set: (key, value) => writes.push([key, structuredClone(value)]) };
+  scenario.bInitial = true;
+  const state = scenario.getScenario();
+  assert.equal(state.profiles.length, 1);
+  assert.equal(state.profiles[0].name, 'MUI_DAILY_USE');
+  assert.equal(state.active, 0); assert.equal(state.select, 0);
+  assert.equal(defaults, 1); assert.equal(writes.length, 1); assert.equal(broadcasts.length, 1);
+  assert.equal(writes[0][0], 'Scenario');
+  assert.equal(scenario.getScenario(), state);
+  assert.equal(defaults, 1); assert.equal(writes.length, 1);
+  state.profiles.push({ name: 'My existing profile' });
+  state.active = 1; state.select = 1;
+  assert.equal(scenario.getScenario().profiles[1].name, 'My existing profile');
+  assert.equal(state.active, 1); assert.equal(writes.length, 1);
+  for (const active of [-1, 99, null, '0']) {
+    state.active = active;
+    assert.equal(scenario.getScenario().active, 1);
+  }
+  state.select = -1; state.active = -1;
+  scenario.getScenario();
+  assert.equal(state.select, 0); assert.equal(state.active, 0);
+  assert.equal(defaults, 1);
+  // Original profile content/generation and keyboard initialization are unchanged.
+  for (const [begin, end] of [['getInitialProfile(e){', 'startMonitoring(){'], ['CheckPresetKeyboardLighting(e,t){', 'getInitialProfile(e){']]) {
+    assert.equal(classSource(patched.source, begin, end), classSource(main, begin, end));
+  }
 });

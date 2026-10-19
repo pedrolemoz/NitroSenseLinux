@@ -9,8 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
       # Core utilities use built-in modules. No Electron or Acer assets in CI.
       - run: npm test
+      - name: Require reverse engineering evidence for implementation changes
+        if: github.event_name == 'pull_request'
+        env:
+          RE_AUDIT_BASE: ${{ github.event.pull_request.base.sha }}
+        run: npm run audit:changes
