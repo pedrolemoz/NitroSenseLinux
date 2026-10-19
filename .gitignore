@@ -1,0 +1,24 @@
+# User-supplied Acer installers, extracted resources and binaries
+/Installer/
+/Install result/
+/vendor/
+*.zip
+*.msi
+*.appx
+*.appxbundle
+*.asar
+*.exe
+*.dll
+*.cab
+C:*
+
+# Local runtime downloads, analysis, diagnostics and historical notes
+/.tools/
+/.state/
+/analysis/
+node_modules/
+*.log
+*.tap
+core
+core.*
+.DS_Store
